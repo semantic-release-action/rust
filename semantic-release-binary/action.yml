@@ -1,0 +1,102 @@
+---
+name: semantic-release-binary
+description: GitHub Action to semantically release your Rust binary
+author: EricCrosson
+branding:
+  icon: package
+  color: orange
+
+# Use a composite action for access to github.action_path
+# (which is only supported in composite actions)
+
+inputs:
+  binary-name:
+    description: The name of your Rust binary
+    required: true
+    type: string
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        # Fetch all history and tags for calculating next semantic version
+        fetch-depth: 0
+
+    - name: Install is-semantic-release-configured
+      uses: taiki-e/install-action@v2
+      with:
+        tool: is-semantic-release-configured@1
+
+    - run: |
+        : configure semantic-release
+        if ! is-semantic-release-configured; then
+          rm -f package.json package-lock.json
+          cp ${{ github.action_path }}/package.json package.json
+          cp ${{ github.action_path }}/package-lock.json package-lock.json
+          cp ${{ github.action_path }}/.releaserc.json .releaserc.json
+          sed -i 's/BINARY_NAME/${{ inputs.binary-name }}/g' .releaserc.json
+        fi
+      shell: bash
+
+    - name: Download release artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: dist
+
+    - run: |
+        : display downloaded release artifacts
+        ls -R
+      working-directory: dist
+      shell: bash
+
+    - run: |
+        : combine checksums
+        cat dist/**/${{ inputs.binary-name }}-*-SHASUMS256.txt | tee dist/SHASUMS256.txt
+      shell: bash
+
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@master
+      id: rust-toolchain
+      with:
+        toolchain: ${{ inputs.toolchain }}
+
+    - name: Cache cargo
+      uses: actions/cache@v3
+      id: cache-cargo
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Configure Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: lts/*
+        cache: npm
+
+    - name: Cache npm dependencies
+      uses: actions/cache@v3
+      id: cache-node-modules
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+    - if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: |
+        : install dependencies
+        npm ci --ignore-scripts --loglevel error
+      shell: bash
+
+    - run: |
+        : invoke semantic-release
+        ./node_modules/.bin/semantic-release
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        CARGO_REGISTRY_TOKEN: ${{ secrets.cargo-registry-token }}
+      shell: bash

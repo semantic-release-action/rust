@@ -1,0 +1,57 @@
+{
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release-cargo/semantic-release-cargo",
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/BINARY_NAME-x86_64-unknown-linux-musl",
+            "label": "x86_64-unknown-linux-musl"
+          },
+          {
+            "path": "dist/BINARY_NAME-x86_64-unknown-linux-gnu",
+            "label": "x86_64-unknown-linux-gnu"
+          },
+          {
+            "path": "dist/BINARY_NAME-i686-unknown-linux-musl",
+            "label": "i686-unknown-linux-musl"
+          },
+          {
+            "path": "dist/BINARY_NAME-i686-unknown-linux-gnu",
+            "label": "i686-unknown-linux-gnu"
+          },
+          {
+            "path": "dist/BINARY_NAME-x86_64-apple-darwin",
+            "label": "x86_64-apple-darwin"
+          },
+          {
+            "path": "dist/BINARY_NAME-aarch64-unknown-linux-musl",
+            "label": "aarch64-unknown-linux-musl"
+          },
+          {
+            "path": "dist/BINARY_NAME-aarch64-unknown-linux-gnu",
+            "label": "aarch64-unknown-linux-gnu"
+          },
+          {
+            "path": "dist/BINARY_NAME-aarch64-apple-darwin",
+            "label": "aarch64-apple-darwin"
+          },
+          {
+            "path": "dist/SHASUMS256.txt",
+            "label": "SHASUMS256.txt"
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md", "Cargo.toml", "Cargo.lock"]
+      }
+    ]
+  ]
+}
