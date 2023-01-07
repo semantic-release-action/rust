@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/EricCrosson/rust-action/compare/v1.2.1...v1.2.2) (2023-01-07)
+
+
+### Bug Fixes
+
+* use path that exists ([d28b102](https://github.com/EricCrosson/rust-action/commit/d28b1023c8c4dd33a6548b6c834c34093c914bae))
+
 ## [1.2.1](https://github.com/EricCrosson/rust-action/compare/v1.2.0...v1.2.1) (2023-01-07)
 
 
