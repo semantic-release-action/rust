@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/EricCrosson/rust-action/compare/v1.0.3...v1.0.4) (2023-01-07)
+
+
+### Bug Fixes
+
+* Revert "fix: remove unsupported syntax" ([9c9c162](https://github.com/EricCrosson/rust-action/commit/9c9c16264f149d3c9133c282e2ca87dd781434f4))
+
 ## [1.0.3](https://github.com/EricCrosson/rust-action/compare/v1.0.2...v1.0.3) (2023-01-07)
 
 
