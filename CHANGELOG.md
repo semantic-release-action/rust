@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/EricCrosson/rust-action/compare/v1.2.6...v1.2.7) (2023-01-07)
+
+
+### Bug Fixes
+
+* reference release assets by correct path ([a4c5daf](https://github.com/EricCrosson/rust-action/commit/a4c5dafe91eec55c6d2e2d293ca67594cda2fb44))
+
 ## [1.2.6](https://github.com/EricCrosson/rust-action/compare/v1.2.5...v1.2.6) (2023-01-07)
 
 
