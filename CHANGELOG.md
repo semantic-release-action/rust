@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/EricCrosson/rust-action/compare/v1.2.0...v1.2.1) (2023-01-07)
+
+
+### Bug Fixes
+
+* alphabetize UI by target ([c4ff96b](https://github.com/EricCrosson/rust-action/commit/c4ff96bb8e310f968078c28b12941965fdfe53cb))
+* pass cargo-registry-token to release action ([73df727](https://github.com/EricCrosson/rust-action/commit/73df7278acbb6c8907605532c2a73ad34fab1f39))
+
 # [1.2.0](https://github.com/EricCrosson/rust-action/compare/v1.1.2...v1.2.0) (2023-01-07)
 
 
