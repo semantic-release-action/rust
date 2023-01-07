@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/EricCrosson/rust-action/compare/v1.2.7...v1.2.8) (2023-01-07)
+
+
+### Bug Fixes
+
+* remove target suffix from binary name ([abdb48d](https://github.com/EricCrosson/rust-action/commit/abdb48d367fc0b811bc69476f6621bb86d1a442c))
+
 ## [1.2.7](https://github.com/EricCrosson/rust-action/compare/v1.2.6...v1.2.7) (2023-01-07)
 
 
