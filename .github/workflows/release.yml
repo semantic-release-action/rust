@@ -197,4 +197,5 @@ jobs:
       - name: Release
         uses: EricCrosson/rust-action/semantic-release-binary@v1
         with:
+          binary-name: ${{ inputs.binary-name }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
