@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/EricCrosson/rust-action/compare/v1.2.2...v1.2.3) (2023-01-07)
+
+
+### Bug Fixes
+
+* pass binary-name through to action ([55ced26](https://github.com/EricCrosson/rust-action/commit/55ced26d190b69a38cb60bb041b72f4dede94a03))
+
 ## [1.2.2](https://github.com/EricCrosson/rust-action/compare/v1.2.1...v1.2.2) (2023-01-07)
 
 
