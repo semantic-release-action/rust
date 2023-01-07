@@ -79,7 +79,7 @@ runs:
 
     - run: |
         : combine checksums
-        cat dist/**/${{ inputs.binary-name }}-*-SHASUMS256.txt | tee dist/SHASUMS256.txt
+        cat dist/**/${{ inputs.binary-name }}-*-SHA256SUM.txt | tee dist/SHA256SUMS.txt
       shell: bash
 
     - name: Configure Node.js
