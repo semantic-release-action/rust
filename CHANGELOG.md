@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/EricCrosson/rust-action/compare/v1.0.2...v1.0.3) (2023-01-07)
+
+
+### Bug Fixes
+
+* move reusable workflow under .github/workflows ([f305572](https://github.com/EricCrosson/rust-action/commit/f30557294aea311a1efed590952581fb8ca70ed4))
+
 ## [1.0.2](https://github.com/EricCrosson/rust-action/compare/v1.0.1...v1.0.2) (2023-01-06)
 
 
