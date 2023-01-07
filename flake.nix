@@ -31,7 +31,7 @@
           };
         };
       in {
-        devShell = pkgs.mkShell {
+        devShells.default = pkgs.mkShell {
           buildInputs = [pkgs.nodejs];
           inherit (checks.pre-commit-check) shellHook;
         };
