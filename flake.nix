@@ -1,6 +1,4 @@
 {
-  description = "GitHub Actions for Rust projects";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
@@ -32,6 +30,7 @@
         };
       in {
         devShell = pkgs.mkShell {
+          buildInputs = [pkgs.nodejs];
           inherit (checks.pre-commit-check) shellHook;
         };
       }
