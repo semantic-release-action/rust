@@ -2,25 +2,253 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - master
-      - next
-      - next-major
-      - beta
-      - alpha
-      - "[0-9]+.[0-9]+.x"
-      - "[0-9]+.x"
+  workflow_call:
+    inputs:
+      toolchain:
+        required: false
+        type: string
+        default: stable
+      command:
+        required: true
+        type: string
+      binary-name:
+        required: true
+        type: string
+    secrets:
+      CARGO_REGISTRY_TOKEN:
+        required: true
+        description: API token for writing to your cargo registry
 
 # Only allow one release workflow to execute at a time, since each release
 # workflow uses shared resources (git tags, package registries)
 concurrency:
   group: ${{ github.workflow }}
 
+env:
+  RUST_BACKTRACE: 1
+
 jobs:
-  release:
-    name: Release
+  get-next-version:
+    name: Calculate next release
     runs-on: ubuntu-latest
+    outputs:
+      new-release-published: ${{ steps.get-next-version.outputs.new-release-published }}
+      new-release-version: ${{ steps.get-next-version.outputs.new-release-version }}
 
     steps:
-      - uses: EricCrosson/semantic-release-your-github-action@v3
+      - name: Calculate next semantic-release version
+        id: get-next-version
+        uses: semantic-release-extras/next-release-version@v1
+
+  test:
+    name: Cargo test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        id: rust-toolchain
+        with:
+          toolchain: ${{ inputs.toolchain }}
+
+      - name: Cache cargo
+        uses: actions/cache@v3
+        id: cache-cargo
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Invoke cargo
+        run: ${{ inputs.command }}
+
+  # Compile release artifacts
+  build-release:
+    name: Build CLI ${{ matrix.build.target }}
+    runs-on: ${{ matrix.build.os }}
+    needs:
+      - get-next-version
+    env:
+      CARGO: cargo
+
+    strategy:
+      fail-fast: false
+      matrix:
+        build:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+            cross: false
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            cross: false
+          - os: ubuntu-latest
+            target: i686-unknown-linux-musl
+            cross: true
+          - os: ubuntu-latest
+            target: i686-unknown-linux-gnu
+            cross: true
+          - os: macOS-latest
+            target: x86_64-apple-darwin
+            cross: false
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-musl
+            cross: true
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            cross: true
+          - os: macOS-latest
+            target: aarch64-apple-darwin
+            cross: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install build inputs
+        if: runner.os == 'Linux' && !matrix.build.cross && endsWith(matrix.build.target, '-musl')
+        run: sudo apt install musl-tools
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        id: rust-toolchain
+        with:
+          toolchain: nightly
+          target: ${{ matrix.build.target }}
+
+      - name: Cache cargo
+        uses: actions/cache@v3
+        id: cache-cargo
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Install semantic-release-cargo
+        if: needs.get-next-version.outputs.new-release-published == 'true'
+        uses: taiki-e/install-action@v2
+        with:
+          tool: semantic-release-cargo@2
+
+      - name: Prepare semantic-release for Rust
+        if: needs.get-next-version.outputs.new-release-published == 'true'
+        run: semantic-release-cargo --verbose --verbose --verbose prepare ${{ needs.get-next-version.outputs.new-release-version }}
+
+      - name: Install cross
+        uses: taiki-e/install-action@v2
+        if: matrix.build.cross
+        with:
+          tool: cross
+
+      - name: Configure cross
+        if: matrix.build.cross
+        run: echo "CARGO=cross" >> "$GITHUB_ENV"
+
+      - name: Ccompile release binary
+        run: ${{ env.CARGO }} build --release --target ${{ matrix.build.target }} --verbose
+
+      - name: Create release archive
+        run: |
+          mkdir dist
+          mkdir -p builds/${{ inputs.binary-name }}-${{ matrix.build.target }}
+          cp target/${{ matrix.build.target }}/release/${{ inputs.binary-name }} builds/${{ inputs.binary-name }}-${{ matrix.build.target }}/
+          tar -C builds -czvf dist/${{ inputs.binary-name }}-${{ matrix.build.target }}.tar.gz ${{ inputs.binary-name }}-${{ matrix.build.target }}
+
+      - name: Create tar checksum
+        run: shasum --algorithm 256 ${{ inputs.binary-name }}-${{ matrix.build.target }}.tar.gz > ${{ inputs.binary-name }}-${{ matrix.build.target }}-SHASUMS256.txt
+        working-directory: ./dist
+
+      - name: Create binary checksum
+        run: shasum --algorithm 256 --binary ${{ inputs.binary-name }} | tee ../../dist/${{ inputs.binary-name }}-${{ matrix.build.target }}-binary-SHASUMS256.txt
+        working-directory: ./builds/${{ inputs.binary-name }}-${{ matrix.build.target }}
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.build.target }}
+          path: |
+            dist/${{ inputs.binary-name }}-${{ matrix.build.target }}.tar.gz
+            dist/${{ inputs.binary-name }}-${{ matrix.build.target }}-binary-SHASUMS256.txt
+            dist/${{ inputs.binary-name }}-${{ matrix.build.target }}-SHASUMS256.txt
+          if-no-files-found: error
+          retention-days: 1
+
+  # TOOD: encapsulate semantic-release so the calling repo doesn't have to muck with npm
+  # Perform the semantic-release
+  release:
+    name: Release
+    if: needs.get-next-version.outputs.new-release-published == 'true'
+    runs-on: ubuntu-latest
+    needs:
+      - build-release
+      - get-next-version
+      - test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          # Fetch all history and tags for calculating next semantic version
+          fetch-depth: 0
+
+      - name: Download release artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: dist
+
+      - name: Display downloaded release artifacts
+        run: ls -R
+        working-directory: dist
+
+      - name: Combine checksums
+        run: cat dist/**/${{ inputs.binary-name }}-*-SHASUMS256.txt | tee dist/SHASUMS256.txt
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        id: rust-toolchain
+        with:
+          toolchain: ${{ inputs.toolchain }}
+
+      - name: Cache cargo
+        uses: actions/cache@v3
+        id: cache-cargo
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts --loglevel error
+
+      - name: Invoke semantic-release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: ./node_modules/.bin/semantic-release

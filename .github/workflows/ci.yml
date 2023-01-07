@@ -45,5 +45,5 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Cargo test
-        run: cargo test
+      - name: Invoke cargo
+        run: ${{ inputs.command }}
