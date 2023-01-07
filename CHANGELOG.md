@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/EricCrosson/rust-action/compare/v1.0.5...v1.1.0) (2023-01-07)
+
+
+### Features
+
+* add release workflow ([60ad162](https://github.com/EricCrosson/rust-action/commit/60ad1622e23bf1b03ed5c0bf453c2e96a0f17f99))
+
 ## [1.0.5](https://github.com/EricCrosson/rust-action/compare/v1.0.4...v1.0.5) (2023-01-07)
 
 
