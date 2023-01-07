@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/EricCrosson/rust-action/compare/v1.0.4...v1.0.5) (2023-01-07)
+
+
+### Bug Fixes
+
+* rename file ([4d74f96](https://github.com/EricCrosson/rust-action/commit/4d74f967775571e4cbedb2d13dfb8949e182c2fa))
+
 ## [1.0.4](https://github.com/EricCrosson/rust-action/compare/v1.0.3...v1.0.4) (2023-01-07)
 
 
