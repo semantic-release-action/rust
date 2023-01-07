@@ -171,7 +171,7 @@ jobs:
           cp target/${{ matrix.build.target }}/release/${{ inputs.binary-name }} dist/
 
       - name: Create binary checksum
-        run: shasum --algorithm 256 --binary ${{ inputs.binary-name }} | tee ${{ inputs.binary-name }}-SHASUMS256.txt
+        run: shasum --algorithm 256 --binary ${{ inputs.binary-name }} | tee ${{ inputs.binary-name }}-SHA256SUM.txt
         working-directory: ./dist
 
       - name: Upload release artifacts
@@ -180,7 +180,7 @@ jobs:
           name: ${{ matrix.build.target }}
           path: |
             dist/${{ inputs.binary-name }}
-            dist/${{ inputs.binary-name }}-SHASUMS256.txt
+            dist/${{ inputs.binary-name }}-SHA256SUM.txt
           if-no-files-found: error
           retention-days: 1
 
