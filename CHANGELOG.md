@@ -1,3 +1,10 @@
+## [1.2.11](https://github.com/EricCrosson/rust-action/compare/v1.2.10...v1.2.11) (2023-01-07)
+
+
+### Bug Fixes
+
+* move semantic-release deps to prod deps ([d98af11](https://github.com/EricCrosson/rust-action/commit/d98af114f5ea7af26fb2cca4a6b248b97818313b))
+
 ## [1.2.10](https://github.com/EricCrosson/rust-action/compare/v1.2.9...v1.2.10) (2023-01-07)
 
 
