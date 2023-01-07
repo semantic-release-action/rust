@@ -1,3 +1,10 @@
+## [1.2.6](https://github.com/EricCrosson/rust-action/compare/v1.2.5...v1.2.6) (2023-01-07)
+
+
+### Bug Fixes
+
+* install rust toolchain before using taiki-e/install-action ([42a991e](https://github.com/EricCrosson/rust-action/commit/42a991e79430abed2790c871b87ff7623336cf57))
+
 ## [1.2.5](https://github.com/EricCrosson/rust-action/compare/v1.2.4...v1.2.5) (2023-01-07)
 
 
