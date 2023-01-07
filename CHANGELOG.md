@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/EricCrosson/rust-action/compare/v1.1.1...v1.1.2) (2023-01-07)
+
+
+### Bug Fixes
+
+* rename secret to kebab case ([4e96a10](https://github.com/EricCrosson/rust-action/commit/4e96a10066873ee60e17a4a4eefdb6036323f8c0))
+
 ## [1.1.1](https://github.com/EricCrosson/rust-action/compare/v1.1.0...v1.1.1) (2023-01-07)
 
 
