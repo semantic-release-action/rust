@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/EricCrosson/rust-action/compare/v1.1.2...v1.2.0) (2023-01-07)
+
+
+### Bug Fixes
+
+* correct typo ([1cc18fa](https://github.com/EricCrosson/rust-action/commit/1cc18fa2e37ad3795b996b491ed5280c4a8062bb))
+
+
+### Features
+
+* encapsulate semantic-release configuration ([fa1c307](https://github.com/EricCrosson/rust-action/commit/fa1c3072ae7fb19e7ea799d91a7729a1058aa973))
+
 ## [1.1.2](https://github.com/EricCrosson/rust-action/compare/v1.1.1...v1.1.2) (2023-01-07)
 
 
