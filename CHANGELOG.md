@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/EricCrosson/rust-action/compare/v1.1.0...v1.1.1) (2023-01-07)
+
+
+### Bug Fixes
+
+* default command to cargo test ([732da09](https://github.com/EricCrosson/rust-action/commit/732da0954565dbe5669ceed3261cc185f791c691))
+
 # [1.1.0](https://github.com/EricCrosson/rust-action/compare/v1.0.5...v1.1.0) (2023-01-07)
 
 
