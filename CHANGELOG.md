@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/EricCrosson/rust-action/compare/v1.2.11...v1.3.0) (2023-01-07)
+
+
+### Features
+
+* add semantic-release-major-tag ([910ab73](https://github.com/EricCrosson/rust-action/commit/910ab73a8da7c7198c67532e39451e33a4838945))
+
 ## [1.2.11](https://github.com/EricCrosson/rust-action/compare/v1.2.10...v1.2.11) (2023-01-07)
 
 
