@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/EricCrosson/rust-action/compare/v1.2.3...v1.2.4) (2023-01-07)
+
+
+### Bug Fixes
+
+* recurse into nested artifact directories ([38014c0](https://github.com/EricCrosson/rust-action/commit/38014c057be59f158a5405eeed2a732a847c8f60))
+
 ## [1.2.3](https://github.com/EricCrosson/rust-action/compare/v1.2.2...v1.2.3) (2023-01-07)
 
 
