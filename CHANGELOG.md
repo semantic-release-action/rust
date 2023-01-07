@@ -1,3 +1,10 @@
+## [1.2.9](https://github.com/EricCrosson/rust-action/compare/v1.2.8...v1.2.9) (2023-01-07)
+
+
+### Bug Fixes
+
+* rename checksums file ([e9e3fbd](https://github.com/EricCrosson/rust-action/commit/e9e3fbd49a6126f5dac48ce39f581e8736974381))
+
 ## [1.2.8](https://github.com/EricCrosson/rust-action/compare/v1.2.7...v1.2.8) (2023-01-07)
 
 
