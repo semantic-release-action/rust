@@ -1,3 +1,16 @@
+## [1.2.10](https://github.com/EricCrosson/rust-action/compare/v1.2.9...v1.2.10) (2023-01-07)
+
+
+### Bug Fixes
+
+* rename checksums file SHA256SUMS ([e9a6c41](https://github.com/EricCrosson/rust-action/commit/e9a6c41f64148b7021e9403944f90e11cd1cccfa))
+
+
+### Reverts
+
+* Revert "fix: remove target suffix from binary name" ([8424747](https://github.com/EricCrosson/rust-action/commit/84247476da6a5b12b7f66e85fe13ae8e946feea4))
+* Revert "fix: rename checksums file" ([62f1390](https://github.com/EricCrosson/rust-action/commit/62f1390dca50a64fddd80112eedd615d37ec9f73))
+
 ## [1.2.9](https://github.com/EricCrosson/rust-action/compare/v1.2.8...v1.2.9) (2023-01-07)
 
 
