@@ -5,6 +5,12 @@
     "@semantic-release/changelog",
     "@semantic-release-cargo/semantic-release-cargo",
     [
+      "semantic-release-major-tag",
+      {
+        "customTags": ["v${major}", "v${major}.${minor}"]
+      }
+    ],
+    [
       "@semantic-release/github",
       {
         "assets": [
