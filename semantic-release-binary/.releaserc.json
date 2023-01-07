@@ -9,35 +9,35 @@
       {
         "assets": [
           {
-            "path": "dist/BINARY_NAME-x86_64-unknown-linux-musl",
+            "path": "dist/x86_64-unknown-linux-musl/BINARY_NAME-x86_64-unknown-linux-musl",
             "label": "x86_64-unknown-linux-musl"
           },
           {
-            "path": "dist/BINARY_NAME-x86_64-unknown-linux-gnu",
+            "path": "dist/x86_64-unknown-linux-gnu/BINARY_NAME-x86_64-unknown-linux-gnu",
             "label": "x86_64-unknown-linux-gnu"
           },
           {
-            "path": "dist/BINARY_NAME-i686-unknown-linux-musl",
+            "path": "dist/i686-unknown-linux-musl/BINARY_NAME-i686-unknown-linux-musl",
             "label": "i686-unknown-linux-musl"
           },
           {
-            "path": "dist/BINARY_NAME-i686-unknown-linux-gnu",
+            "path": "dist/i686-unknown-linux-gnu/BINARY_NAME-i686-unknown-linux-gnu",
             "label": "i686-unknown-linux-gnu"
           },
           {
-            "path": "dist/BINARY_NAME-x86_64-apple-darwin",
+            "path": "dist/x86_64-apple-darwin/BINARY_NAME-x86_64-apple-darwin",
             "label": "x86_64-apple-darwin"
           },
           {
-            "path": "dist/BINARY_NAME-aarch64-unknown-linux-musl",
+            "path": "dist/aarch64-unknown-linux-musl/BINARY_NAME-aarch64-unknown-linux-musl",
             "label": "aarch64-unknown-linux-musl"
           },
           {
-            "path": "dist/BINARY_NAME-aarch64-unknown-linux-gnu",
+            "path": "dist/aarch64-unknown-linux-gnu/BINARY_NAME-aarch64-unknown-linux-gnu",
             "label": "aarch64-unknown-linux-gnu"
           },
           {
-            "path": "dist/BINARY_NAME-aarch64-apple-darwin",
+            "path": "dist/aarch64-apple-darwin/BINARY_NAME-aarch64-apple-darwin",
             "label": "aarch64-apple-darwin"
           },
           {
