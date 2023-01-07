@@ -10,6 +10,11 @@ branding:
 # (which is only supported in composite actions)
 
 inputs:
+  toolchain:
+    description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
+    required: false
+    type: string
+    default: stable
   binary-name:
     description: The name of your Rust binary
     required: true
