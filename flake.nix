@@ -1,4 +1,6 @@
 {
+  description = "GitHub Actions for Rust projects";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
