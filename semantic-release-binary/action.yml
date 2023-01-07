@@ -32,6 +32,24 @@ runs:
         # Fetch all history and tags for calculating next semantic version
         fetch-depth: 0
 
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@master
+      id: rust-toolchain
+      with:
+        toolchain: ${{ inputs.toolchain }}
+
+    - name: Cache cargo
+      uses: actions/cache@v3
+      id: cache-cargo
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
+
     - name: Install is-semantic-release-configured
       uses: taiki-e/install-action@v2
       with:
@@ -63,24 +81,6 @@ runs:
         : combine checksums
         cat dist/**/${{ inputs.binary-name }}-*-SHASUMS256.txt | tee dist/SHASUMS256.txt
       shell: bash
-
-    - name: Install Rust toolchain
-      uses: dtolnay/rust-toolchain@master
-      id: rust-toolchain
-      with:
-        toolchain: ${{ inputs.toolchain }}
-
-    - name: Cache cargo
-      uses: actions/cache@v3
-      id: cache-cargo
-      with:
-        path: |
-          ~/.cargo/bin/
-          ~/.cargo/registry/index/
-          ~/.cargo/registry/cache/
-          ~/.cargo/git/db/
-          target/
-        key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
 
     - name: Configure Node.js
       uses: actions/setup-node@v3
