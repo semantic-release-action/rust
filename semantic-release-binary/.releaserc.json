@@ -41,8 +41,8 @@
             "label": "aarch64-apple-darwin"
           },
           {
-            "path": "dist/SHA256SUMS.txt",
-            "label": "SHA256SUMS.txt"
+            "path": "dist/SHASUMS256.txt",
+            "label": "SHASUMS256.txt"
           }
         ]
       }
