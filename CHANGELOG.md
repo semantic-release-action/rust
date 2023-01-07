@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/EricCrosson/rust-action/compare/v1.2.4...v1.2.5) (2023-01-07)
+
+
+### Bug Fixes
+
+* plumb toolchain through to action ([dca3160](https://github.com/EricCrosson/rust-action/commit/dca3160dd23d96a1cb636cf41c9fae86d60618d2))
+
 ## [1.2.4](https://github.com/EricCrosson/rust-action/compare/v1.2.3...v1.2.4) (2023-01-07)
 
 
