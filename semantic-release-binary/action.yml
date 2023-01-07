@@ -14,6 +14,9 @@ inputs:
     description: The name of your Rust binary
     required: true
     type: string
+  cargo-registry-token:
+    description: API token for writing to your cargo registry
+    required: true
 
 runs:
   using: composite
@@ -98,5 +101,5 @@ runs:
         ./node_modules/.bin/semantic-release
       env:
         GITHUB_TOKEN: ${{ github.token }}
-        CARGO_REGISTRY_TOKEN: ${{ secrets.cargo-registry-token }}
+        CARGO_REGISTRY_TOKEN: ${{ inputs.cargo-registry-token }}
       shell: bash
