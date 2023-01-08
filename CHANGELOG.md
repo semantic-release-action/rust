@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/EricCrosson/rust-action/compare/v1.3.1...v1.3.2) (2023-01-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency semantic-release to v20.0.2 ([a62707f](https://github.com/EricCrosson/rust-action/commit/a62707f41b869e1a2a499130983d3163d3cd7baf))
+
 ## [1.3.1](https://github.com/EricCrosson/rust-action/compare/v1.3.0...v1.3.1) (2023-01-08)
 
 
