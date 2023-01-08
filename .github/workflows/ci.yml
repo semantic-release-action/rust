@@ -5,10 +5,12 @@ on:
   workflow_call:
     inputs:
       toolchain:
+        description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
         required: false
         type: string
         default: stable
-      command:
+      test-command:
+        description: Cargo command used to provide confidence in proposed changes
         required: false
         type: string
         default: cargo test
@@ -47,4 +49,4 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Invoke cargo
-        run: ${{ inputs.command }}
+        run: ${{ inputs.test-command }}

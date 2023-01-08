@@ -1,9 +1,6 @@
 ---
 name: Release
 
-# TODO: document limitations
-# - expects just one binary
-
 on:
   workflow_call:
     inputs:
