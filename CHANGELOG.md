@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/EricCrosson/rust-action/compare/v1.3.0...v1.3.1) (2023-01-08)
+
+
+### Bug Fixes
+
+* **ci:** use faster install method ([e54e68c](https://github.com/EricCrosson/rust-action/commit/e54e68cf28924e873ecc8775cc51e26b387febb6))
+
 # [1.3.0](https://github.com/EricCrosson/rust-action/compare/v1.2.11...v1.3.0) (2023-01-07)
 
 
