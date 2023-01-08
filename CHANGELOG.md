@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/EricCrosson/rust-action/compare/v1.3.3...v1.3.4) (2023-01-08)
+
+
+### Bug Fixes
+
+* **ci:** add ref to action invokation ([dc2da1b](https://github.com/EricCrosson/rust-action/commit/dc2da1b18541091f7659f9b21af4f055893fb50d))
+
 ## [1.3.3](https://github.com/EricCrosson/rust-action/compare/v1.3.2...v1.3.3) (2023-01-08)
 
 
