@@ -1,5 +1,9 @@
 # rust-action
 
+[![Build Status]](https://github.com/EricCrosson/rust-action/actions/workflows/host_release.yml)
+
+[build status]: https://github.com/EricCrosson/rust-action/actions/workflows/host_release.yml/badge.svg?event=push
+
 This repository contains _extremely opinionated_ reusable GitHub Actions workflows providing CI and CD for Rust projects.
 
 **rust-action** is intended to reduce duplication among very rigidly organized projects.
