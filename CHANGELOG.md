@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/EricCrosson/rust-action/compare/v1.3.2...v1.3.3) (2023-01-08)
+
+
+### Bug Fixes
+
+* **ci:** use faster method to install semantic-release-cargo ([1ca8c15](https://github.com/EricCrosson/rust-action/commit/1ca8c155a4c436bcf2243b4d4038421155c5f2a9))
+
 ## [1.3.2](https://github.com/EricCrosson/rust-action/compare/v1.3.1...v1.3.2) (2023-01-08)
 
 
