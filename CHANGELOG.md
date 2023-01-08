@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/EricCrosson/rust-action/compare/v1.3.4...v1.3.5) (2023-01-08)
+
+
+### Bug Fixes
+
+* **docs:** add readme ([5450fc5](https://github.com/EricCrosson/rust-action/commit/5450fc5495da0a44fb0b86396685e167822b79af))
+
 ## [1.3.4](https://github.com/EricCrosson/rust-action/compare/v1.3.3...v1.3.4) (2023-01-08)
 
 
