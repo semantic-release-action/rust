@@ -66,6 +66,8 @@ runs:
 
     # TODO: document why we mess with NODE_PATH
 
+    # NODE_PATH still formed like this:
+    # NODE_PATH: /home/runner/work/sanitize-git-ref/sanitize-git-ref/.rust-action/semantic-release-library/:
     - id: is-semantic-release-configured
       run: |
         : test for semantic-release configuration
@@ -129,7 +131,7 @@ runs:
       id: cache-action-node-modules
       with:
         path: node_modules
-        key: ${{ runner.os }}-node-action-${{ hashFiles('${{ env.node_workdir }}/package-lock.json') }}
+        key: ${{ runner.os }}-node-action-${{ hashFiles('.rust-action/semantic-release-library/package-lock.json') }}
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && steps.cache-action-node-modules.outputs.cache-hit != 'true'
       run: |
