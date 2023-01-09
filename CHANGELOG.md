@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/EricCrosson/rust-action/compare/v1.3.5...v2.0.0) (2023-01-09)
+
+
+* feat!: support releasing Rust libraries ([3abf0f8](https://github.com/EricCrosson/rust-action/commit/3abf0f8d4f131f2e466ceec53d975b0476491414))
+
+
+### BREAKING CHANGES
+
+* release.yml workflow renamed to release-binary.yml
+
 ## [1.3.5](https://github.com/EricCrosson/rust-action/compare/v1.3.4...v1.3.5) (2023-01-08)
 
 
