@@ -66,8 +66,6 @@ runs:
 
     # TODO: document why we mess with NODE_PATH
 
-    # NODE_PATH still formed like this:
-    # NODE_PATH: /home/runner/work/sanitize-git-ref/sanitize-git-ref/.rust-action/semantic-release-library/:
     - id: is-semantic-release-configured
       run: |
         : test for semantic-release configuration
@@ -87,7 +85,7 @@ runs:
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
       run: |
         : configure Node.js path
-        echo NODE_PATH="$node_workdir:${NODE_PATH:+":$NODE_PATH"}" >> "$GITHUB_ENV"
+        echo NODE_PATH="$node_workdir${NODE_PATH:+":$NODE_PATH"}" >> "$GITHUB_ENV"
       shell: bash
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
