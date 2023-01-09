@@ -1,6 +1,5 @@
 {
   "name": "@ericcrosson/rust-action-semantic-release-library",
-  "version": "0.0.0-semantically-released",
   "private": true,
   "dependencies": {
     "@semantic-release-cargo/semantic-release-cargo": "2.0.19",
