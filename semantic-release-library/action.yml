@@ -91,6 +91,7 @@ runs:
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
       run: |
         : configure git to ignore semantic-release manifest
+        mkdir -p "$HOME/.config/git"
         echo "/.releaserc.json" >> "$HOME/.config/git/ignore"
         echo "/.rust-action/" >> "$HOME/.config/git/ignore"
       shell: bash
