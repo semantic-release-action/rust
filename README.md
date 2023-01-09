@@ -33,7 +33,7 @@ on:
 
 jobs:
   test:
-    uses: EricCrosson/rust-action/.github/workflows/ci.yml@v1
+    uses: EricCrosson/rust-action/.github/workflows/ci.yml@v2
 ```
 
 ### Inputs
@@ -52,11 +52,11 @@ Specify a Rust [toolchain].
 #### test-command
 
 The shell command used to provide confidence in the proposed changes.
-Defaults to `cargo test` but you can override this to `cargo check` or anything else.
+Defaults to `cargo test`, but you can override this to `cargo check` or anything else.
 
-## Release
+## Release binary
 
-Continuous deployments are provided by `.github/workflows/release.yml`.
+Continuous deployments for Rust binaries are provided by `.github/workflows/release-binary.yml`.
 
 Each deploy:
 
@@ -100,7 +100,7 @@ on:
 
 jobs:
   release:
-    uses: EricCrosson/rust-action/.github/workflows/release.yml@v1
+    uses: EricCrosson/rust-action/.github/workflows/release.yml@v2
     with:
       binary-name: flux-capacitor-driver
     secrets:
@@ -129,3 +129,54 @@ This workflow currently assumes you are generating only one binary.
 #### cargo-registry-token
 
 API with write permission for publishing your crate to your target registry.
+
+## Release library
+
+Continuous deployments for Rust libraries are provided by `.github/workflows/release-library.yml`.
+
+Each deploy:
+
+- publishes your crate to crates.io
+
+  This provides compatibility with [cargo binstall].
+
+- updates a CHANGELOG.md in your git repository
+
+  This produces a commit (currently not gpg signed).
+
+### Use
+
+```yaml
+---
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+      - next
+      - next-major
+      - beta
+      - alpha
+      - "[0-9]+.[0-9]+.x"
+      - "[0-9]+.x"
+
+jobs:
+  release:
+    uses: EricCrosson/rust-action/.github/workflows/release-library.yml@v2
+    secrets:
+      cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+```
+
+### Inputs
+
+| Input Parameter | Required |   Default    | Description                                                                           |
+| :-------------: | :------: | :----------: | ------------------------------------------------------------------------------------- |
+|    toolchain    |  false   |   `stable`   | Rust toolchain specification [Details](#toolchain)                                    |
+|  test-command   |  false   | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command) |
+
+### Secrets
+
+|        Secret        | Required | Description                                               |
+| :------------------: | :------: | --------------------------------------------------------- |
+| cargo-registry-token |   true   | Cargo registry API token [Details](#cargo-registry-token) |

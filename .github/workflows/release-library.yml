@@ -1,0 +1,41 @@
+---
+name: Release Library
+
+on:
+  workflow_call:
+    inputs:
+      toolchain:
+        description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
+        required: false
+        type: string
+        default: stable
+      test-command:
+        description: Command used to test your Rust program
+        required: false
+        type: string
+        default: cargo test
+    secrets:
+      cargo-registry-token:
+        description: API token for writing to your cargo registry
+        required: true
+
+# Only allow one release workflow to execute at a time, since each release
+# workflow uses shared resources (git tags, package registries)
+concurrency:
+  group: ${{ github.workflow }}
+
+env:
+  RUST_BACKTRACE: 1
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Release
+        uses: EricCrosson/rust-action/semantic-release-library@v2
+        with:
+          toolchain: ${{ inputs.toolchain }}
+          test-command: ${{ inputs.test-command }}
+          cargo-registry-token: ${{ secrets.cargo-registry-token }}

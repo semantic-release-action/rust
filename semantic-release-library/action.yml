@@ -1,0 +1,98 @@
+---
+name: semantic-release-library
+description: GitHub Action to semantically release your Rust library
+author: EricCrosson
+branding:
+  icon: package
+  color: orange
+
+# Use a composite action for access to github.action_path
+# (which is only supported in composite actions)
+
+inputs:
+  toolchain:
+    description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
+    required: false
+    type: string
+    default: stable
+  test-command:
+    description: Command used to test your Rust program
+    required: false
+    type: string
+    default: cargo test
+  cargo-registry-token:
+    description: API token for writing to your cargo registry
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        # Fetch all history and tags for calculating next semantic version
+        fetch-depth: 0
+
+    - name: Install Rust toolchain
+      uses: dtolnay/rust-toolchain@master
+      id: rust-toolchain
+      with:
+        toolchain: ${{ inputs.toolchain }}
+
+    - name: Cache cargo
+      uses: actions/cache@v3
+      id: cache-cargo
+      with:
+        path: |
+          ~/.cargo/bin/
+          ~/.cargo/registry/index/
+          ~/.cargo/registry/cache/
+          ~/.cargo/git/db/
+          target/
+        key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
+
+    - name: Test
+      run: ${{ inputs.test-command }}
+
+    - name: Install is-semantic-release-configured
+      uses: EricCrosson/install-github-release-binary@v1
+      with:
+        repo: EricCrosson/is-semantic-release-configured@v1
+
+    - run: |
+        : configure semantic-release
+        if ! is-semantic-release-configured; then
+          rm -f package.json package-lock.json
+          cp ${{ github.action_path }}/package.json package.json
+          cp ${{ github.action_path }}/package-lock.json package-lock.json
+          cp ${{ github.action_path }}/.releaserc.json .releaserc.json
+          sed -i 's/BINARY_NAME/${{ inputs.binary-name }}/g' .releaserc.json
+        fi
+      shell: bash
+
+    - name: Configure Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: lts/*
+        cache: npm
+
+    - name: Cache npm dependencies
+      uses: actions/cache@v3
+      id: cache-node-modules
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+    - if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: |
+        : install dependencies
+        npm ci --ignore-scripts --loglevel error
+      shell: bash
+
+    - run: |
+        : invoke semantic-release
+        ./node_modules/.bin/semantic-release
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        CARGO_REGISTRY_TOKEN: ${{ inputs.cargo-registry-token }}
+      shell: bash
