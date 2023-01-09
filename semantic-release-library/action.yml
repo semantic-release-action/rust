@@ -76,9 +76,9 @@ runs:
         else
           echo "::debug::Did not detect semantic-release configuration, using this action's built-in configuration"
           echo "host-configuration=false" >> "$GITHUB_OUTPUT"
-          echo node_workdir="$GITHUB_WORKSPACE/.rust-action/semantic-release-library/" >> "$GITHUB_ENV"
-          mkdir -p "$node_workdir"
-          echo "semantic_release=$node_workdir/node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
+          echo "semantic_release=$GITHUB_WORKSPACE/.rust-action/semantic-release-library/node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
+          echo "node_workdir=$GITHUB_WORKSPACE/.rust-action/semantic-release-library/" >> "$GITHUB_ENV"
+          mkdir -p "$GITHUB_WORKSPACE/.rust-action/semantic-release-library/"
         fi
       shell: bash
 
