@@ -1,3 +1,10 @@
+## [2.0.8](https://github.com/EricCrosson/rust-action/compare/v2.0.7...v2.0.8) (2023-01-09)
+
+
+### Bug Fixes
+
+* create directory before writing file ([edf21e8](https://github.com/EricCrosson/rust-action/commit/edf21e822e73b7b055088ff03cf241aa6dd3a55e))
+
 ## [2.0.7](https://github.com/EricCrosson/rust-action/compare/v2.0.6...v2.0.7) (2023-01-09)
 
 
