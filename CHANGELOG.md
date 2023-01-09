@@ -1,3 +1,10 @@
+## [2.0.9](https://github.com/EricCrosson/rust-action/compare/v2.0.8...v2.0.9) (2023-01-09)
+
+
+### Bug Fixes
+
+* resolve logical bug ([784609a](https://github.com/EricCrosson/rust-action/commit/784609afe790aa183ece2dd291fee6098e4053ed))
+
 ## [2.0.8](https://github.com/EricCrosson/rust-action/compare/v2.0.7...v2.0.8) (2023-01-09)
 
 
