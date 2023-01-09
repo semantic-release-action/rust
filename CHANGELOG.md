@@ -1,3 +1,10 @@
+## [2.0.13](https://github.com/EricCrosson/rust-action/compare/v2.0.12...v2.0.13) (2023-01-09)
+
+
+### Bug Fixes
+
+* remove extra colon from NODE_PATH ([0f22c8d](https://github.com/EricCrosson/rust-action/commit/0f22c8dc201b8681ca427217a2220036db9f6979))
+
 ## [2.0.12](https://github.com/EricCrosson/rust-action/compare/v2.0.11...v2.0.12) (2023-01-09)
 
 
