@@ -108,7 +108,6 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: lts/*
-        cache: npm
 
     - name: Cache host npm dependencies
       if: steps.is-semantic-release-configured.outputs.host-configuration == 'true'
