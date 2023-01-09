@@ -60,17 +60,47 @@ runs:
       with:
         repo: EricCrosson/is-semantic-release-configured@v1
 
-    - run: |
-        : configure semantic-release
-        if ! is-semantic-release-configured; then
-          echo "::debug::Did not detect semantic-release configuration, using this action's built-in configuration"
-          rm -f package.json package-lock.json
-          cp ${{ github.action_path }}/package.json package.json
-          cp ${{ github.action_path }}/package-lock.json package-lock.json
-          cp ${{ github.action_path }}/.releaserc.json .releaserc.json
-        else
+    # Terminology:
+    # - The "host" is the repository calling this action.
+    # - The "action" is this action.
+
+    # TODO: document why we mess with NODE_PATH
+
+    - id: is-semantic-release-configured
+      run: |
+        : test for semantic-release configuration
+        if is-semantic-release-configured; then
           echo "::debug::Detected semantic-release configuration, using host repository's configuration"
+          echo "host-configuration=true" >> "$GITHUB_OUTPUT"
+          echo node_workdir="$GITHUB_WORKSPACE/.rust-action/semantic-release-library/" >> "$GITHUB_ENV"
+          mkdir -p "$node_workdir"
+          echo "semantic_release=$node_workdir/node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
         fi
+          echo "::debug::Did not detect semantic-release configuration, using this action's built-in configuration"
+          echo "host-configuration=false" >> "$GITHUB_OUTPUT"
+          echo "semantic_release=./node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
+        else
+      shell: bash
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
+      run: |
+        : configure Node.js path
+        echo NODE_PATH="$node_workdir:${NODE_PATH:+":$NODE_PATH"}" >> "$GITHUB_ENV"
+      shell: bash
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
+      run: |
+        : configure git to ignore semantic-release manifest
+        echo "/.releaserc.json" >> "$HOME/.config/git/ignore"
+        echo "/.rust-action/" >> "$HOME/.config/git/ignore"
+      shell: bash
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
+      run: |
+        : install semantic-release manifest
+        cp "${{ github.action_path }}/package.json" "${{ env.node_workdir }}/package.json"
+        cp "${{ github.action_path }}/package-lock.json" "${{ env.node_workdir }}/package-lock.json"
+        cp "${{ github.action_path }}/.releaserc.json" ".releaserc.json"
       shell: bash
 
     - name: Configure Node.js
@@ -79,22 +109,38 @@ runs:
         node-version: lts/*
         cache: npm
 
-    - name: Cache npm dependencies
+    - name: Cache host npm dependencies
+      if: steps.is-semantic-release-configured.outputs.host-configuration == 'true'
       uses: actions/cache@v3
-      id: cache-node-modules
+      id: cache-host-node-modules
       with:
         path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        key: ${{ runner.os }}-node-host-${{ hashFiles('package.json', package-lock.json') }}
 
-    - if: steps.cache-node-modules.outputs.cache-hit != 'true'
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'true' && steps.cache-host-node-modules.outputs.cache-hit != 'true'
       run: |
-        : install dependencies
+        : install host npm dependencies
+        npm ci --loglevel error
+      shell: bash
+
+    - name: Cache action npm dependencies
+      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
+      uses: actions/cache@v3
+      id: cache-action-node-modules
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-action-${{ hashFiles('${{ env.node_workdir }}/package-lock.json') }}
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && steps.cache-action-node-modules.outputs.cache-hit != 'true'
+      run: |
+        : install action npm dependencies
         npm ci --ignore-scripts --loglevel error
+      working-directory: ${{ env.node_workdir }}
       shell: bash
 
     - run: |
         : invoke semantic-release
-        ./node_modules/.bin/semantic-release
+        ${semantic_release}
       env:
         GITHUB_TOKEN: ${{ github.token }}
         CARGO_REGISTRY_TOKEN: ${{ inputs.cargo-registry-token }}
