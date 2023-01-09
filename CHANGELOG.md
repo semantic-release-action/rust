@@ -1,3 +1,10 @@
+## [2.0.12](https://github.com/EricCrosson/rust-action/compare/v2.0.11...v2.0.12) (2023-01-09)
+
+
+### Bug Fixes
+
+* inline variable expansion ([885b4e4](https://github.com/EricCrosson/rust-action/commit/885b4e45492b63c0b057d9f4f36d721aecf98622))
+
 ## [2.0.11](https://github.com/EricCrosson/rust-action/compare/v2.0.10...v2.0.11) (2023-01-09)
 
 
