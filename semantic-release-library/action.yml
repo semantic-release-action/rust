@@ -53,6 +53,7 @@ runs:
 
     - name: Test
       run: ${{ inputs.test-command }}
+      shell: bash
 
     - name: Install is-semantic-release-configured
       uses: EricCrosson/install-github-release-binary@v1
