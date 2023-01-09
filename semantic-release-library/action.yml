@@ -72,13 +72,13 @@ runs:
         if is-semantic-release-configured; then
           echo "::debug::Detected semantic-release configuration, using host repository's configuration"
           echo "host-configuration=true" >> "$GITHUB_OUTPUT"
-          echo node_workdir="$GITHUB_WORKSPACE/.rust-action/semantic-release-library/" >> "$GITHUB_ENV"
-          mkdir -p "$node_workdir"
-          echo "semantic_release=$node_workdir/node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
+          echo "semantic_release=./node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
         else
           echo "::debug::Did not detect semantic-release configuration, using this action's built-in configuration"
           echo "host-configuration=false" >> "$GITHUB_OUTPUT"
-          echo "semantic_release=./node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
+          echo node_workdir="$GITHUB_WORKSPACE/.rust-action/semantic-release-library/" >> "$GITHUB_ENV"
+          mkdir -p "$node_workdir"
+          echo "semantic_release=$node_workdir/node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
         fi
       shell: bash
 
