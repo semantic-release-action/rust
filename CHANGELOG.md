@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/EricCrosson/rust-action/compare/v2.0.3...v2.0.4) (2023-01-09)
+
+
+### Bug Fixes
+
+* do not commit rust-action npm package manifest to repository ([3bb46e9](https://github.com/EricCrosson/rust-action/commit/3bb46e97a227bbbcf12cce37624587a66d924883))
+
 ## [2.0.3](https://github.com/EricCrosson/rust-action/compare/v2.0.2...v2.0.3) (2023-01-09)
 
 
