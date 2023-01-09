@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/EricCrosson/rust-action/compare/v2.0.1...v2.0.2) (2023-01-09)
+
+
+### Bug Fixes
+
+* skip unnecessary semantic-release config processing ([fe9894a](https://github.com/EricCrosson/rust-action/commit/fe9894a9283ab5445e16236bee43d3e0c4068cf8))
+
 ## [2.0.1](https://github.com/EricCrosson/rust-action/compare/v2.0.0...v2.0.1) (2023-01-09)
 
 
