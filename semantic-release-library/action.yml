@@ -61,10 +61,18 @@ runs:
         repo: EricCrosson/is-semantic-release-configured@v1
 
     # Terminology:
+    #
     # - The "host" is the repository calling this action.
     # - The "action" is this action.
-
-    # TODO: document why we mess with NODE_PATH
+    #
+    # When we use the action's semantic-release configuration,
+    # install node_modules into an ephemeral .rust-action directory.
+    # Add this directory and the semantic-release manifest to the global gitignore.
+    #
+    # This has the following benefits:
+    #
+    # - @semantic-release/changelog does not try to commit the npm package manifest
+    # - cargo does not include git-ignored files in the package upload
 
     - id: is-semantic-release-configured
       run: |
