@@ -1,3 +1,10 @@
+## [2.0.5](https://github.com/EricCrosson/rust-action/compare/v2.0.4...v2.0.5) (2023-01-09)
+
+
+### Bug Fixes
+
+* do not use host repository as working directory ([ed81db7](https://github.com/EricCrosson/rust-action/commit/ed81db72d7931014526dd818fbf97b9db5321edf))
+
 ## [2.0.4](https://github.com/EricCrosson/rust-action/compare/v2.0.3...v2.0.4) (2023-01-09)
 
 
