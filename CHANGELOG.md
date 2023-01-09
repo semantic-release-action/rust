@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/EricCrosson/rust-action/compare/v2.0.2...v2.0.3) (2023-01-09)
+
+
+### Bug Fixes
+
+* correct typo in package manifest ([cecb2d7](https://github.com/EricCrosson/rust-action/commit/cecb2d7cc06c7df33d53fb5b987a9b3598825e87))
+
 ## [2.0.2](https://github.com/EricCrosson/rust-action/compare/v2.0.1...v2.0.2) (2023-01-09)
 
 
