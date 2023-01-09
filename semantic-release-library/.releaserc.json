@@ -5,6 +5,11 @@
     "@semantic-release/changelog",
     "@semantic-release-cargo/semantic-release-cargo",
     "@semantic-release/github",
-    "@semantic-release/git"
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md", "Cargo.toml"]
+      }
+    ]
   ]
 }
