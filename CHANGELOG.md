@@ -1,3 +1,10 @@
+## [2.0.11](https://github.com/EricCrosson/rust-action/compare/v2.0.10...v2.0.11) (2023-01-09)
+
+
+### Bug Fixes
+
+* remove premature caching ([d3780b9](https://github.com/EricCrosson/rust-action/commit/d3780b901c432c097917df0d9541251ec9d2bcc3))
+
 ## [2.0.10](https://github.com/EricCrosson/rust-action/compare/v2.0.9...v2.0.10) (2023-01-09)
 
 
