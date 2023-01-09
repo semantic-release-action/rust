@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/EricCrosson/rust-action/compare/v2.0.0...v2.0.1) (2023-01-09)
+
+
+### Bug Fixes
+
+* specify shell ([f98cb8b](https://github.com/EricCrosson/rust-action/commit/f98cb8bfec258240e3db4f06b6c9546959855402))
+
 # [2.0.0](https://github.com/EricCrosson/rust-action/compare/v1.3.5...v2.0.0) (2023-01-09)
 
 
