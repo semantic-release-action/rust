@@ -1,3 +1,10 @@
+## [2.0.14](https://github.com/EricCrosson/rust-action/compare/v2.0.13...v2.0.14) (2023-01-09)
+
+
+### Bug Fixes
+
+* use scratch directory for temporary work ([3768183](https://github.com/EricCrosson/rust-action/commit/376818375e5e7bcef74d2a2393a93d397e053650))
+
 ## [2.0.13](https://github.com/EricCrosson/rust-action/compare/v2.0.12...v2.0.13) (2023-01-09)
 
 
