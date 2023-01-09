@@ -1,3 +1,10 @@
+## [2.0.6](https://github.com/EricCrosson/rust-action/compare/v2.0.5...v2.0.6) (2023-01-09)
+
+
+### Bug Fixes
+
+* use valid syntax ([bc7cb2e](https://github.com/EricCrosson/rust-action/commit/bc7cb2e0524b86321075f45c65a6dc85f32882f7))
+
 ## [2.0.5](https://github.com/EricCrosson/rust-action/compare/v2.0.4...v2.0.5) (2023-01-09)
 
 
