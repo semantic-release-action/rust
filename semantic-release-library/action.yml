@@ -63,11 +63,13 @@ runs:
     - run: |
         : configure semantic-release
         if ! is-semantic-release-configured; then
+          echo "::debug::Did not detect semantic-release configuration, using this action's built-in configuration"
           rm -f package.json package-lock.json
           cp ${{ github.action_path }}/package.json package.json
           cp ${{ github.action_path }}/package-lock.json package-lock.json
           cp ${{ github.action_path }}/.releaserc.json .releaserc.json
-          sed -i 's/BINARY_NAME/${{ inputs.binary-name }}/g' .releaserc.json
+        else
+          echo "::debug::Detected semantic-release configuration, using host repository's configuration"
         fi
       shell: bash
 
