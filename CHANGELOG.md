@@ -1,3 +1,10 @@
+## [2.0.16](https://github.com/EricCrosson/rust-action/compare/v2.0.15...v2.0.16) (2023-01-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @semantic-release-cargo/semantic-release-cargo to v2.0.24 ([54953ec](https://github.com/EricCrosson/rust-action/commit/54953ec89b71e97a086e23d5dc83ce7dc8536f2d))
+
 ## [2.0.15](https://github.com/EricCrosson/rust-action/compare/v2.0.14...v2.0.15) (2023-01-09)
 
 
