@@ -148,7 +148,7 @@ runs:
       uses: actions/cache@v3
       id: cache-action-node-modules
       with:
-        path: node_modules
+        path: .rust-action/semantic-release-binary/node_modules
         key: ${{ runner.os }}-node-action-${{ hashFiles('.rust-action/semantic-release-binary/package-lock.json') }}
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && steps.cache-action-node-modules.outputs.cache-hit != 'true'
