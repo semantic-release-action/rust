@@ -1,3 +1,10 @@
+## [2.0.18](https://github.com/EricCrosson/rust-action/compare/v2.0.17...v2.0.18) (2023-01-10)
+
+
+### Bug Fixes
+
+* cache the right node_modules directory ([2617a6b](https://github.com/EricCrosson/rust-action/commit/2617a6beaa589b2df4ababb7e5cda0b3b0f82e30))
+
 ## [2.0.17](https://github.com/EricCrosson/rust-action/compare/v2.0.16...v2.0.17) (2023-01-10)
 
 
