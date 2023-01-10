@@ -51,8 +51,9 @@ runs:
           target/
         key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
 
-    - name: Test
-      run: ${{ inputs.test-command }}
+    - run: |
+        : test
+        ${{ inputs.test-command }}
       shell: bash
 
     - name: Install is-semantic-release-configured
