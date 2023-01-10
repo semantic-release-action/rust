@@ -1,5 +1,5 @@
 ---
-name: semantic-release-binary
+name: semantic-release-rust-binary
 description: GitHub Action to semantically release your Rust binary
 author: EricCrosson
 branding:

@@ -1,5 +1,5 @@
 ---
-name: semantic-release-library
+name: semantic-release-rust-library
 description: GitHub Action to semantically release your Rust library
 author: EricCrosson
 branding:
