@@ -1,3 +1,10 @@
+## [2.0.17](https://github.com/EricCrosson/rust-action/compare/v2.0.16...v2.0.17) (2023-01-10)
+
+
+### Bug Fixes
+
+* use consistent output style ([b59a0cf](https://github.com/EricCrosson/rust-action/commit/b59a0cf86f88c53e4f925a291475da9e028150cd))
+
 ## [2.0.16](https://github.com/EricCrosson/rust-action/compare/v2.0.15...v2.0.16) (2023-01-10)
 
 
