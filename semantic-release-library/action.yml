@@ -126,7 +126,7 @@ runs:
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && !inputs.enable-semantic-release-git
       run: |
         : disable @semantic-release/git
-        configure-semantic-release-manifest --remove @semantic-release/git
+        configure-semantic-release-manifest --in-place --remove @semantic-release/git
       shell: bash
 
     - name: Configure Node.js
