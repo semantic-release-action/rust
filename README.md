@@ -38,10 +38,11 @@ jobs:
 
 ### Inputs
 
-| Input Parameter |   Default    | Description                                                                           |
-| :-------------: | :----------: | ------------------------------------------------------------------------------------- |
-|    toolchain    |   `stable`   | Rust toolchain specification [Details](#toolchain)                                    |
-|  test-command   | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command) |
+|       Input Parameter       |   Default    | Description                                                                               |
+| :-------------------------: | :----------: | ----------------------------------------------------------------------------------------- |
+|          toolchain          |   `stable`   | Rust toolchain specification [Details](#toolchain)                                        |
+|        test-command         | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command)     |
+| enable-semantic-release-git |     true     | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git) |
 
 #### toolchain
 
@@ -53,6 +54,12 @@ Specify a Rust [toolchain].
 
 The shell command used to provide confidence in the proposed changes.
 Defaults to `cargo test`, but you can override this to `cargo check` or anything else.
+
+#### enable-semantic-release-git
+
+Runtime option controlling the use of [@semantic-release/git].
+Set to `false` to prevent semantic-release from pushing artifacts to your repository.
+This may be required with certain repository settings, for example when requiring signed commits.
 
 ## Release binary
 
@@ -109,11 +116,12 @@ jobs:
 
 ### Inputs
 
-| Input Parameter | Required |   Default    | Description                                                                           |
-| :-------------: | :------: | :----------: | ------------------------------------------------------------------------------------- |
-|    toolchain    |  false   |   `stable`   | Rust toolchain specification [Details](#toolchain)                                    |
-|  test-command   |  false   | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command) |
-|   binary-name   |   true   |              | The name [Details](#binary-name)                                                      |
+|       Input Parameter       | Required |                                          Default                                          | Description                                                                           |
+| :-------------------------: | :------: | :---------------------------------------------------------------------------------------: | ------------------------------------------------------------------------------------- |
+|          toolchain          |  false   |                                         `stable`                                          | Rust toolchain specification [Details](#toolchain)                                    |
+|        test-command         |  false   |                                       `cargo test`                                        | Shell command used to provide confidence in proposed changes [Details](#test-command) |
+|         binary-name         |   true   |                                                                                           | The name [Details](#binary-name)                                                      |
+| enable-semantic-release-git |   true   | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git) |
 
 #### binary-name
 

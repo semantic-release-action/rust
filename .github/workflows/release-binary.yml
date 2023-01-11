@@ -6,18 +6,20 @@ on:
     inputs:
       toolchain:
         description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
-        required: false
         type: string
         default: stable
       test-command:
         description: Command used to test your Rust program
-        required: false
         type: string
         default: cargo test
       binary-name:
         description: The name of your Rust binary
         required: true
         type: string
+      enable-semantic-release-git:
+        description: Use @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
+        type: boolean
+        default: true
     secrets:
       cargo-registry-token:
         description: API token for writing to your cargo registry
@@ -193,4 +195,5 @@ jobs:
         uses: EricCrosson/rust-action/semantic-release-binary@v2
         with:
           binary-name: ${{ inputs.binary-name }}
+          enable-semantic-release-git: ${{ inputs.enable-semantic-release-git }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}

@@ -19,6 +19,10 @@ inputs:
     description: The name of your Rust binary
     required: true
     type: string
+  enable-semantic-release-git:
+    description: Use @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
+    type: boolean
+    default: true
   cargo-registry-token:
     description: API token for writing to your cargo registry
     required: true
@@ -106,6 +110,18 @@ runs:
         cp "${{ github.action_path }}/package-lock.json" "${{ env.node_workdir }}/package-lock.json"
         cp ${{ github.action_path }}/.releaserc.json .releaserc.json
         sed -i 's/BINARY_NAME/${{ inputs.binary-name }}/g' .releaserc.json
+      shell: bash
+
+    - name: Install is-semantic-release-configured
+      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && !inputs.enable-semantic-release-git
+      uses: EricCrosson/install-github-release-binary@v1
+      with:
+        repo: EricCrosson/configure-semantic-release-manifest@v1
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && !inputs.enable-semantic-release-git
+      run: |
+        : disable @semantic-release/git
+        configure-semantic-release-manifest --remove @semantic-release/git
       shell: bash
 
     - name: Download release artifacts
