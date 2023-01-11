@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/EricCrosson/rust-action/compare/v2.1.0...v2.1.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* write semantic-release manifest after edit ([aecf4d4](https://github.com/EricCrosson/rust-action/commit/aecf4d4c658bfb0028dbb0e24e6dd4295176d606))
+
 # [2.1.0](https://github.com/EricCrosson/rust-action/compare/v2.0.18...v2.1.0) (2023-01-11)
 
 
