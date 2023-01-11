@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/EricCrosson/rust-action/compare/v2.0.18...v2.1.0) (2023-01-11)
+
+
+### Features
+
+* add input to control committing artifacts ([bd5f033](https://github.com/EricCrosson/rust-action/commit/bd5f033008d77dbb122dcdea9c0017035fddc8c1))
+
 ## [2.0.18](https://github.com/EricCrosson/rust-action/compare/v2.0.17...v2.0.18) (2023-01-10)
 
 
