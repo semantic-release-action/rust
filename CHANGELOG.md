@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/EricCrosson/rust-action/compare/v2.1.1...v2.1.2) (2023-01-12)
+
+
+### Bug Fixes
+
+* **deps:** upgrade install-github-release-binary to v2 ([2c85ed8](https://github.com/EricCrosson/rust-action/commit/2c85ed8c6cbcaa8b1846a97f005d0f11316d3a3f))
+
 ## [2.1.1](https://github.com/EricCrosson/rust-action/compare/v2.1.0...v2.1.1) (2023-01-11)
 
 
