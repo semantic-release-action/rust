@@ -142,9 +142,9 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Install semantic-release-cargo
-        uses: EricCrosson/install-github-release-binary@v1
+        uses: EricCrosson/install-github-release-binary@v2
         with:
-          repo: semantic-release-cargo/semantic-release-cargo@v2
+          targets: semantic-release-cargo/semantic-release-cargo@v2
 
       - name: Prepare semantic-release for Rust
         run: semantic-release-cargo --verbose --verbose --verbose prepare ${{ needs.get-next-version.outputs.new-release-version }}

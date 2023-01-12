@@ -55,9 +55,9 @@ runs:
         key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
 
     - name: Install is-semantic-release-configured
-      uses: EricCrosson/install-github-release-binary@v1
+      uses: EricCrosson/install-github-release-binary@v2
       with:
-        repo: EricCrosson/is-semantic-release-configured@v1
+        targets: EricCrosson/is-semantic-release-configured@v1
 
     # Terminology:
     #
@@ -114,9 +114,9 @@ runs:
 
     - name: Install is-semantic-release-configured
       if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && !inputs.enable-semantic-release-git
-      uses: EricCrosson/install-github-release-binary@v1
+      uses: EricCrosson/install-github-release-binary@v2
       with:
-        repo: EricCrosson/configure-semantic-release-manifest@v1
+        targets: EricCrosson/configure-semantic-release-manifest@v1
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && !inputs.enable-semantic-release-git
       run: |
