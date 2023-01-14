@@ -71,7 +71,7 @@ runs:
     # - The "action" is this action.
     #
     # When we use the action's semantic-release configuration,
-    # install node_modules into an ephemeral .rust-action directory.
+    # install node_modules into an ephemeral .semantic-release-action_rust directory.
     # Add this directory and the semantic-release manifest to the global gitignore.
     #
     # This has the following benefits:
@@ -89,9 +89,9 @@ runs:
         else
           echo "::debug::Did not detect semantic-release configuration, using this action's built-in configuration"
           echo "host-configuration=false" >> "$GITHUB_OUTPUT"
-          echo "semantic_release=$GITHUB_WORKSPACE/.rust-action/semantic-release-library/node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
-          echo "node_workdir=$GITHUB_WORKSPACE/.rust-action/semantic-release-library/" >> "$GITHUB_ENV"
-          mkdir -p "$GITHUB_WORKSPACE/.rust-action/semantic-release-library/"
+          echo "semantic_release=$GITHUB_WORKSPACE/.semantic-release-action_rust/semantic-release-library/node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
+          echo "node_workdir=$GITHUB_WORKSPACE/.semantic-release-action_rust/semantic-release-library/" >> "$GITHUB_ENV"
+          mkdir -p "$GITHUB_WORKSPACE/.semantic-release-action_rust/semantic-release-library/"
         fi
       shell: bash
 
@@ -106,7 +106,7 @@ runs:
         : configure git to ignore semantic-release manifest
         mkdir -p "$HOME/.config/git"
         echo "/.releaserc.json" >> "$HOME/.config/git/ignore"
-        echo "/.rust-action/" >> "$HOME/.config/git/ignore"
+        echo "/.semantic-release-action_rust/" >> "$HOME/.config/git/ignore"
       shell: bash
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
@@ -153,8 +153,8 @@ runs:
       uses: actions/cache@v3
       id: cache-action-node-modules
       with:
-        path: .rust-action/semantic-release-library/node_modules
-        key: ${{ runner.os }}-node-action-${{ hashFiles('.rust-action/semantic-release-library/package-lock.json') }}
+        path: .semantic-release-action_rust/semantic-release-library/node_modules
+        key: ${{ runner.os }}-node-action-${{ hashFiles('.semantic-release-action_rust/semantic-release-library/package-lock.json') }}
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && steps.cache-action-node-modules.outputs.cache-hit != 'true'
       run: |

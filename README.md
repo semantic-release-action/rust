@@ -1,12 +1,12 @@
-# rust-action
+# semantic-release-action/rust
 
-[![Build Status]](https://github.com/EricCrosson/rust-action/actions/workflows/host_release.yml)
+[![Build Status]](https://github.com/semantic-release-action/rust/actions/workflows/host_release.yml)
 
-[build status]: https://github.com/EricCrosson/rust-action/actions/workflows/host_release.yml/badge.svg?event=push
+[build status]: https://github.com/semantic-release-action/rust/actions/workflows/host_release.yml/badge.svg?event=push
 
 This repository contains _extremely opinionated_ reusable GitHub Actions workflows providing CI and CD for Rust projects.
 
-**rust-action** is intended to reduce duplication among very rigidly organized projects.
+This GitHub Action is intended to reduce duplication among very rigidly organized projects.
 These are not general-purpose workflows.
 You may find that they work for you and your development workflows out of the box, or they may not.
 

@@ -192,7 +192,7 @@ jobs:
 
     steps:
       - name: Release
-        uses: EricCrosson/rust-action/semantic-release-binary@v2
+        uses: semantic-release-action/rust/semantic-release-binary@v2
         with:
           binary-name: ${{ inputs.binary-name }}
           enable-semantic-release-git: ${{ inputs.enable-semantic-release-git }}
