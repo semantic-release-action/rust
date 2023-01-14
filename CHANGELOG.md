@@ -1,3 +1,10 @@
+## [2.1.6](https://github.com/semantic-release-action/rust/compare/v2.1.5...v2.1.6) (2023-01-14)
+
+
+### Bug Fixes
+
+* update repository metadata ([767e482](https://github.com/semantic-release-action/rust/commit/767e482ff16c5fcf5a6851f2aefc9be6b713a061)), closes [#7](https://github.com/semantic-release-action/rust/issues/7)
+
 ## [2.1.5](https://github.com/semantic-release-action/rust/compare/v2.1.4...v2.1.5) (2023-01-14)
 
 
