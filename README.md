@@ -128,6 +128,8 @@ Runtime option controlling the use of [@semantic-release/git].
 Set to `false` to prevent semantic-release from pushing artifacts to your repository.
 This may be required with certain repository settings, for example when requiring signed commits.
 
+[@semantic-release/git]: https://github.com/semantic-release/git
+
 ### Secrets
 
 |        Secret        | Required | Description                                               |
