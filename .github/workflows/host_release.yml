@@ -23,4 +23,4 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: EricCrosson/semantic-release-your-github-action@v3
+      - uses: semantic-release-action/github-actions@v3
