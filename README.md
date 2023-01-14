@@ -33,7 +33,7 @@ on:
 
 jobs:
   test:
-    uses: EricCrosson/rust-action/.github/workflows/ci.yml@v2
+    uses: semantic-release-action/rust/.github/workflows/ci.yml@v2
 ```
 
 ### Inputs
@@ -107,7 +107,7 @@ on:
 
 jobs:
   release:
-    uses: EricCrosson/rust-action/.github/workflows/release.yml@v2
+    uses: semantic-release-action/rust/.github/workflows/release.yml@v2
     with:
       binary-name: flux-capacitor-driver
     secrets:
@@ -171,7 +171,7 @@ on:
 
 jobs:
   release:
-    uses: EricCrosson/rust-action/.github/workflows/release-library.yml@v2
+    uses: semantic-release-action/rust/.github/workflows/release-library.yml@v2
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 ```
