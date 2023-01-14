@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/EricCrosson/rust-action/compare/v2.1.3...v2.1.4) (2023-01-14)
+
+
+### Bug Fixes
+
+* **deps:** migrate to semantic-release-action/next-release-version ([51ebb77](https://github.com/EricCrosson/rust-action/commit/51ebb77c9f2770d4a6fa08a9c347e923163dfa1f))
+
 ## [2.1.3](https://github.com/EricCrosson/rust-action/compare/v2.1.2...v2.1.3) (2023-01-14)
 
 
