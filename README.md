@@ -38,11 +38,10 @@ jobs:
 
 ### Inputs
 
-|       Input Parameter       |   Default    | Description                                                                               |
-| :-------------------------: | :----------: | ----------------------------------------------------------------------------------------- |
-|          toolchain          |   `stable`   | Rust toolchain specification [Details](#toolchain)                                        |
-|        test-command         | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command)     |
-| enable-semantic-release-git |     true     | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git) |
+| Input Parameter |   Default    | Description                                                                           |
+| :-------------: | :----------: | ------------------------------------------------------------------------------------- |
+|    toolchain    |   `stable`   | Rust toolchain specification [Details](#toolchain)                                    |
+|  test-command   | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command) |
 
 #### toolchain
 
