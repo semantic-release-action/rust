@@ -1,3 +1,11 @@
+## [2.1.7](https://github.com/semantic-release-action/rust/compare/v2.1.6...v2.1.7) (2023-01-14)
+
+
+### Bug Fixes
+
+* **ci:** invoke reusable workflow correctly ([ddeaf93](https://github.com/semantic-release-action/rust/commit/ddeaf93b8b3c75116e02e7425b112d1bac7cd9a5))
+* **ci:** update semantic-release-action/github-actions to v4 ([cd0d6eb](https://github.com/semantic-release-action/rust/commit/cd0d6eb13e8b6dca517c51ee88fd26848b228d2e))
+
 ## [2.1.6](https://github.com/semantic-release-action/rust/compare/v2.1.5...v2.1.6) (2023-01-14)
 
 
