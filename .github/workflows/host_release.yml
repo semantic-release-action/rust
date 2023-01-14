@@ -14,4 +14,4 @@ on:
 
 jobs:
   release:
-    uses: semantic-release-action/github-actions/.github/workflows/release@v4
+    uses: semantic-release-action/github-actions/.github/workflows/release.yml@v4
