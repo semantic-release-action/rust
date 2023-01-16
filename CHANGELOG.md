@@ -1,3 +1,10 @@
+## [4.0.6](https://github.com/semantic-release-action/rust/compare/v4.0.5...v4.0.6) (2023-01-16)
+
+
+### Bug Fixes
+
+* treat inputs as strings ([b634610](https://github.com/semantic-release-action/rust/commit/b6346101718a104e5ebe42a02d126b8f8abecece))
+
 ## [4.0.5](https://github.com/semantic-release-action/rust/compare/v4.0.4...v4.0.5) (2023-01-16)
 
 
