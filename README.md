@@ -113,7 +113,7 @@ jobs:
 | :-------------------------: | :------: | :----------: | ----------------------------------------------------------------------------------------- |
 |          toolchain          |  false   |   `stable`   | Rust toolchain specification [Details](#toolchain)                                        |
 |        test-command         |  false   | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command)     |
-|         binary-name         |   true   |              | The name [Details](#binary-name)                                                          |
+|         binary-name         |   true   |              | The name of your crate's binary [Details](#binary-name)                                   |
 | enable-semantic-release-git |  false   |    `true`    | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git) |
 
 #### binary-name
