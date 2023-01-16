@@ -38,10 +38,10 @@ jobs:
 
 ### Inputs
 
-| Input Parameter |   Default    | Description                                                                           |
-| :-------------: | :----------: | ------------------------------------------------------------------------------------- |
-|    toolchain    |   `stable`   | Rust toolchain specification [Details](#toolchain)                                    |
-|  test-command   | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command) |
+| Input Parameter |   Default    | Description                                                                            |
+| :-------------: | :----------: | -------------------------------------------------------------------------------------- |
+|    toolchain    |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                    |
+|  test-command   | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command) |
 
 #### toolchain
 
@@ -109,11 +109,11 @@ jobs:
 
 ### Inputs
 
-|       Input Parameter       | Required |   Default    | Description                                                                              |
-| :-------------------------: | :------: | :----------: | ---------------------------------------------------------------------------------------- |
-|          toolchain          |  false   |   `stable`   | Rust toolchain specification [Details](#toolchain)                                       |
-|        test-command         |  false   | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command)    |
-| enable-semantic-release-git |  false   |    `true`    | Use [@semantic-release/git] in your release flow [Details](#enable-semantic-release-git) |
+|       Input Parameter       | Required |   Default    | Description                                                                               |
+| :-------------------------: | :------: | :----------: | ----------------------------------------------------------------------------------------- |
+|          toolchain          |  false   |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                       |
+|        test-command         |  false   | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)    |
+| enable-semantic-release-git |  false   |    `true`    | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git) |
 
 #### enable-semantic-release-git
 
@@ -173,11 +173,11 @@ jobs:
 
 ### Inputs
 
-|       Input Parameter       | Required |   Default    | Description                                                                              |
-| :-------------------------: | :------: | :----------: | ---------------------------------------------------------------------------------------- |
-|          toolchain          |  false   |   `stable`   | Rust toolchain specification [Details](#toolchain)                                       |
-|        test-command         |  false   | `cargo test` | Shell command used to provide confidence in proposed changes [Details](#test-command)    |
-| enable-semantic-release-git |  false   |    `true`    | Use [@semantic-release/git] in your release flow [Details](#enable-semantic-release-git) |
+|       Input Parameter       | Required |   Default    | Description                                                                               |
+| :-------------------------: | :------: | :----------: | ----------------------------------------------------------------------------------------- |
+|          toolchain          |  false   |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                       |
+|        test-command         |  false   | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)    |
+| enable-semantic-release-git |  false   |    `true`    | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git) |
 
 ### Secrets
 
