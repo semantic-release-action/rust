@@ -109,11 +109,19 @@ jobs:
 
 ### Inputs
 
-|       Input Parameter       | Required |   Default    | Description                                                                               |
-| :-------------------------: | :------: | :----------: | ----------------------------------------------------------------------------------------- |
-|          toolchain          |  false   |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                       |
-|        test-command         |  false   | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)    |
-| enable-semantic-release-git |  false   |    `true`    | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git) |
+|        Input Parameter        | Required |   Default    | Description                                                                                  |
+| :---------------------------: | :------: | :----------: | -------------------------------------------------------------------------------------------- |
+|           toolchain           |  false   |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                          |
+|         test-command          |  false   | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)       |
+| enable-semantic-release-cargo |  false   |    `true`    | Use [semantic-release-cargo] in your release flow. [Details](#enable-semantic-release-cargo) |
+|  enable-semantic-release-git  |  false   |    `true`    | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git)    |
+
+#### enable-semantic-release-cargo
+
+Runtime option controlling the use of [semantic-release-cargo].
+Set to `false` to prevent semantic-release from publishing your crate to the configured cargo registry.
+
+[semantic-release-cargo]: https://github.com/semantic-release-cargo/semantic-release-cargo
 
 #### enable-semantic-release-git
 

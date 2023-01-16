@@ -19,6 +19,10 @@ inputs:
     description: The name of your Rust binary
     required: true
     type: string
+  enable-semantic-release-cargo:
+    description: Use semantic-release-cargo in your release flow. Only takes effect if the action semantic-release config is used.
+    type: boolean
+    default: true
   enable-semantic-release-git:
     description: Use @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
     type: boolean
@@ -113,10 +117,16 @@ runs:
       shell: bash
 
     - name: Install is-semantic-release-configured
-      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && !inputs.enable-semantic-release-git
+      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && (!inputs.enable-semantic-release-git || !inputs.enabme-semantic-release-cargo)
       uses: EricCrosson/install-github-release-binary@v2
       with:
         targets: EricCrosson/configure-semantic-release-manifest@v1
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && !inputs.enable-semantic-release-cargo
+      run: |
+        : disable semantic-release-cargo
+        configure-semantic-release-manifest --in-place --remove @semantic-release-cargo/semantic-release-cargo
+      shell: bash
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && !inputs.enable-semantic-release-git
       run: |
