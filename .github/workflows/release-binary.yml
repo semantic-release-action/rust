@@ -72,6 +72,8 @@ jobs:
     runs-on: ${{ matrix.build.os }}
     needs:
       - get-next-version
+    outputs:
+      binary-name: ${{ steps.get-binary-name.outputs.binary-name }}
     env:
       CARGO: cargo
 
@@ -141,7 +143,8 @@ jobs:
         run: semantic-release-cargo --verbose --verbose --verbose prepare ${{ needs.get-next-version.outputs.new-release-version }}
 
       - name: Detect binary name
-        run: echo "BINARY_NAME=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].targets | map(select(.kind | map(select(. == "bin"))).name)[0]')" >> "$GITHUB_ENV"
+        id: get-binary-name
+        run: echo "binary-name=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].targets | map(select(.kind | map(select(. == "bin"))).name)[0]')" >> "$GITHUB_OUTPUT"
 
       - name: Install cross
         uses: taiki-e/install-action@v2
@@ -188,7 +191,7 @@ jobs:
       - name: Release
         uses: semantic-release-action/rust/semantic-release-binary@v2
         with:
-          binary-name: ${{ env.BINARY_NAME }}
+          binary-name: ${{ needs.build-release.outputs.binary-name }}
           disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
