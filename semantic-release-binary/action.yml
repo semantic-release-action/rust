@@ -134,6 +134,19 @@ runs:
         configure-semantic-release-manifest --in-place --remove @semantic-release/git
       shell: bash
 
+    # If the semantic-release-cargo plugin never runs, the cargo manifest never has its version bumped.
+    # Run the prepare step of semantic-release-cargo by invoking its binary directly
+    - name: Install semantic-release-cargo
+      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
+      uses: EricCrosson/install-github-release-binary@v2
+      with:
+        targets: semantic-release-cargo/semantic-release-cargo@v2
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
+      run: |
+        : bump binary version
+        semantic-release-cargo --verbose --verbose --verbose prepare ${{ needs.get-next-version.outputs.new-release-version }}
+
     - name: Download release artifacts
       uses: actions/download-artifact@v3
       with:
