@@ -12,10 +12,6 @@ on:
         description: Command used to test your Rust program
         type: string
         default: cargo test
-      binary-name:
-        description: The name of your Rust binary
-        required: true
-        type: string
       enable-semantic-release-git:
         description: Use @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
         type: boolean
@@ -149,6 +145,9 @@ jobs:
       - name: Prepare semantic-release for Rust
         run: semantic-release-cargo --verbose --verbose --verbose prepare ${{ needs.get-next-version.outputs.new-release-version }}
 
+      - name: Detect binary name
+        run: echo "BINARY_NAME=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].targets | map(select(.kind | map(select(. == "bin"))).name)[0]')" >> "$GITHUB_ENV"
+
       - name: Install cross
         uses: taiki-e/install-action@v2
         if: matrix.build.cross
@@ -165,10 +164,10 @@ jobs:
       - name: Create release artifacts
         run: |
           mkdir dist
-          cp target/${{ matrix.build.target }}/release/${{ inputs.binary-name }} dist/${{ inputs.binary-name }}-${{ matrix.build.target }}
+          cp target/${{ matrix.build.target }}/release/${{ env.BINARY_NAME }} dist/${{ env.BINARY_NAME }}-${{ matrix.build.target }}
 
       - name: Create binary checksum
-        run: shasum --algorithm 256 --binary ${{ inputs.binary-name }}-${{ matrix.build.target }} | tee ${{ inputs.binary-name }}-${{ matrix.build.target }}-SHA256SUM.txt
+        run: shasum --algorithm 256 --binary ${{ env.BINARY_NAME }}-${{ matrix.build.target }} | tee ${{ env.BINARY_NAME }}-${{ matrix.build.target }}-SHA256SUM.txt
         working-directory: ./dist
 
       - name: Upload release artifacts
@@ -176,8 +175,8 @@ jobs:
         with:
           name: ${{ matrix.build.target }}
           path: |
-            dist/${{ inputs.binary-name }}-${{ matrix.build.target }}
-            dist/${{ inputs.binary-name }}-${{ matrix.build.target }}-SHA256SUM.txt
+            dist/${{ env.BINARY_NAME }}-${{ matrix.build.target }}
+            dist/${{ env.BINARY_NAME }}-${{ matrix.build.target }}-SHA256SUM.txt
           if-no-files-found: error
           retention-days: 1
 
@@ -194,6 +193,6 @@ jobs:
       - name: Release
         uses: semantic-release-action/rust/semantic-release-binary@v2
         with:
-          binary-name: ${{ inputs.binary-name }}
+          binary-name: ${{ env.BINARY_NAME }}
           enable-semantic-release-git: ${{ inputs.enable-semantic-release-git }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
