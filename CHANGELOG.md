@@ -1,3 +1,10 @@
+## [4.0.9](https://github.com/semantic-release-action/rust/compare/v4.0.8...v4.0.9) (2023-01-16)
+
+
+### Bug Fixes
+
+* thread inputs properly ([ebca30f](https://github.com/semantic-release-action/rust/commit/ebca30f53331883638f227735e52e9880cf9edc4))
+
 ## [4.0.8](https://github.com/semantic-release-action/rust/compare/v4.0.7...v4.0.8) (2023-01-16)
 
 
