@@ -1,3 +1,10 @@
+## [4.0.8](https://github.com/semantic-release-action/rust/compare/v4.0.7...v4.0.8) (2023-01-16)
+
+
+### Bug Fixes
+
+* correct action syntax ([2e4be3f](https://github.com/semantic-release-action/rust/commit/2e4be3ffca0982c6e7868b7cb7f624ddb5bd41ef))
+
 ## [4.0.7](https://github.com/semantic-release-action/rust/compare/v4.0.6...v4.0.7) (2023-01-16)
 
 
