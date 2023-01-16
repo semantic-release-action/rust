@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/semantic-release-action/rust/compare/v3.0.0...v3.1.0) (2023-01-16)
+
+
+### Features
+
+* create input to opt out of cargo publish for binaries ([8b0e2aa](https://github.com/semantic-release-action/rust/commit/8b0e2aaa6727bfccace65da284e0de20d2f0fbac)), closes [#8](https://github.com/semantic-release-action/rust/issues/8)
+
 # [3.0.0](https://github.com/semantic-release-action/rust/compare/v2.1.8...v3.0.0) (2023-01-16)
 
 
