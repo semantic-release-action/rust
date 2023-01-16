@@ -109,24 +109,24 @@ jobs:
 
 ### Inputs
 
-|        Input Parameter        | Required |   Default    | Description                                                                                  |
-| :---------------------------: | :------: | :----------: | -------------------------------------------------------------------------------------------- |
-|           toolchain           |  false   |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                          |
-|         test-command          |  false   | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)       |
-| enable-semantic-release-cargo |  false   |    `true`    | Use [semantic-release-cargo] in your release flow. [Details](#enable-semantic-release-cargo) |
-|  enable-semantic-release-git  |  false   |    `true`    | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git)    |
+|        Input Parameter         |   Default    | Description                                                                                       |
+| :----------------------------: | :----------: | ------------------------------------------------------------------------------------------------- |
+|           toolchain            |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                               |
+|          test-command          | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)            |
+| disable-semantic-release-cargo |   `false`    | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
+|  disable-semantic-release-git  |   `false`    | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
 
-#### enable-semantic-release-cargo
+#### disable-semantic-release-cargo
 
 Runtime option controlling the use of [semantic-release-cargo].
-Set to `false` to prevent semantic-release from publishing your crate to the configured cargo registry.
+Set to `true` to prevent semantic-release from publishing your crate to the configured cargo registry.
 
 [semantic-release-cargo]: https://github.com/semantic-release-cargo/semantic-release-cargo
 
-#### enable-semantic-release-git
+#### disable-semantic-release-git
 
 Runtime option controlling the use of [@semantic-release/git].
-Set to `false` to prevent semantic-release from pushing artifacts to your repository.
+Set to `true` to prevent semantic-release from pushing artifacts to your repository.
 This may be required with certain repository settings, for example when requiring signed commits.
 
 [@semantic-release/git]: https://github.com/semantic-release/git
@@ -181,11 +181,11 @@ jobs:
 
 ### Inputs
 
-|       Input Parameter       | Required |   Default    | Description                                                                               |
-| :-------------------------: | :------: | :----------: | ----------------------------------------------------------------------------------------- |
-|          toolchain          |  false   |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                       |
-|        test-command         |  false   | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)    |
-| enable-semantic-release-git |  false   |    `true`    | Use [@semantic-release/git] in your release flow. [Details](#enable-semantic-release-git) |
+|       Input Parameter        |   Default    | Description                                                                                    |
+| :--------------------------: | :----------: | ---------------------------------------------------------------------------------------------- |
+|          toolchain           |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                            |
+|         test-command         | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)         |
+| disable-semantic-release-git |   `false`    | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git) |
 
 ### Secrets
 
