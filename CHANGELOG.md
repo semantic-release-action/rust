@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/semantic-release-action/rust/compare/v4.0.3...v4.0.4) (2023-01-16)
+
+
+### Bug Fixes
+
+* share data between steps correctly ([c8eaeb6](https://github.com/semantic-release-action/rust/commit/c8eaeb678a1ec0f622a55677be84cc5c0d7741fb))
+
 ## [4.0.3](https://github.com/semantic-release-action/rust/compare/v4.0.2...v4.0.3) (2023-01-16)
 
 
