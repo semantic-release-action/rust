@@ -1,3 +1,10 @@
+## [4.0.5](https://github.com/semantic-release-action/rust/compare/v4.0.4...v4.0.5) (2023-01-16)
+
+
+### Bug Fixes
+
+* **deps:** update self-reference to latest ([fae17a1](https://github.com/semantic-release-action/rust/commit/fae17a125cac8270c781f6695594a6f3da7efa97))
+
 ## [4.0.4](https://github.com/semantic-release-action/rust/compare/v4.0.3...v4.0.4) (2023-01-16)
 
 
