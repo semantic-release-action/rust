@@ -189,7 +189,7 @@ jobs:
 
     steps:
       - name: Release
-        uses: semantic-release-action/rust/semantic-release-binary@v2
+        uses: semantic-release-action/rust/semantic-release-binary@v4
         with:
           binary-name: ${{ needs.build-release.outputs.binary-name }}
           disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}

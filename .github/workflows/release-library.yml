@@ -36,7 +36,7 @@ jobs:
 
     steps:
       - name: Release
-        uses: semantic-release-action/rust/semantic-release-library@v2
+        uses: semantic-release-action/rust/semantic-release-library@v4
         with:
           toolchain: ${{ inputs.toolchain }}
           test-command: ${{ inputs.test-command }}
