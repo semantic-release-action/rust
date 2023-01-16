@@ -162,10 +162,10 @@ jobs:
       - name: Create release artifacts
         run: |
           mkdir dist
-          cp target/${{ matrix.build.target }}/release/${{ env.BINARY_NAME }} dist/${{ env.BINARY_NAME }}-${{ matrix.build.target }}
+          cp target/${{ matrix.build.target }}/release/${{ steps.get-binary-name.outputs.binary-name }} dist/${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }}
 
       - name: Create binary checksum
-        run: shasum --algorithm 256 --binary ${{ env.BINARY_NAME }}-${{ matrix.build.target }} | tee ${{ env.BINARY_NAME }}-${{ matrix.build.target }}-SHA256SUM.txt
+        run: shasum --algorithm 256 --binary ${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }} | tee ${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }}-SHA256SUM.txt
         working-directory: ./dist
 
       - name: Upload release artifacts
@@ -173,8 +173,8 @@ jobs:
         with:
           name: ${{ matrix.build.target }}
           path: |
-            dist/${{ env.BINARY_NAME }}-${{ matrix.build.target }}
-            dist/${{ env.BINARY_NAME }}-${{ matrix.build.target }}-SHA256SUM.txt
+            dist/${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }}
+            dist/${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }}-SHA256SUM.txt
           if-no-files-found: error
           retention-days: 1
 
