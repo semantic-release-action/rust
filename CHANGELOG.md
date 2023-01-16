@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/semantic-release-action/rust/compare/v4.0.0...v4.0.1) (2023-01-16)
+
+
+### Bug Fixes
+
+* use next-release-version v2 ([2c442d2](https://github.com/semantic-release-action/rust/commit/2c442d211773d7c711c5a0b7bc912b04f3807468))
+
 # [4.0.0](https://github.com/semantic-release-action/rust/compare/v3.1.1...v4.0.0) (2023-01-16)
 
 
