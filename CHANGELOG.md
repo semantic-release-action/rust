@@ -1,3 +1,13 @@
+# [4.0.0](https://github.com/semantic-release-action/rust/compare/v3.1.1...v4.0.0) (2023-01-16)
+
+
+* fix!: opt out of flags by default ([4a8f145](https://github.com/semantic-release-action/rust/commit/4a8f1450e4d809e55d70ad6a68dce9b904d4990d))
+
+
+### BREAKING CHANGES
+
+* negate runtime flags to control semantic-release
+
 ## [3.1.1](https://github.com/semantic-release-action/rust/compare/v3.1.0...v3.1.1) (2023-01-16)
 
 
