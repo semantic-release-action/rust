@@ -30,7 +30,7 @@ inputs:
     description: Disable @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
     type: boolean # This is ignored, you're really passing a string
     default: false
-  new-release-version:
+  next-version:
     description: Next semantic-release version number
     required: true
 
@@ -148,7 +148,7 @@ runs:
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
       run: |
         : bump binary version
-        semantic-release-cargo --verbose --verbose --verbose prepare ${{ inputs.new-release-version }}
+        semantic-release-cargo --verbose --verbose --verbose prepare ${{ inputs.next-version }}
       shell: bash
 
     - name: Download release artifacts
