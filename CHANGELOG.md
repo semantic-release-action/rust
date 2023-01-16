@@ -1,3 +1,14 @@
+# [3.0.0](https://github.com/semantic-release-action/rust/compare/v2.1.8...v3.0.0) (2023-01-16)
+
+
+* feat!: automatically detect binary name ([b7ffa1f](https://github.com/semantic-release-action/rust/commit/b7ffa1f66693f92ceb59d627abdc971729eb2387)), closes [#6](https://github.com/semantic-release-action/rust/issues/6)
+
+
+### BREAKING CHANGES
+
+* The binary-release workflow no longer accepts
+binary-name. This is automatically detected from the cargo manifest.
+
 ## [2.1.8](https://github.com/semantic-release-action/rust/compare/v2.1.7...v2.1.8) (2023-01-16)
 
 
