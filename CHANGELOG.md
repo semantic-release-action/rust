@@ -1,3 +1,10 @@
+## [4.0.3](https://github.com/semantic-release-action/rust/compare/v4.0.2...v4.0.3) (2023-01-16)
+
+
+### Bug Fixes
+
+* share output properly between jobs ([dbbf6d4](https://github.com/semantic-release-action/rust/commit/dbbf6d45a5d4e83b291d3cdac5d4b4ceeb143691))
+
 ## [4.0.2](https://github.com/semantic-release-action/rust/compare/v4.0.1...v4.0.2) (2023-01-16)
 
 
