@@ -21,11 +21,11 @@ inputs:
     type: string
   disable-semantic-release-cargo:
     description: Disable semantic-release-cargo in your release flow. Only takes effect if the action semantic-release config is used.
-    type: boolean
+    type: boolean # This is ignored, you're really passing a string
     default: false
   disable-semantic-release-git:
     description: Disable @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
-    type: boolean
+    type: boolean # This is ignored, you're really passing a string
     default: false
   cargo-registry-token:
     description: API token for writing to your cargo registry
@@ -117,18 +117,18 @@ runs:
       shell: bash
 
     - name: Install is-semantic-release-configured
-      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && (inputs.disable-semantic-release-git || inputs.disable-semantic-release-cargo)
+      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && (inputs.disable-semantic-release-git == 'true' || inputs.disable-semantic-release-cargo == 'true')
       uses: EricCrosson/install-github-release-binary@v2
       with:
         targets: EricCrosson/configure-semantic-release-manifest@v1
 
-    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-cargo
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-cargo == 'true'
       run: |
         : disable semantic-release-cargo
         configure-semantic-release-manifest --in-place --remove @semantic-release-cargo/semantic-release-cargo
       shell: bash
 
-    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
       run: |
         : disable @semantic-release/git
         configure-semantic-release-manifest --in-place --remove @semantic-release/git
