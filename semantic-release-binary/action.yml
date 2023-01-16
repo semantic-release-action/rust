@@ -135,7 +135,7 @@ runs:
       shell: bash
 
     # If the semantic-release-cargo plugin never runs, the cargo manifest never has its version bumped.
-    # Run the prepare step of semantic-release-cargo by invoking its binary directly
+    # Run the prepare step of semantic-release-cargo by invoking its binary directly.
     - name: Install semantic-release-cargo
       if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
       uses: EricCrosson/install-github-release-binary@v2
