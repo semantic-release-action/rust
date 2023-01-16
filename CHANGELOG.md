@@ -1,3 +1,10 @@
+## [4.0.10](https://github.com/semantic-release-action/rust/compare/v4.0.9...v4.0.10) (2023-01-16)
+
+
+### Bug Fixes
+
+* correct typo in expression ([065803f](https://github.com/semantic-release-action/rust/commit/065803f80d50693eb0b20ebe41aa42eb62d78b51))
+
 ## [4.0.9](https://github.com/semantic-release-action/rust/compare/v4.0.8...v4.0.9) (2023-01-16)
 
 
