@@ -1,3 +1,10 @@
+## [4.0.7](https://github.com/semantic-release-action/rust/compare/v4.0.6...v4.0.7) (2023-01-16)
+
+
+### Bug Fixes
+
+* always bump version in cargo manifest ([9bf5005](https://github.com/semantic-release-action/rust/commit/9bf500589e7f333aa4ccda6c8a61ece5617013b7)), closes [#9](https://github.com/semantic-release-action/rust/issues/9)
+
 ## [4.0.6](https://github.com/semantic-release-action/rust/compare/v4.0.5...v4.0.6) (2023-01-16)
 
 
