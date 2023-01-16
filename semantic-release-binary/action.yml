@@ -19,6 +19,9 @@ inputs:
     description: The name of your Rust binary
     required: true
     type: string
+  cargo-registry-token:
+    description: API token for writing to your cargo registry
+    required: true
   disable-semantic-release-cargo:
     description: Disable semantic-release-cargo in your release flow. Only takes effect if the action semantic-release config is used.
     type: boolean # This is ignored, you're really passing a string
@@ -27,8 +30,8 @@ inputs:
     description: Disable @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
     type: boolean # This is ignored, you're really passing a string
     default: false
-  cargo-registry-token:
-    description: API token for writing to your cargo registry
+  new-release-version:
+    description: Next semantic-release version number
     required: true
 
 runs:
@@ -145,7 +148,8 @@ runs:
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
       run: |
         : bump binary version
-        semantic-release-cargo --verbose --verbose --verbose prepare ${{ needs.get-next-version.outputs.new-release-version }}
+        semantic-release-cargo --verbose --verbose --verbose prepare ${{ inputs.new-release-version }}
+      shell: bash
 
     - name: Download release artifacts
       uses: actions/download-artifact@v3

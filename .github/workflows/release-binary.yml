@@ -192,6 +192,7 @@ jobs:
         uses: semantic-release-action/rust/semantic-release-binary@v4
         with:
           binary-name: ${{ needs.build-release.outputs.binary-name }}
+          cargo-registry-token: ${{ secrets.cargo-registry-token }}
           disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
-          cargo-registry-token: ${{ secrets.cargo-registry-token }}
+          next-version: ${{ needs.get-next-version.outputs.new-release-version }}
