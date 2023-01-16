@@ -1,3 +1,10 @@
+## [3.1.1](https://github.com/semantic-release-action/rust/compare/v3.1.0...v3.1.1) (2023-01-16)
+
+
+### Bug Fixes
+
+* fix typo in conditional logic ([6a5e8a3](https://github.com/semantic-release-action/rust/commit/6a5e8a34f4d1cdcaf09ca1e9bbe77bf24e72ac9d))
+
 # [3.1.0](https://github.com/semantic-release-action/rust/compare/v3.0.0...v3.1.0) (2023-01-16)
 
 
