@@ -117,7 +117,7 @@ runs:
       shell: bash
 
     - name: Install is-semantic-release-configured
-      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && (!inputs.enable-semantic-release-git || !inputs.enabme-semantic-release-cargo)
+      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && (!inputs.enable-semantic-release-git || !inputs.enable-semantic-release-cargo)
       uses: EricCrosson/install-github-release-binary@v2
       with:
         targets: EricCrosson/configure-semantic-release-manifest@v1
