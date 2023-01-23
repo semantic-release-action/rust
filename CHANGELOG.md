@@ -1,3 +1,11 @@
+## [4.0.11](https://github.com/semantic-release-action/rust/compare/v4.0.10...v4.0.11) (2023-01-23)
+
+
+### Bug Fixes
+
+* do not publish cross-compiled release binaries to cargo registry ([ac98cca](https://github.com/semantic-release-action/rust/commit/ac98cca4169954fa5e1cbd61a668393e42f53360))
+* list the files cargo is publishing to cargo registry ([0ba7c0b](https://github.com/semantic-release-action/rust/commit/0ba7c0b8702937e420507c5b11e37acb20e85af7))
+
 ## [4.0.10](https://github.com/semantic-release-action/rust/compare/v4.0.9...v4.0.10) (2023-01-16)
 
 
