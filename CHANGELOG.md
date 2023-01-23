@@ -1,3 +1,10 @@
+## [4.0.12](https://github.com/semantic-release-action/rust/compare/v4.0.11...v4.0.12) (2023-01-23)
+
+
+### Bug Fixes
+
+* fix glob ([eaaa792](https://github.com/semantic-release-action/rust/commit/eaaa792d20c3b6cf4d5f7e32e6c269fea4261863))
+
 ## [4.0.11](https://github.com/semantic-release-action/rust/compare/v4.0.10...v4.0.11) (2023-01-23)
 
 
