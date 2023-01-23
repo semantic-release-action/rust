@@ -203,6 +203,11 @@ runs:
       shell: bash
 
     - run: |
+        : list cargo package contents
+        cargo package --list --allow-dirty
+      shell: bash
+
+    - run: |
         : invoke semantic-release
         ${semantic_release}
       env:
