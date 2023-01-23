@@ -165,7 +165,8 @@ runs:
 
     - run: |
         : combine checksums
-        cat "$artifact_dir/**/${{ inputs.binary-name }}-*-SHA256SUM.txt" | tee "$artifact_dir/SHA256SUMS.txt"
+        cat **/${{ inputs.binary-name }}-*-SHA256SUM.txt | tee SHA256SUMS.txt
+      working-directory: ${{ env.artifact_dir }}
       shell: bash
 
     - name: Configure Node.js
