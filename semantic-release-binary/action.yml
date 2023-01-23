@@ -91,6 +91,7 @@ runs:
           echo "::debug::Did not detect semantic-release configuration, using this action's built-in configuration"
           echo "host-configuration=false" >> "$GITHUB_OUTPUT"
           echo "semantic_release=$GITHUB_WORKSPACE/.semantic-release-action_rust/semantic-release-binary/node_modules/.bin/semantic-release" >> "$GITHUB_ENV"
+          echo "artifact_dir=$GITHUB_WORKSPACE/.semantic-release-action_rust/dist/" >> "$GITHUB_ENV"
           echo "node_workdir=$GITHUB_WORKSPACE/.semantic-release-action_rust/semantic-release-binary/" >> "$GITHUB_ENV"
           mkdir -p "$GITHUB_WORKSPACE/.semantic-release-action_rust/semantic-release-binary/"
         fi
@@ -154,17 +155,17 @@ runs:
     - name: Download release artifacts
       uses: actions/download-artifact@v3
       with:
-        path: dist
+        path: ${{ env.artifact_dir }}
 
     - run: |
         : display downloaded release artifacts
         ls -R
-      working-directory: dist
+      working-directory: ${{ env.artifact_dir }}
       shell: bash
 
     - run: |
         : combine checksums
-        cat dist/**/${{ inputs.binary-name }}-*-SHA256SUM.txt | tee dist/SHA256SUMS.txt
+        cat "$artifact_dir/**/${{ inputs.binary-name }}-*-SHA256SUM.txt" | tee "$artifact_dir/SHA256SUMS.txt"
       shell: bash
 
     - name: Configure Node.js
