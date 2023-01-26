@@ -33,7 +33,7 @@ on:
 
 jobs:
   test:
-    uses: semantic-release-action/rust/.github/workflows/ci.yml@v3
+    uses: semantic-release-action/rust/.github/workflows/ci.yml@v4
 ```
 
 ### Inputs
