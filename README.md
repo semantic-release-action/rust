@@ -102,7 +102,7 @@ on:
 
 jobs:
   release:
-    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v3
+    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v4
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 ```
@@ -174,7 +174,7 @@ on:
 
 jobs:
   release:
-    uses: semantic-release-action/rust/.github/workflows/release-library.yml@v3
+    uses: semantic-release-action/rust/.github/workflows/release-library.yml@v4
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 ```
