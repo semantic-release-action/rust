@@ -1,3 +1,10 @@
+## [4.0.14](https://github.com/semantic-release-action/rust/compare/v4.0.13...v4.0.14) (2023-02-04)
+
+
+### Bug Fixes
+
+* correctly select binary name from crates with a binary and library ([14e1af1](https://github.com/semantic-release-action/rust/commit/14e1af1da2ebf12b01c4a712f1f1df650cbfba92))
+
 ## [4.0.13](https://github.com/semantic-release-action/rust/compare/v4.0.12...v4.0.13) (2023-01-26)
 
 
