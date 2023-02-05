@@ -1,3 +1,10 @@
+# [4.1.0-beta.2](https://github.com/semantic-release-action/rust/compare/v4.1.0-beta.1...v4.1.0-beta.2) (2023-02-05)
+
+
+### Bug Fixes
+
+* add debug logs ([eda9b91](https://github.com/semantic-release-action/rust/commit/eda9b919026b88ea7685d4265d26ea47da0bdd43))
+
 # [4.1.0-beta.1](https://github.com/semantic-release-action/rust/compare/v4.0.14...v4.1.0-beta.1) (2023-02-05)
 
 
