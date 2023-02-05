@@ -62,13 +62,12 @@ jobs:
         run: |
           : configure compilation target matrix
           matrix="$(jq \
-            --argjson whitelist "$(echo "$supported" | jq --raw-input --compact-output --slurp '[splits("[ \n]+")] | map(select(length > 0))')" \
+            --argjson whitelist "$(echo "$whitelist" | jq --raw-input --compact-output --slurp '[splits("[ \n]+")] | map(select(length > 0))')" \
             'map(select(.target | IN($whitelist[])))' \
             <<< "$all_compilation_targets")"
-          echo "Using comilation matrix:"
-          echo "$matrix"
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
         env:
+          whitelist: ${{ inputs.targets }}
           all_compilation_targets: |
             [
               {
