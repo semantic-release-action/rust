@@ -162,9 +162,9 @@ This may be required with certain repository settings, for example when requirin
 
 ### Secrets
 
-|        Secret        | Required | Description                                               |
-| :------------------: | :------: | --------------------------------------------------------- |
-| cargo-registry-token |   true   | Cargo registry API token [Details](#cargo-registry-token) |
+|        Secret        | Required | Description                                                |
+| :------------------: | :------: | ---------------------------------------------------------- |
+| cargo-registry-token |   true   | Cargo registry API token. [Details](#cargo-registry-token) |
 
 #### cargo-registry-token
 
@@ -218,6 +218,6 @@ jobs:
 
 ### Secrets
 
-|        Secret        | Required | Description                                               |
-| :------------------: | :------: | --------------------------------------------------------- |
-| cargo-registry-token |   true   | Cargo registry API token [Details](#cargo-registry-token) |
+|        Secret        | Required | Description                                                |
+| :------------------: | :------: | ---------------------------------------------------------- |
+| cargo-registry-token |   true   | Cargo registry API token. [Details](#cargo-registry-token) |
