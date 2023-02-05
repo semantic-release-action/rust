@@ -1,3 +1,10 @@
+# [4.1.0-beta.5](https://github.com/semantic-release-action/rust/compare/v4.1.0-beta.4...v4.1.0-beta.5) (2023-02-05)
+
+
+### Bug Fixes
+
+* skip matrix configuration when possible ([19455f2](https://github.com/semantic-release-action/rust/commit/19455f2cb6e6ee15b183604b9f36255ba6be5667))
+
 # [4.1.0-beta.4](https://github.com/semantic-release-action/rust/compare/v4.1.0-beta.3...v4.1.0-beta.4) (2023-02-05)
 
 
