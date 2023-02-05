@@ -40,8 +40,8 @@ jobs:
 
 | Input Parameter |   Default    | Description                                                                            |
 | :-------------: | :----------: | -------------------------------------------------------------------------------------- |
-|    toolchain    |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                    |
 |  test-command   | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command) |
+|    toolchain    |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                    |
 
 #### toolchain
 
@@ -109,12 +109,41 @@ jobs:
 
 ### Inputs
 
-|        Input Parameter         |   Default    | Description                                                                                       |
-| :----------------------------: | :----------: | ------------------------------------------------------------------------------------------------- |
-|           toolchain            |   `stable`   | Rust toolchain specification. [Details](#toolchain)                                               |
-|          test-command          | `cargo test` | Shell command used to provide confidence in proposed changes. [Details](#test-command)            |
-| disable-semantic-release-cargo |   `false`    | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
-|  disable-semantic-release-git  |   `false`    | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
+|        Input Parameter         |    Default    | Description                                                                                       |
+| :----------------------------: | :-----------: | ------------------------------------------------------------------------------------------------- |
+|            targets             | all supported | Whitelist of compilation targets to upload GitHub release binaries for. [Details](#targets)       |
+|          test-command          | `cargo test`  | Shell command used to provide confidence in proposed changes. [Details](#test-command)            |
+|           toolchain            |   `stable`    | Rust toolchain specification. [Details](#toolchain)                                               |
+| disable-semantic-release-cargo |    `false`    | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
+|  disable-semantic-release-git  |    `false`    | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
+
+#### targets
+
+Whitelist of compilation targets to upload GitHub release binaries for. Must be a subset of supported targets:
+
+- aarch64-apple-darwin
+- aarch64-unknown-linux-gnu
+- aarch64-unknown-linux-musl
+- i686-unknown-linux-gnu
+- i686-unknown-linux-musl
+- x86_64-apple-darwin
+- x86_64-unknown-linux-gnu
+- x86_64-unknown-linux-musl
+
+Separate each target with whitespace:
+
+```yaml
+jobs:
+  release:
+    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v4
+    with:
+      targets: |
+        aarch64-apple-darwin
+        x86_64-apple-darwin
+        x86_64-unknown-linux-musl
+    secrets:
+      cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+```
 
 #### disable-semantic-release-cargo
 

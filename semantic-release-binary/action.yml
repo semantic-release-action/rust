@@ -10,25 +10,24 @@ branding:
 # (which is only supported in composite actions)
 
 inputs:
+  targets:
+    description: Whitelist of compilation targets to upload GitHub release binaries for. Must be a subset of supported targets.
+    required: true
   toolchain:
-    description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
+    description: Rust toolchain specification
     required: false
-    type: string
     default: stable
   binary-name:
     description: The name of your Rust binary
     required: true
-    type: string
   cargo-registry-token:
     description: API token for writing to your cargo registry
     required: true
   disable-semantic-release-cargo:
     description: Disable semantic-release-cargo in your release flow. Only takes effect if the action semantic-release config is used.
-    type: boolean # This is ignored, you're really passing a string
     default: false
   disable-semantic-release-git:
     description: Disable @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
-    type: boolean # This is ignored, you're really passing a string
     default: false
   next-version:
     description: Next semantic-release version number
@@ -64,7 +63,9 @@ runs:
     - name: Install is-semantic-release-configured
       uses: EricCrosson/install-github-release-binary@v2
       with:
-        targets: EricCrosson/is-semantic-release-configured@v1
+        targets: |
+          EricCrosson/is-semantic-release-configured@v1
+          EricCrosson/configure-semantic-release-assets@v1
 
     # Terminology:
     #
@@ -136,6 +137,11 @@ runs:
       run: |
         : disable @semantic-release/git
         configure-semantic-release-manifest --in-place --remove @semantic-release/git
+      shell: bash
+
+    - run: |
+        : configure semantic-release assets
+        configure-semantic-release-assets --in-place whitelist "${{ inputs.targets }} SHA256SUMS.txt"
       shell: bash
 
     # If the semantic-release-cargo plugin never runs, the cargo manifest never has its version bumped.
