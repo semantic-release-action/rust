@@ -65,7 +65,9 @@ jobs:
             --argjson whitelist "$(echo "$supported" | jq --raw-input --compact-output --slurp '[splits("[ \n]+")] | map(select(length > 0))')" \
             'map(select(.target | IN($whitelist[])))' \
             <<< "$all_compilation_targets")"
-          echo "matrix=${matrix}" >> "$GITHUB_OUTPUT"
+          echo "Using comilation matrix:"
+          echo "$matrix"
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
         env:
           all_compilation_targets: |
             [
