@@ -61,7 +61,7 @@ jobs:
       - id: configure-compilation-target-matrix
         run: |
           : configure compilation target matrix
-          matrix="$(jq \
+          matrix="$(jq --compact-output \
             --argjson whitelist "$(echo "$whitelist" | jq --raw-input --compact-output --slurp '[splits("[ \n]+")] | map(select(length > 0))')" \
             'map(select(.target | IN($whitelist[])))' \
             <<< "$all_compilation_targets")"
