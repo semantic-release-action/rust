@@ -1,3 +1,10 @@
+# [4.1.0-beta.1](https://github.com/semantic-release-action/rust/compare/v4.0.14...v4.1.0-beta.1) (2023-02-05)
+
+
+### Features
+
+* **release-binary:** support whitelist of compilation targets ([fb84a2f](https://github.com/semantic-release-action/rust/commit/fb84a2fa1d05fbf663cb5266f90eddd9427f110f)), closes [#15](https://github.com/semantic-release-action/rust/issues/15)
+
 ## [4.0.14](https://github.com/semantic-release-action/rust/compare/v4.0.13...v4.0.14) (2023-02-04)
 
 
