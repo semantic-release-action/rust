@@ -1,3 +1,18 @@
+# [4.1.0](https://github.com/semantic-release-action/rust/compare/v4.0.14...v4.1.0) (2023-02-05)
+
+
+### Bug Fixes
+
+* add debug logs ([eda9b91](https://github.com/semantic-release-action/rust/commit/eda9b919026b88ea7685d4265d26ea47da0bdd43))
+* skip matrix configuration when possible ([19455f2](https://github.com/semantic-release-action/rust/commit/19455f2cb6e6ee15b183604b9f36255ba6be5667))
+* use correct variable name ([c1d8895](https://github.com/semantic-release-action/rust/commit/c1d889505c8fdb541cf3553d2403382fed9ddc45))
+* use single line string in step output ([ee65603](https://github.com/semantic-release-action/rust/commit/ee6560395c59b22aa8153147bf2b67d11e519644))
+
+
+### Features
+
+* **release-binary:** support whitelist of compilation targets ([fb84a2f](https://github.com/semantic-release-action/rust/commit/fb84a2fa1d05fbf663cb5266f90eddd9427f110f)), closes [#15](https://github.com/semantic-release-action/rust/issues/15)
+
 # [4.1.0-beta.5](https://github.com/semantic-release-action/rust/compare/v4.1.0-beta.4...v4.1.0-beta.5) (2023-02-05)
 
 
