@@ -4,12 +4,24 @@ name: Release Binary
 on:
   workflow_call:
     inputs:
+      targets:
+        description: Whitelist of compilation targets to upload GitHub release binaries for. Must be a subset of supported targets.
+        type: string
+        default: |
+          aarch64-apple-darwin
+          aarch64-unknown-linux-gnu
+          aarch64-unknown-linux-musl
+          i686-unknown-linux-gnu
+          i686-unknown-linux-musl
+          x86_64-apple-darwin
+          x86_64-unknown-linux-gnu
+          x86_64-unknown-linux-musl
       test-command:
         description: Command used to test your Rust program
         type: string
         default: cargo test
       toolchain:
-        description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
+        description: Rust toolchain specification
         type: string
         default: stable
       disable-semantic-release-cargo:
@@ -36,6 +48,68 @@ env:
 jobs:
   get-next-version:
     uses: semantic-release-action/next-release-version/.github/workflows/next-release-version.yml@v2
+
+  configure-compilation-target-matrix:
+    name: Configure compilation targets
+    runs-on: ubuntu-latest
+    needs:
+      - get-next-version
+    outputs:
+      matrix: ${{ steps.configure-compilation-target-matrix.outputs.matrix }}
+
+    steps:
+      - id: configure-compilation-target-matrix
+        run: |
+          : configure compilation target matrix
+          matrix="$(jq \
+            --argjson whitelist "$(echo "$supported" | jq --raw-input --compact-output --slurp '[splits("[ \n]+")] | map(select(length > 0))')" \
+            'map(select(.target | IN($whitelist[])))' \
+            <<< "$all_compilation_targets")"
+          echo "matrix=${matrix}" >> "$GITHUB_OUTPUT"
+        env:
+          all_compilation_targets: |
+            [
+              {
+                "target": "aarch64-apple-darwin",
+                "host": "macOS-latest",
+                "cross": true
+              },
+              {
+                "target": "aarch64-unknown-linux-gnu",
+                "host": "ubuntu-latest",
+                "cross": true
+              },
+              {
+                "target": "aarch64-unknown-linux-musl",
+                "host": "ubuntu-latest",
+                "cross": true
+              },
+              {
+                "target": "i686-unknown-linux-gnu",
+                "host": "ubuntu-latest",
+                "cross": true
+              },
+              {
+                "target": "i686-unknown-linux-musl",
+                "host": "ubuntu-latest",
+                "cross": true
+              },
+              {
+                "target": "x86_64-apple-darwin",
+                "host": "macOS-latest",
+                "cross": false
+              },
+              {
+                "target": "x86_64-unknown-linux-gnu",
+                "host": "ubuntu-latest",
+                "cross": false
+              },
+              {
+                "target": "x86_64-unknown-linux-musl",
+                "host": "ubuntu-latest",
+                "cross": false
+              }
+            ]
 
   test:
     name: Cargo test
@@ -69,9 +143,10 @@ jobs:
   build-release:
     name: Build CLI ${{ matrix.build.target }}
     if: needs.get-next-version.outputs.new-release-published == 'true'
-    runs-on: ${{ matrix.build.os }}
+    runs-on: ${{ matrix.build.host }}
     needs:
       - get-next-version
+      - configure-compilation-target-matrix
     outputs:
       binary-name: ${{ steps.get-binary-name.outputs.binary-name }}
     env:
@@ -80,32 +155,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build:
-          # alphabatized by target
-          - os: macOS-latest
-            target: aarch64-apple-darwin
-            cross: true
-          - os: ubuntu-latest
-            target: aarch64-unknown-linux-gnu
-            cross: true
-          - os: ubuntu-latest
-            target: aarch64-unknown-linux-musl
-            cross: true
-          - os: ubuntu-latest
-            target: i686-unknown-linux-gnu
-            cross: true
-          - os: ubuntu-latest
-            target: i686-unknown-linux-musl
-            cross: true
-          - os: macOS-latest
-            target: x86_64-apple-darwin
-            cross: false
-          - os: ubuntu-latest
-            target: x86_64-unknown-linux-gnu
-            cross: false
-          - os: ubuntu-latest
-            target: x86_64-unknown-linux-musl
-            cross: false
+        build: ${{ fromJson(needs.configure-compilation-target-matrix.outputs.matrix) }}
 
     steps:
       - name: Checkout
@@ -196,3 +246,4 @@ jobs:
           disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
           next-version: ${{ needs.get-next-version.outputs.new-release-version }}
+          targets: ${{ inputs.targets }}

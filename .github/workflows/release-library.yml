@@ -9,7 +9,7 @@ on:
         type: string
         default: cargo test
       toolchain:
-        description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
+        description: Rust toolchain specification
         type: string
         default: stable
       disable-semantic-release-git:
