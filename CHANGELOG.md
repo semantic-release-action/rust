@@ -1,3 +1,10 @@
+# [4.1.0-beta.3](https://github.com/semantic-release-action/rust/compare/v4.1.0-beta.2...v4.1.0-beta.3) (2023-02-05)
+
+
+### Bug Fixes
+
+* use correct variable name ([c1d8895](https://github.com/semantic-release-action/rust/commit/c1d889505c8fdb541cf3553d2403382fed9ddc45))
+
 # [4.1.0-beta.2](https://github.com/semantic-release-action/rust/compare/v4.1.0-beta.1...v4.1.0-beta.2) (2023-02-05)
 
 
