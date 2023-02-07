@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/semantic-release-action/rust/compare/v4.1.0...v4.1.1) (2023-02-07)
+
+
+### Bug Fixes
+
+* do not require cargo-registry-token to be specified ([097ccad](https://github.com/semantic-release-action/rust/commit/097ccad6921d2661a7c92520976f709572740d4d))
+
 # [4.1.0](https://github.com/semantic-release-action/rust/compare/v4.0.14...v4.1.0) (2023-02-05)
 
 
