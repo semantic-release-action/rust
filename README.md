@@ -164,7 +164,7 @@ This may be required with certain repository settings, for example when requirin
 
 |        Secret        | Required | Description                                                |
 | :------------------: | :------: | ---------------------------------------------------------- |
-| cargo-registry-token |   true   | Cargo registry API token. [Details](#cargo-registry-token) |
+| cargo-registry-token |  false   | Cargo registry API token. [Details](#cargo-registry-token) |
 
 #### cargo-registry-token
 
@@ -220,4 +220,4 @@ jobs:
 
 |        Secret        | Required | Description                                                |
 | :------------------: | :------: | ---------------------------------------------------------- |
-| cargo-registry-token |   true   | Cargo registry API token. [Details](#cargo-registry-token) |
+| cargo-registry-token |  false   | Cargo registry API token. [Details](#cargo-registry-token) |

@@ -23,7 +23,6 @@ inputs:
     default: false
   cargo-registry-token:
     description: API token for writing to your cargo registry
-    required: true
 
 runs:
   using: composite

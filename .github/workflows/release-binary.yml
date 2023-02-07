@@ -35,7 +35,6 @@ on:
     secrets:
       cargo-registry-token:
         description: API token for writing to your cargo registry
-        required: true
 
 # Only allow one release workflow to execute at a time, since each release
 # workflow uses shared resources (git tags, package registries)

@@ -22,7 +22,6 @@ inputs:
     required: true
   cargo-registry-token:
     description: API token for writing to your cargo registry
-    required: true
   disable-semantic-release-cargo:
     description: Disable semantic-release-cargo in your release flow. Only takes effect if the action semantic-release config is used.
     default: false
