@@ -1,3 +1,10 @@
+## [4.1.10](https://github.com/semantic-release-action/rust/compare/v4.1.9...v4.1.10) (2023-03-09)
+
+
+### Bug Fixes
+
+* use clearer step name ([ee73f0b](https://github.com/semantic-release-action/rust/commit/ee73f0b9792951892887743fe667c78c5849f58a))
+
 ## [4.1.9](https://github.com/semantic-release-action/rust/compare/v4.1.8...v4.1.9) (2023-03-06)
 
 
