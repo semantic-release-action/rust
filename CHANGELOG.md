@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/semantic-release-action/rust/compare/v4.2.0...v4.2.1) (2023-03-12)
+
+
+### Bug Fixes
+
+* split compilation and testing in fewer cases ([616db04](https://github.com/semantic-release-action/rust/commit/616db049f5b42f19332d5d7cc67b14f304231d2a))
+
 # [4.2.0](https://github.com/semantic-release-action/rust/compare/v4.1.10...v4.2.0) (2023-03-12)
 
 
