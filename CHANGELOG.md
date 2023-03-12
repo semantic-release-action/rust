@@ -1,3 +1,10 @@
+## [4.2.2](https://github.com/semantic-release-action/rust/compare/v4.2.1...v4.2.2) (2023-03-12)
+
+
+### Bug Fixes
+
+* do not apply `--locked` if user has not specified it ([006cd6f](https://github.com/semantic-release-action/rust/commit/006cd6fecb3f2582e4803ca353979e0f8a3612a4))
+
 ## [4.2.1](https://github.com/semantic-release-action/rust/compare/v4.2.0...v4.2.1) (2023-03-12)
 
 
