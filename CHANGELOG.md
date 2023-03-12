@@ -1,3 +1,16 @@
+# [4.2.0](https://github.com/semantic-release-action/rust/compare/v4.1.10...v4.2.0) (2023-03-12)
+
+
+### Bug Fixes
+
+* pass `--locked` to `cargo test` ([b0e45ce](https://github.com/semantic-release-action/rust/commit/b0e45ced75c975f68e0687243cde6555d573a4c4))
+* pass `--nocapture` to `cargo test` ([02ce796](https://github.com/semantic-release-action/rust/commit/02ce7967a165704bef0cae3744213f65d2c9e123))
+
+
+### Features
+
+* separate compilation and testing ([714425e](https://github.com/semantic-release-action/rust/commit/714425e3dcbc53a373c3b4111c4a9558f353535f))
+
 ## [4.1.10](https://github.com/semantic-release-action/rust/compare/v4.1.9...v4.1.10) (2023-03-09)
 
 
