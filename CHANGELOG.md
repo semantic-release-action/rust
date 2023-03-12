@@ -1,3 +1,10 @@
+## [4.2.5](https://github.com/semantic-release-action/rust/compare/v4.2.4...v4.2.5) (2023-03-12)
+
+
+### Bug Fixes
+
+* use Swatinem/rust-cache for caching ([21dbb34](https://github.com/semantic-release-action/rust/commit/21dbb34872fc7516ad90aba6bd276651bbe80ccd))
+
 ## [4.2.4](https://github.com/semantic-release-action/rust/compare/v4.2.3...v4.2.4) (2023-03-12)
 
 
