@@ -47,17 +47,7 @@ runs:
       with:
         toolchain: ${{ inputs.toolchain }}
 
-    - name: Cache cargo
-      uses: actions/cache@v3
-      id: cache-cargo
-      with:
-        path: |
-          ~/.cargo/bin/
-          ~/.cargo/registry/index/
-          ~/.cargo/registry/cache/
-          ~/.cargo/git/db/
-          target/
-        key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
+    - uses: Swatinem/rust-cache@v2
 
     - name: Install is-semantic-release-configured
       uses: EricCrosson/install-github-release-binary@v2
