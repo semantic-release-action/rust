@@ -52,7 +52,7 @@ runs:
         key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
 
     # Separate compilation from testing to accurately report the runtime of each
-    - if: contains(inputs.test-command, 'cargo test')
+    - if: startsWith(inputs.test-command, 'cargo test')
       run: cargo test --no-run --locked
       shell: bash
 
