@@ -48,5 +48,8 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ steps.rust-toolchain.outputs.cachekey }}-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Run tests
-        run: ${{ inputs.test-command }}
+      # Separate compilation from testing to accurately report the runtime of each
+      - if: contains(inputs.test-command, 'cargo test')
+        run: cargo test --no-run
+
+      - run: ${{ inputs.test-command }}
