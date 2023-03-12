@@ -38,10 +38,10 @@ jobs:
 
 ### Inputs
 
-| Input Parameter |           Default           | Description                                                                            |
-| :-------------: | :-------------------------: | -------------------------------------------------------------------------------------- |
-|  test-command   | `cargo test -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command) |
-|    toolchain    |          `stable`           | Rust toolchain specification. [Details](#toolchain)                                    |
+| Input Parameter |               Default                | Description                                                                            |
+| :-------------: | :----------------------------------: | -------------------------------------------------------------------------------------- |
+|  test-command   | `cargo test -- --nocapture --locked` | Shell command used to provide confidence in proposed changes. [Details](#test-command) |
+|    toolchain    |               `stable`               | Rust toolchain specification. [Details](#toolchain)                                    |
 
 #### toolchain
 
@@ -52,7 +52,7 @@ Specify a Rust [toolchain].
 #### test-command
 
 The shell command used to provide confidence in the proposed changes.
-Defaults to `cargo test -- --nocapture`, but you can override this to `cargo check` or anything else.
+Defaults to `cargo test -- --nocapture --locked`, but you can override this to `cargo check` or anything else.
 
 ## Release binary
 
@@ -109,13 +109,13 @@ jobs:
 
 ### Inputs
 
-|        Input Parameter         |           Default           | Description                                                                                       |
-| :----------------------------: | :-------------------------: | ------------------------------------------------------------------------------------------------- |
-|            targets             |        all supported        | Whitelist of compilation targets to upload GitHub release binaries for. [Details](#targets)       |
-|          test-command          | `cargo test -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command)            |
-|           toolchain            |          `stable`           | Rust toolchain specification. [Details](#toolchain)                                               |
-| disable-semantic-release-cargo |           `false`           | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
-|  disable-semantic-release-git  |           `false`           | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
+|        Input Parameter         |               Default                | Description                                                                                       |
+| :----------------------------: | :----------------------------------: | ------------------------------------------------------------------------------------------------- |
+|            targets             |            all supported             | Whitelist of compilation targets to upload GitHub release binaries for. [Details](#targets)       |
+|          test-command          | `cargo test -- --nocapture --locked` | Shell command used to provide confidence in proposed changes. [Details](#test-command)            |
+|           toolchain            |               `stable`               | Rust toolchain specification. [Details](#toolchain)                                               |
+| disable-semantic-release-cargo |               `false`                | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
+|  disable-semantic-release-git  |               `false`                | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
 
 #### targets
 
@@ -210,11 +210,11 @@ jobs:
 
 ### Inputs
 
-|       Input Parameter        |           Default           | Description                                                                                    |
-| :--------------------------: | :-------------------------: | ---------------------------------------------------------------------------------------------- |
-|          toolchain           |          `stable`           | Rust toolchain specification. [Details](#toolchain)                                            |
-|         test-command         | `cargo test -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command)         |
-| disable-semantic-release-git |           `false`           | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git) |
+|       Input Parameter        |               Default                | Description                                                                                    |
+| :--------------------------: | :----------------------------------: | ---------------------------------------------------------------------------------------------- |
+|          toolchain           |               `stable`               | Rust toolchain specification. [Details](#toolchain)                                            |
+|         test-command         | `cargo test -- --nocapture --locked` | Shell command used to provide confidence in proposed changes. [Details](#test-command)         |
+| disable-semantic-release-git |               `false`                | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git) |
 
 ### Secrets
 

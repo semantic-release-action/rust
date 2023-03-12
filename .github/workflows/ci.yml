@@ -13,7 +13,7 @@ on:
         description: Cargo command used to provide confidence in proposed changes
         required: false
         type: string
-        default: cargo test -- --nocapture
+        default: cargo test -- --nocapture --locked
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
