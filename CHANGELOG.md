@@ -1,3 +1,10 @@
+## [4.2.10](https://github.com/semantic-release-action/rust/compare/v4.2.9...v4.2.10) (2023-03-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @semantic-release/changelog to v6.0.3 ([0b62cb6](https://github.com/semantic-release-action/rust/commit/0b62cb65f167f0051ffb847c4776cfd569b0a948))
+
 ## [4.2.9](https://github.com/semantic-release-action/rust/compare/v4.2.8...v4.2.9) (2023-03-25)
 
 
