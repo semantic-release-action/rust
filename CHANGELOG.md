@@ -1,3 +1,10 @@
+## [4.2.9](https://github.com/semantic-release-action/rust/compare/v4.2.8...v4.2.9) (2023-03-25)
+
+
+### Bug Fixes
+
+* rename job from Cargo test to Test ([ece2e34](https://github.com/semantic-release-action/rust/commit/ece2e3425676199247767984965aa443a188c766))
+
 ## [4.2.8](https://github.com/semantic-release-action/rust/compare/v4.2.7...v4.2.8) (2023-03-25)
 
 
