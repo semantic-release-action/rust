@@ -24,7 +24,7 @@ env:
 
 jobs:
   test:
-    name: Cargo test
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
