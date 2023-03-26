@@ -199,7 +199,7 @@ runs:
       shell: bash
 
     - run: |
-        : invoke semantic-release
+        : semantic-release
         ${semantic_release}
       env:
         GITHUB_TOKEN: ${{ github.token }}
