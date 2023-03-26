@@ -1,3 +1,10 @@
+## [4.2.11](https://github.com/semantic-release-action/rust/compare/v4.2.10...v4.2.11) (2023-03-26)
+
+
+### Bug Fixes
+
+* remove redundant words from step name ([407493b](https://github.com/semantic-release-action/rust/commit/407493bc77e52e5b63d81a8fb80aa4eb0d31c466))
+
 ## [4.2.10](https://github.com/semantic-release-action/rust/compare/v4.2.9...v4.2.10) (2023-03-25)
 
 
