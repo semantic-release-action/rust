@@ -1,3 +1,10 @@
+## [4.2.13](https://github.com/semantic-release-action/rust/compare/v4.2.12...v4.2.13) (2023-04-10)
+
+
+### Bug Fixes
+
+* specify arguments in consistent order ([fe01a44](https://github.com/semantic-release-action/rust/commit/fe01a44284235ea7ceeca9eae4e2fc83d2d0b3d1))
+
 ## [4.2.12](https://github.com/semantic-release-action/rust/compare/v4.2.11...v4.2.12) (2023-03-31)
 
 
