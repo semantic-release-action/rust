@@ -129,7 +129,7 @@ jobs:
 
       # Separate compilation from testing to accurately report the runtime of each
       - if: startsWith(inputs.test-command, 'cargo test')
-        run: cargo test --no-run ${{ contains(inputs.test-command, '--locked') && '--locked' || '' }}
+        run: cargo test ${{ contains(inputs.test-command, '--locked') && '--locked' || '' }} --no-run
 
       - run: ${{ inputs.test-command }}
 
