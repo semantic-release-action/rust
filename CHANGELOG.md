@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/semantic-release-action/rust/compare/v4.2.15...v4.3.0) (2023-04-19)
+
+
+### Features
+
+* add support for checking out submodules ([836593b](https://github.com/semantic-release-action/rust/commit/836593bc081200f03c6528510074e55ee7a91545))
+
 ## [4.2.15](https://github.com/semantic-release-action/rust/compare/v4.2.14...v4.2.15) (2023-04-12)
 
 
