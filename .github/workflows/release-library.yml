@@ -4,6 +4,11 @@ name: Release Library
 on:
   workflow_call:
     inputs:
+      submodules:
+        description: Whether to checkout submodules. Use `true` to checkout submodules or `recursive` to recursively checkout submodules -- see https://github.com/actions/checkout
+        required: false
+        type: string
+        default: false
       test-command:
         description: Command used to test your Rust program
         type: string
@@ -41,3 +46,4 @@ jobs:
           test-command: ${{ inputs.test-command }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
+          submodules: ${{ inputs.submodules }}

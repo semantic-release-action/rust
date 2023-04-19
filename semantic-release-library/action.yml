@@ -23,6 +23,9 @@ inputs:
     default: false
   cargo-registry-token:
     description: API token for writing to your cargo registry
+  submodules:
+    description: Whether to checkout submodules
+    required: true
 
 runs:
   using: composite
@@ -32,6 +35,7 @@ runs:
       with:
         # Fetch all history and tags for calculating next semantic version
         fetch-depth: 0
+        submodules: ${{ inputs.submodules }}
 
     - name: Install Rust toolchain
       uses: dtolnay/rust-toolchain@master

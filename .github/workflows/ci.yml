@@ -4,6 +4,11 @@ name: CI
 on:
   workflow_call:
     inputs:
+      submodules:
+        description: Whether to checkout submodules. Use `true` to checkout submodules or `recursive` to recursively checkout submodules -- see https://github.com/actions/checkout
+        required: false
+        type: string
+        default: false
       toolchain:
         description: Rust toolchain specification -- see https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
         required: false
@@ -29,6 +34,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          submodules: ${{ inputs.submodules }}
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@master

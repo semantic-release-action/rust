@@ -31,6 +31,9 @@ inputs:
   next-version:
     description: Next semantic-release version number
     required: true
+  submodules:
+    description: Whether to checkout submodules
+    required: true
 
 runs:
   using: composite
@@ -40,6 +43,7 @@ runs:
       with:
         # Fetch all history and tags for calculating next semantic version
         fetch-depth: 0
+        submodules: ${{ inputs.submodules }}
 
     - name: Install Rust toolchain
       uses: dtolnay/rust-toolchain@master

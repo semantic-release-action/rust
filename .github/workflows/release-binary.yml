@@ -4,6 +4,11 @@ name: Release Binary
 on:
   workflow_call:
     inputs:
+      submodules:
+        description: Whether to checkout submodules. Use `true` to checkout submodules or `recursive` to recursively checkout submodules -- see https://github.com/actions/checkout
+        required: false
+        type: string
+        default: false
       targets:
         description: Whitelist of compilation targets to upload GitHub release binaries for. Must be a subset of supported targets.
         type: string
@@ -118,6 +123,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          submodules: ${{ inputs.submodules }}
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@master
@@ -154,6 +161,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          submodules: ${{ inputs.submodules }}
 
       - name: Install build inputs
         if: runner.os == 'Linux' && !matrix.build.cross && endsWith(matrix.build.target, '-musl')
@@ -230,4 +239,5 @@ jobs:
           disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
           next-version: ${{ needs.get-next-version.outputs.new-release-version }}
+          submodules: ${{ inputs.submodules }}
           targets: ${{ inputs.targets }}
