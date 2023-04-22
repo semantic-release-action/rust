@@ -53,7 +53,7 @@ Specify a Rust [toolchain].
 #### test-command
 
 The shell command used to provide confidence in the proposed changes.
-Defaults to `cargo test --locked -- --nocapture`, but you can override this to `cargo check` or anything else.
+Defaults to `cargo test --locked -- --nocapture` for binaries and `cargo test -- --nocapture` for libraries, but you can override this to `cargo check` or anything else.
 
 #### submodules
 
@@ -219,12 +219,12 @@ jobs:
 
 ### Inputs
 
-|       Input Parameter        |               Default                | Description                                                                                    |
-| :--------------------------: | :----------------------------------: | ---------------------------------------------------------------------------------------------- |
-|          toolchain           |               `stable`               | Rust toolchain specification. [Details](#toolchain)                                            |
-|         test-command         | `cargo test --locked -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command)         |
-| disable-semantic-release-git |               `false`                | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git) |
-|          submodules          |               `false`                | Whether to checkout submodules. [Details](#submodules)                                         |
+|       Input Parameter        |           Default           | Description                                                                                    |
+| :--------------------------: | :-------------------------: | ---------------------------------------------------------------------------------------------- |
+|          toolchain           |          `stable`           | Rust toolchain specification. [Details](#toolchain)                                            |
+|         test-command         | `cargo test -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command)         |
+| disable-semantic-release-git |           `false`           | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git) |
+|          submodules          |           `false`           | Whether to checkout submodules. [Details](#submodules)                                         |
 
 ### Secrets
 
