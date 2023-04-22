@@ -1,3 +1,10 @@
+## [4.3.1](https://github.com/semantic-release-action/rust/compare/v4.3.0...v4.3.1) (2023-04-22)
+
+
+### Bug Fixes
+
+* do not use cargo --locked in library release workflow ([edccf72](https://github.com/semantic-release-action/rust/commit/edccf723b30faa0182063140e97b0e5d79fc84d4))
+
 # [4.3.0](https://github.com/semantic-release-action/rust/compare/v4.2.15...v4.3.0) (2023-04-19)
 
 
