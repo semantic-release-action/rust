@@ -42,7 +42,8 @@ runs:
       with:
         toolchain: ${{ inputs.toolchain }}
 
-    - uses: Swatinem/rust-cache@v2
+    - name: Cache Rust dependencies
+      uses: Swatinem/rust-cache@v2
 
     # Separate compilation from testing to accurately report the runtime of each
     - if: startsWith(inputs.test-command, 'cargo test')

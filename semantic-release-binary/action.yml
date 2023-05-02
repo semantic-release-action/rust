@@ -50,7 +50,8 @@ runs:
       with:
         toolchain: ${{ inputs.toolchain }}
 
-    - uses: Swatinem/rust-cache@v2
+    - name: Cache Rust dependencies
+      uses: Swatinem/rust-cache@v2
 
     - name: Install is-semantic-release-configured
       uses: EricCrosson/install-github-release-binary@v2

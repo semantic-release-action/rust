@@ -131,7 +131,8 @@ jobs:
         with:
           toolchain: ${{ inputs.toolchain }}
 
-      - uses: Swatinem/rust-cache@v2
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
 
       # Separate compilation from testing to accurately report the runtime of each
       - if: startsWith(inputs.test-command, 'cargo test')
@@ -173,7 +174,8 @@ jobs:
           toolchain: nightly
           target: ${{ matrix.build.target }}
 
-      - uses: Swatinem/rust-cache@v2
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
 
       - name: Install semantic-release-cargo
         uses: EricCrosson/install-github-release-binary@v2
