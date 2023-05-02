@@ -1,3 +1,10 @@
+## [4.3.2](https://github.com/semantic-release-action/rust/compare/v4.3.1...v4.3.2) (2023-05-02)
+
+
+### Bug Fixes
+
+* add step name describing what's being performed ([ae4119b](https://github.com/semantic-release-action/rust/commit/ae4119be152b795e641543920be408a85c1ca353))
+
 ## [4.3.1](https://github.com/semantic-release-action/rust/compare/v4.3.0...v4.3.1) (2023-04-22)
 
 
