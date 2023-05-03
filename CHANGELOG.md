@@ -1,3 +1,10 @@
+## [4.3.3](https://github.com/semantic-release-action/rust/compare/v4.3.2...v4.3.3) (2023-05-03)
+
+
+### Bug Fixes
+
+* use inputs.toolchain instead of hardcoded value ([be4a183](https://github.com/semantic-release-action/rust/commit/be4a18397dcb8894de07aa8e066e382074ef105f))
+
 ## [4.3.2](https://github.com/semantic-release-action/rust/compare/v4.3.1...v4.3.2) (2023-05-02)
 
 
