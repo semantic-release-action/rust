@@ -171,7 +171,7 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: nightly
+          toolchain: ${{ inputs.toolchain }}
           target: ${{ matrix.build.target }}
 
       - name: Cache Rust dependencies
