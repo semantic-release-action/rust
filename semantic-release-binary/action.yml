@@ -53,7 +53,7 @@ runs:
     - name: Cache Rust dependencies
       uses: Swatinem/rust-cache@v2
 
-    - name: Install is-semantic-release-configured
+    - name: Install semantic-release configuration utilities
       uses: EricCrosson/install-github-release-binary@v2
       with:
         targets: |
@@ -114,7 +114,7 @@ runs:
         sed -i 's/BINARY_NAME/${{ inputs.binary-name }}/g' .releaserc.json
       shell: bash
 
-    - name: Install is-semantic-release-configured
+    - name: Install configure-semantic-release-manifest
       if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && (inputs.disable-semantic-release-git == 'true' || inputs.disable-semantic-release-cargo == 'true')
       uses: EricCrosson/install-github-release-binary@v2
       with:

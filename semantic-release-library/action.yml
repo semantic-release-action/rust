@@ -110,7 +110,7 @@ runs:
         cp "${{ github.action_path }}/.releaserc.json" ".releaserc.json"
       shell: bash
 
-    - name: Install is-semantic-release-configured
+    - name: Install configure-semantic-release-manifest
       if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
       uses: EricCrosson/install-github-release-binary@v2
       with:
