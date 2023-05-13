@@ -219,12 +219,13 @@ jobs:
 
 ### Inputs
 
-|       Input Parameter        |           Default           | Description                                                                                    |
-| :--------------------------: | :-------------------------: | ---------------------------------------------------------------------------------------------- |
-|          toolchain           |          `stable`           | Rust toolchain specification. [Details](#toolchain)                                            |
-|         test-command         | `cargo test -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command)         |
-| disable-semantic-release-git |           `false`           | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git) |
-|          submodules          |           `false`           | Whether to checkout submodules. [Details](#submodules)                                         |
+|        Input Parameter         |           Default           | Description                                                                                       |
+| :----------------------------: | :-------------------------: | ------------------------------------------------------------------------------------------------- |
+|           toolchain            |          `stable`           | Rust toolchain specification. [Details](#toolchain)                                               |
+|          test-command          | `cargo test -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command)            |
+| disable-semantic-release-cargo |           `false`           | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
+|  disable-semantic-release-git  |           `false`           | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
+|           submodules           |           `false`           | Whether to checkout submodules. [Details](#submodules)                                            |
 
 ### Secrets
 

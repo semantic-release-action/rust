@@ -17,6 +17,10 @@ on:
         description: Rust toolchain specification
         type: string
         default: stable
+      disable-semantic-release-cargo:
+        description: Disable semantic-release-cargo in your release flow. Only takes effect if the action semantic-release config is used.
+        type: boolean
+        default: false
       disable-semantic-release-git:
         description: Disable @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
         type: boolean
@@ -44,6 +48,7 @@ jobs:
         with:
           toolchain: ${{ inputs.toolchain }}
           test-command: ${{ inputs.test-command }}
+          disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
           submodules: ${{ inputs.submodules }}

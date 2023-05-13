@@ -18,6 +18,9 @@ inputs:
     description: Command used to test your Rust program
     required: false
     default: cargo test
+  disable-semantic-release-cargo:
+    description: Disable semantic-release-cargo in your release flow. Only takes effect if the action semantic-release config is used.
+    default: false
   disable-semantic-release-git:
     description: Disable @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
     default: false
@@ -111,10 +114,16 @@ runs:
       shell: bash
 
     - name: Install configure-semantic-release-manifest
-      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
+      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && (inputs.disable-semantic-release-git == 'true' || inputs.disable-semantic-release-cargo == 'true')
       uses: EricCrosson/install-github-release-binary@v2
       with:
         targets: EricCrosson/configure-semantic-release-manifest@v1
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-cargo == 'true'
+      run: |
+        : disable semantic-release-cargo
+        configure-semantic-release-manifest --in-place --remove @semantic-release-cargo/semantic-release-cargo
+      shell: bash
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
       run: |
