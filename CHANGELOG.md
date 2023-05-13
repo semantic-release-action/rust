@@ -1,3 +1,10 @@
+## [4.4.2](https://github.com/semantic-release-action/rust/compare/v4.4.1...v4.4.2) (2023-05-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency semantic-release to v21.0.2 ([34c8a71](https://github.com/semantic-release-action/rust/commit/34c8a71c5810c59c7d9d41c9382a15969f184c09))
+
 ## [4.4.1](https://github.com/semantic-release-action/rust/compare/v4.4.0...v4.4.1) (2023-05-13)
 
 
