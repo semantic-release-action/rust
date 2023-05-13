@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/semantic-release-action/rust/compare/v4.3.4...v4.4.0) (2023-05-13)
+
+
+### Features
+
+* support `disable-semantic-release-cargo` in library release workflow ([a2ad523](https://github.com/semantic-release-action/rust/commit/a2ad523058c87a76ecbcfce74968647f44bd4acc))
+
 ## [4.3.4](https://github.com/semantic-release-action/rust/compare/v4.3.3...v4.3.4) (2023-05-03)
 
 
