@@ -1,3 +1,10 @@
+## [4.4.4](https://github.com/semantic-release-action/rust/compare/v4.4.3...v4.4.4) (2023-06-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency semantic-release-major-tag to v0.3.2 ([2bfd934](https://github.com/semantic-release-action/rust/commit/2bfd9340bb6b1e488afd5e36aaae783b67199dc4))
+
 ## [4.4.3](https://github.com/semantic-release-action/rust/compare/v4.4.2...v4.4.3) (2023-05-13)
 
 
