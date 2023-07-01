@@ -45,8 +45,33 @@ jobs:
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
 
+      - name: Check if crate is a library
+        id: check-if-crate-is-library
+        run: |
+          is_crate_library="$(
+            cargo read-manifest \
+            | jq '.targets | map(.kind) | flatten | map(select(. == "lib")) | length > 0'
+          )"
+          echo "is-crate-library=$is_crate_library" >> "$GITHUB_OUTPUT"
+
+      - name: Construct test command
+        id: format-test-command
+        env:
+          input_test_command: ${{ inputs.test-command }}
+          is_crate_library: ${{ steps.check-if-crate-is-library.outputs.is-crate-library }}
+        run: |
+          test_command="$input_test_command"
+
+          # If the user has not overridden the default test command, and this is
+          # a library crate, we need to remove the '--locked' argument. This is
+          # necessary because library crates do not commit a Cargo.lock file.
+          if [[ "$input_test_command" == "cargo test --locked -- --nocapture" && "$is_crate_library" == true ]]; then
+            test_command="${input_test_command//--locked }"
+          fi
+          echo "test-command=$test_command" >> "$GITHUB_OUTPUT"
+
       # Separate compilation from testing to accurately report the runtime of each
-      - if: startsWith(inputs.test-command, 'cargo test')
-        run: cargo test ${{ contains(inputs.test-command, '--locked') && '--locked' || '' }} --no-run
+      - if: startsWith(steps.format-test-command.outputs.test-command, 'cargo test')
+        run: cargo test ${{ contains(steps.format-test-command.outputs.test-command, '--locked') && '--locked' || '' }} --no-run
 
       - run: ${{ inputs.test-command }}
