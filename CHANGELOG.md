@@ -1,3 +1,10 @@
+## [4.4.5](https://github.com/semantic-release-action/rust/compare/v4.4.4...v4.4.5) (2023-07-01)
+
+
+### Bug Fixes
+
+* do not pass --locked to cargo commands for library crates ([26e1542](https://github.com/semantic-release-action/rust/commit/26e15424a71201e51ae22f79796f8d1cdd44665b))
+
 ## [4.4.4](https://github.com/semantic-release-action/rust/compare/v4.4.3...v4.4.4) (2023-06-03)
 
 
