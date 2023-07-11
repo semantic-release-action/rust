@@ -2,7 +2,7 @@
   "name": "@semantic-release-action/rust-semantic-release-binary",
   "private": true,
   "dependencies": {
-    "@semantic-release-cargo/semantic-release-cargo": "2.1.112",
+    "@semantic-release-cargo/semantic-release-cargo": "2.1.113",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "semantic-release": "21.0.7",
