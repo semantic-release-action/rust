@@ -58,7 +58,6 @@ runs:
       with:
         targets: |
           EricCrosson/is-semantic-release-configured@v1
-          EricCrosson/configure-semantic-release-assets@v1
 
     # Terminology:
     #
@@ -132,9 +131,30 @@ runs:
         configure-semantic-release-manifest --in-place --remove @semantic-release/git
       shell: bash
 
-    - run: |
+    - env:
+        selected_targets: ${{ inputs.targets }}
+        tmpdir: ${{ runner.temp }}
+      run: |
         : configure semantic-release assets
-        configure-semantic-release-assets --in-place whitelist "${{ inputs.targets }} SHA256SUMS.txt"
+        whitelist="$(
+          echo "$selected_targets SHAS256SUMS.txt" \
+          | jq --null-input --raw-input 'input | split("\\s"; null)'
+        )"
+
+        jq \
+          --argjson whitelist "$whitelist"\
+          '
+            .plugins
+            | map(select(type == "array" and .[0] == "@semantic-release/github")[1] |= (
+                .assets
+                | map(select(.label | IN($whitelist[])))
+              )
+            )
+          ' \
+          .releaserc.json \
+        > "${tmpdir}/.releaserc.json"
+
+        mv "${tmpdir}/.releaserc.json" .releaserc.json
       shell: bash
 
     # If the semantic-release-cargo plugin never runs, the cargo manifest never has its version bumped.
