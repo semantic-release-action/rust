@@ -1,3 +1,10 @@
+## [4.4.33](https://github.com/semantic-release-action/rust/compare/v4.4.32...v4.4.33) (2023-09-09)
+
+
+### Performance Improvements
+
+* use jq to modify semantic-release manifest ([dab05bc](https://github.com/semantic-release-action/rust/commit/dab05bc0ac51dffdf0ec8d9403e1b0cc42fd86d2))
+
 ## [4.4.32](https://github.com/semantic-release-action/rust/compare/v4.4.31...v4.4.32) (2023-09-09)
 
 
