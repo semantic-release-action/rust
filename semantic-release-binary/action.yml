@@ -113,22 +113,30 @@ runs:
         sed -i 's/BINARY_NAME/${{ inputs.binary-name }}/g' .releaserc.json
       shell: bash
 
-    - name: Install configure-semantic-release-manifest
-      if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && (inputs.disable-semantic-release-git == 'true' || inputs.disable-semantic-release-cargo == 'true')
-      uses: EricCrosson/install-github-release-binary@v2
-      with:
-        targets: EricCrosson/configure-semantic-release-manifest@v1
-
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-cargo == 'true'
+      env:
+        tmpdir: ${{ runner.temp }}
       run: |
         : disable semantic-release-cargo
-        configure-semantic-release-manifest --in-place --remove @semantic-release-cargo/semantic-release-cargo
+        jq \
+          '.plugins | map(select(type == "array" and .[0] == "@semantic-release-cargo/semantic-release-cargo" | not))' \
+          .releaserc.json \
+        > "${tmpdir}/.releaserc.json"
+
+        mv "${tmpdir}/.releaserc.json" .releaserc.json
       shell: bash
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-git == 'true'
+      env:
+        tmpdir: ${{ runner.temp }}
       run: |
         : disable @semantic-release/git
-        configure-semantic-release-manifest --in-place --remove @semantic-release/git
+        jq \
+          '.plugins | map(select(type == "array" and .[0] == "@semantic-release/git" | not))' \
+          .releaserc.json \
+        > "${tmpdir}/.releaserc.json"
+
+        mv "${tmpdir}/.releaserc.json" .releaserc.json
       shell: bash
 
     - env:
