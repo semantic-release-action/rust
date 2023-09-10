@@ -150,13 +150,10 @@ runs:
         )"
 
         jq \
-          --argjson whitelist "$whitelist"\
           '
-            .plugins
-            | map(select(type == "array" and .[0] == "@semantic-release/github")[1] |= (
-                .assets
-                | map(select(.label | IN($whitelist[])))
-              )
+            .plugins |= (
+              map(select(type == "array" and .[0] == "@semantic-release/github")[1].assets |=
+                map(select(.label | IN($whitelist[]))))
             )
           ' \
           .releaserc.json \
