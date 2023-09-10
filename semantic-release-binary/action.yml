@@ -236,6 +236,11 @@ runs:
       shell: bash
 
     - run: |
+        : ls 
+        ls -lah
+      shell: bash
+
+    - run: |
         : semantic-release
         ${semantic_release}
       env:
