@@ -1,3 +1,10 @@
+## [4.4.39](https://github.com/semantic-release-action/rust/compare/v4.4.38...v4.4.39) (2023-09-10)
+
+
+### Bug Fixes
+
+* remove debug prints ([6ef095a](https://github.com/semantic-release-action/rust/commit/6ef095a7b7937ccb6a3ecfc997ab10dd0712aba0))
+
 ## [4.4.38](https://github.com/semantic-release-action/rust/compare/v4.4.37...v4.4.38) (2023-09-10)
 
 
