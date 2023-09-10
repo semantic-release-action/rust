@@ -1,3 +1,10 @@
+## [4.4.37](https://github.com/semantic-release-action/rust/compare/v4.4.36...v4.4.37) (2023-09-10)
+
+
+### Bug Fixes
+
+* correct jq program to modify in-place ([1fe8ee9](https://github.com/semantic-release-action/rust/commit/1fe8ee9c90257dad64d1f6c01f2b472e5a7570d2))
+
 ## [4.4.36](https://github.com/semantic-release-action/rust/compare/v4.4.35...v4.4.36) (2023-09-10)
 
 
