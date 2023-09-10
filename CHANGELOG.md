@@ -1,3 +1,10 @@
+## [4.4.36](https://github.com/semantic-release-action/rust/compare/v4.4.35...v4.4.36) (2023-09-10)
+
+
+### Bug Fixes
+
+* add debug information ([7059472](https://github.com/semantic-release-action/rust/commit/70594721708c8d86cc93c53d95e9ee1f5c689303))
+
 ## [4.4.35](https://github.com/semantic-release-action/rust/compare/v4.4.34...v4.4.35) (2023-09-10)
 
 
