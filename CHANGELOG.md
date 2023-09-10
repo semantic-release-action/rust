@@ -1,3 +1,10 @@
+## [4.4.35](https://github.com/semantic-release-action/rust/compare/v4.4.34...v4.4.35) (2023-09-10)
+
+
+### Bug Fixes
+
+* add missing shell property ([c816026](https://github.com/semantic-release-action/rust/commit/c816026a47f39f430c236671cbed44bd1ea645e0))
+
 ## [4.4.34](https://github.com/semantic-release-action/rust/compare/v4.4.33...v4.4.34) (2023-09-10)
 
 
