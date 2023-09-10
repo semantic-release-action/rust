@@ -1,3 +1,10 @@
+## [4.4.38](https://github.com/semantic-release-action/rust/compare/v4.4.37...v4.4.38) (2023-09-10)
+
+
+### Bug Fixes
+
+* add missing argument ([61a257d](https://github.com/semantic-release-action/rust/commit/61a257d0e716373570977b56b0d094b520984aed))
+
 ## [4.4.37](https://github.com/semantic-release-action/rust/compare/v4.4.36...v4.4.37) (2023-09-10)
 
 
