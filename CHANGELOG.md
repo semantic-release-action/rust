@@ -1,3 +1,10 @@
+## [4.4.34](https://github.com/semantic-release-action/rust/compare/v4.4.33...v4.4.34) (2023-09-10)
+
+
+### Bug Fixes
+
+* form JSON from whitelist of selected assets properly ([0a01014](https://github.com/semantic-release-action/rust/commit/0a01014d4be095fa2049f312349d0bc05e0658fe))
+
 ## [4.4.33](https://github.com/semantic-release-action/rust/compare/v4.4.32...v4.4.33) (2023-09-09)
 
 
