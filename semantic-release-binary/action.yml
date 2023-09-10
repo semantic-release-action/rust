@@ -146,7 +146,7 @@ runs:
         : configure semantic-release assets
         whitelist="$(
           echo "$selected_targets SHAS256SUMS.txt" \
-          | jq --null-input --raw-input 'input | split("\\s"; null)'
+          | jq --null-input --raw-input '[inputs] | map(split("\\s"; null)[] | select(length > 0))'
         )"
 
         jq \
