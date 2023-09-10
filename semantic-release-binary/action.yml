@@ -233,6 +233,7 @@ runs:
     - run: |
         : display final semantic-release configuration
         cat .releaserc.json
+      shell: bash
 
     - run: |
         : semantic-release
