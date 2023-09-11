@@ -119,7 +119,7 @@ runs:
       run: |
         : disable semantic-release-cargo
         jq \
-          '.plugins |= map(select(type == "array" and .[0] == "@semantic-release-cargo/semantic-release-cargo" | not))' \
+          '.plugins |= map(select(type == "string" and . == "@semantic-release-cargo/semantic-release-cargo" | not))' \
           .releaserc.json \
         > "${tmpdir}/.releaserc.json"
 
