@@ -1,3 +1,10 @@
+## [4.4.42](https://github.com/semantic-release-action/rust/compare/v4.4.41...v4.4.42) (2023-09-11)
+
+
+### Bug Fixes
+
+* disable the semantic-release-cargo plugin correctly ([7986e76](https://github.com/semantic-release-action/rust/commit/7986e76e0ae0af663e84a72a99b92f1bd38df293))
+
 ## [4.4.41](https://github.com/semantic-release-action/rust/compare/v4.4.40...v4.4.41) (2023-09-11)
 
 
