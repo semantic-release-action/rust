@@ -15,38 +15,6 @@
       {
         "assets": [
           {
-            "path": ".semantic-release-action_rust/dist/x86_64-unknown-linux-musl/BINARY_NAME-x86_64-unknown-linux-musl",
-            "label": "x86_64-unknown-linux-musl"
-          },
-          {
-            "path": ".semantic-release-action_rust/dist/x86_64-unknown-linux-gnu/BINARY_NAME-x86_64-unknown-linux-gnu",
-            "label": "x86_64-unknown-linux-gnu"
-          },
-          {
-            "path": ".semantic-release-action_rust/dist/i686-unknown-linux-musl/BINARY_NAME-i686-unknown-linux-musl",
-            "label": "i686-unknown-linux-musl"
-          },
-          {
-            "path": ".semantic-release-action_rust/dist/i686-unknown-linux-gnu/BINARY_NAME-i686-unknown-linux-gnu",
-            "label": "i686-unknown-linux-gnu"
-          },
-          {
-            "path": ".semantic-release-action_rust/dist/x86_64-apple-darwin/BINARY_NAME-x86_64-apple-darwin",
-            "label": "x86_64-apple-darwin"
-          },
-          {
-            "path": ".semantic-release-action_rust/dist/aarch64-unknown-linux-musl/BINARY_NAME-aarch64-unknown-linux-musl",
-            "label": "aarch64-unknown-linux-musl"
-          },
-          {
-            "path": ".semantic-release-action_rust/dist/aarch64-unknown-linux-gnu/BINARY_NAME-aarch64-unknown-linux-gnu",
-            "label": "aarch64-unknown-linux-gnu"
-          },
-          {
-            "path": ".semantic-release-action_rust/dist/aarch64-apple-darwin/BINARY_NAME-aarch64-apple-darwin",
-            "label": "aarch64-apple-darwin"
-          },
-          {
             "path": ".semantic-release-action_rust/dist/SHA256SUMS.txt",
             "label": "SHA256SUMS.txt"
           }

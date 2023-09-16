@@ -84,13 +84,6 @@ Each deploy:
 
 [cargo binstall]: https://github.com/cargo-bins/cargo-binstall
 
-### Limitations
-
-This workflow currently only supports releasing a single binary.
-To release library crates, use the [release-library workflow].
-
-[release-library workflow]: #release-library
-
 ### Use
 
 ```yaml
