@@ -95,7 +95,7 @@ jobs:
           # Array<{ binary_name: string, src_path: string }>
           binary_manifest="$(
             cargo metadata --no-deps --format-version 1 \
-              | jq '.packages | map(.targets[] | select(.kind[] | IN("bin")) | { binary_name, src_path })'
+              | jq '.packages | map(.targets[] | select(.kind[] | IN("bin")) | { binary_name: .name, src_path })'
           )"
 
           # Validate there are no binary-name collisions
