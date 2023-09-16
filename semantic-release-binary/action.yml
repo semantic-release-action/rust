@@ -172,7 +172,7 @@ runs:
           echo "release-assets<<EOF"
           echo "$release_assets"
           echo "EOF"
-        } >> "$GITHUB_ACTIONS"
+        } >> "$GITHUB_OUTPUT"
       shell: bash
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
