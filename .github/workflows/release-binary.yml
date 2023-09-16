@@ -111,7 +111,7 @@ jobs:
           has_name_collisions="$(jq 'length > 0' <<< "$name_collisions")"
 
           if [[ $has_name_collisions == true ]]; then
-            targets="$(jq 'join(", ")' <<< "$name_collisions")"
+            targets="$(jq --raw-output 'join(", ")' <<< "$name_collisions")"
             echo "::error title={Binary name collision detected}::Refusing to process binary targets \"$targets\" due to name collisions"
             exit 1
           fi
