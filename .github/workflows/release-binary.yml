@@ -189,7 +189,12 @@ jobs:
 
       - name: Detect binary name
         id: get-binary-name
-        run: echo "binary-name=$(cargo metadata --no-deps --format-version 1 | jq --raw-output '.packages[0].targets | map(select(.kind[] | contains("bin")).name)[0]')" >> "$GITHUB_OUTPUT"
+        run: |
+          binary_names="$(
+            cargo metadata --no-deps --format-version 1 \
+              | jq --raw-output '.packages[0].targets | map(select(.kind[] | contains("bin")).name)[0]'
+          )"
+          echo "binary-name=$binary_names" >> "$GITHUB_OUTPUT"
 
       - name: Install cross
         uses: taiki-e/install-action@v2
