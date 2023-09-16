@@ -192,7 +192,7 @@ jobs:
 
   # Compile release artifacts
   build-release:
-    name: Build ${{ matrix.build.binary_name }} ${{ matrix.build.target }}
+    name: (${{ matrix.build.binary_name }}, ${{ matrix.build.target }})
     if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: ${{ matrix.build.host }}
     needs:
@@ -313,9 +313,10 @@ jobs:
       - name: Release
         uses: semantic-release-action/rust/semantic-release-binary@v4
         with:
+          toolchain: ${{ inputs.toolchain }}
+          compiled-targets: ${{ needs.configure-compilation-matrix.outputs.matrix }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
           disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
           next-version: ${{ needs.get-next-version.outputs.new-release-version }}
           submodules: ${{ inputs.submodules }}
-          compiled-targets: ${{ needs.configure-compilation-matrix.outputs.matrix }}

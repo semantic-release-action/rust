@@ -10,13 +10,9 @@ branding:
 # (which is only supported in composite actions)
 
 inputs:
-  targets:
-    description: Whitelist of compilation targets to upload GitHub release binaries for. Must be a subset of supported targets.
-    required: true
   toolchain:
     description: Rust toolchain specification
-    required: false
-    default: stable
+    required: true
   compiled-targets:
     description: |
       Stringified JSON array describing each precompiled release artifact.
