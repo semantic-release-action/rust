@@ -1,3 +1,10 @@
+# [4.5.0-beta.2](https://github.com/semantic-release-action/rust/compare/v4.5.0-beta.1...v4.5.0-beta.2) (2023-09-16)
+
+
+### Bug Fixes
+
+* fix shell syntax ([ab93f39](https://github.com/semantic-release-action/rust/commit/ab93f39b95543e44b2d89df1fd138c87d5ed287c))
+
 # [4.5.0-beta.1](https://github.com/semantic-release-action/rust/compare/v4.4.46...v4.5.0-beta.1) (2023-09-16)
 
 
