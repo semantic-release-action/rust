@@ -67,12 +67,16 @@ jobs:
         run: |
           : configure compilation target matrix
           matrix="$(
-            jq --compact-output \
+            jq \
               --argjson whitelist "$(echo "$whitelist" | jq --raw-input --slurp '[splits("[ \n]+")] | map(select(length > 0))')" \
               'map(select(.target | IN($whitelist[])))' \
               <<< "$all_compilation_targets"
           )"
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
+          {
+            echo "matrix<<EOF"
+            echo "$matrix"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
         env:
           whitelist: ${{ inputs.targets }}
           all_compilation_targets: |
