@@ -156,8 +156,6 @@ jobs:
       - configure-compilation-target-matrix
     outputs:
       binary-name: ${{ steps.get-binary-name.outputs.binary-name }}
-    env:
-      CARGO: cargo
 
     strategy:
       fail-fast: false
@@ -206,11 +204,9 @@ jobs:
         with:
           tool: cross
 
-      - name: Configure cross
-        if: matrix.build.cross
-        run: echo "CARGO=cross" >> "$GITHUB_ENV"
-
       - name: Compile release binary
+        env:
+          CARGO: ${{ matrix.build.cross && 'cross' || 'cargo' }}
         run: ${{ env.CARGO }} build --release --target ${{ matrix.build.target }} --verbose
 
       - name: Create release artifacts
