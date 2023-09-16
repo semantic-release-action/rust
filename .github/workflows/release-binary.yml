@@ -75,7 +75,7 @@ jobs:
               --null-input \
               --raw-input \
               '[inputs] | map(splits("\\s+") | select(length > 0))' \
-              "$raw_targets"
+              <<< "$raw_targets"
           )"
 
           # Array<string>
