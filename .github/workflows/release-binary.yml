@@ -64,6 +64,9 @@ jobs:
       matrix: ${{ steps.configure-compilation-matrix.outputs.matrix }}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - id: sanitize-input-targets
         env:
           raw_targets: ${{ inputs.targets }}
