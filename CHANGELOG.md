@@ -1,3 +1,10 @@
+# [4.5.0-beta.1](https://github.com/semantic-release-action/rust/compare/v4.4.46...v4.5.0-beta.1) (2023-09-16)
+
+
+### Features
+
+* support multiple binaries ([841cc68](https://github.com/semantic-release-action/rust/commit/841cc686a56005005e8f5b7505ac6b42048f231c)), closes [#13](https://github.com/semantic-release-action/rust/issues/13) [#31](https://github.com/semantic-release-action/rust/issues/31)
+
 ## [4.4.46](https://github.com/semantic-release-action/rust/compare/v4.4.45...v4.4.46) (2023-09-16)
 
 
