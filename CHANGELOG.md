@@ -1,3 +1,10 @@
+# [4.5.0-beta.3](https://github.com/semantic-release-action/rust/compare/v4.5.0-beta.2...v4.5.0-beta.3) (2023-09-16)
+
+
+### Bug Fixes
+
+* add checkout ([e1fbdce](https://github.com/semantic-release-action/rust/commit/e1fbdce1ab115773f3ccff614ad46bc9860b8f85))
+
 # [4.5.0-beta.2](https://github.com/semantic-release-action/rust/compare/v4.5.0-beta.1...v4.5.0-beta.2) (2023-09-16)
 
 
