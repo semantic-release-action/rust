@@ -247,6 +247,12 @@ runs:
         path: ${{ env.artifact_dir }}
 
     - run: |
+        : display downloaded release artifacts
+        ls -R
+      working-directory: ${{ env.artifact_dir }}
+      shell: bash
+
+    - run: |
         : combine checksums
         cat **/*-SHA256SUM.txt | tee SHA256SUMS.txt
       working-directory: ${{ env.artifact_dir }}
