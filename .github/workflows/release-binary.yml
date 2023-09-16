@@ -136,7 +136,7 @@ jobs:
               --argjson targets_whitelist "$targets_whitelist" \
               --argjson target_triples "$target_triples" \
               --argjson binary_names "$binary_names" \
-              '($target_triples[] | select(.target | IN($targets_whitelist[]))) + $binary_names[]'
+              '[$target_triples[] | select(.target | IN($targets_whitelist[])) + $binary_names[]]'
           )"
           {
             echo "matrix<<EOF"
