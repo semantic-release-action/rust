@@ -153,17 +153,18 @@ runs:
           jq 'unique_by(.binary_name) | length > 1' <<< "$compiled_targets"
         )"
 
-        release_assets="$(jq \
-          --null-input \
-          --argjson are_releasing_multiple_binaries "$are_releasing_multiple_binaries" \ 
-          --argjson compiled_targets "$compiled_targets" \
-          '
-            $compiled_targets
-            | map({
-              path: ".semantic-release-action_rust/dist/\(.target)/\(.binary_name)-\(.target)",
-              label: "\(if $are_releasing_multiple_binaries then "\(.binary_name)-" else "" end)\(.target)" 
-            })
-          '
+        release_assets="$(
+          jq \
+            --null-input \
+            --argjson are_releasing_multiple_binaries "$are_releasing_multiple_binaries" \
+            --argjson compiled_targets "$compiled_targets" \
+            '
+              $compiled_targets
+              | map({
+                path: ".semantic-release-action_rust/dist/\(.target)/\(.binary_name)-\(.target)",
+                label: "\(if $are_releasing_multiple_binaries then "\(.binary_name)-" else "" end)\(.target)" 
+              })
+            '
         )"
 
         # Array<{ path: string, label: string }>
