@@ -1,3 +1,10 @@
+## [5.0.1](https://github.com/semantic-release-action/rust/compare/v5.0.0...v5.0.1) (2023-09-17)
+
+
+### Bug Fixes
+
+* **deps:** update semantic-release-action/rust action to v5 ([66ef059](https://github.com/semantic-release-action/rust/commit/66ef059ac1a93b05b0959d5eedca26037d276ac3))
+
 # [5.0.0](https://github.com/semantic-release-action/rust/compare/v4.4.46...v5.0.0) (2023-09-17)
 
 
