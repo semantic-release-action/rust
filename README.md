@@ -38,22 +38,16 @@ jobs:
 
 ### Inputs
 
-| Input Parameter |               Default                | Description                                                                            |
-| :-------------: | :----------------------------------: | -------------------------------------------------------------------------------------- |
-|  test-command   | `cargo test --locked -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command) |
-|    toolchain    |               `stable`               | Rust toolchain specification. [Details](#toolchain)                                    |
-|   submodules    |               `false`                | Whether to checkout submodules. [Details](#submodules)                                 |
+| Input Parameter | Default  | Description                                            |
+| :-------------: | :------: | ------------------------------------------------------ |
+|    toolchain    | `stable` | Rust toolchain specification. [Details](#toolchain)    |
+|   submodules    | `false`  | Whether to checkout submodules. [Details](#submodules) |
 
 #### toolchain
 
 Specify a Rust [toolchain].
 
 [toolchain]: https://rust-lang.github.io/rustup/concepts/toolchains.html#toolchain-specification
-
-#### test-command
-
-The shell command used to provide confidence in the proposed changes.
-Defaults to `cargo test --locked -- --nocapture` for binaries and `cargo test -- --nocapture` for libraries, but you can override this to `cargo check` or anything else.
 
 #### submodules
 
@@ -110,14 +104,13 @@ jobs:
 
 ### Inputs
 
-|        Input Parameter         |               Default                | Description                                                                                       |
-| :----------------------------: | :----------------------------------: | ------------------------------------------------------------------------------------------------- |
-|            targets             |            all supported             | Whitelist of compilation targets to upload GitHub release binaries for. [Details](#targets)       |
-|          test-command          | `cargo test --locked -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command)            |
-|           toolchain            |               `stable`               | Rust toolchain specification. [Details](#toolchain)                                               |
-| disable-semantic-release-cargo |               `false`                | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
-|  disable-semantic-release-git  |               `false`                | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
-|           submodules           |               `false`                | Whether to checkout submodules. [Details](#submodules)                                            |
+|        Input Parameter         |    Default    | Description                                                                                       |
+| :----------------------------: | :-----------: | ------------------------------------------------------------------------------------------------- |
+|            targets             | all supported | Whitelist of compilation targets to upload GitHub release binaries for. [Details](#targets)       |
+|           toolchain            |   `stable`    | Rust toolchain specification. [Details](#toolchain)                                               |
+| disable-semantic-release-cargo |    `false`    | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
+|  disable-semantic-release-git  |    `false`    | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
+|           submodules           |    `false`    | Whether to checkout submodules. [Details](#submodules)                                            |
 
 #### targets
 
@@ -212,13 +205,12 @@ jobs:
 
 ### Inputs
 
-|        Input Parameter         |           Default           | Description                                                                                       |
-| :----------------------------: | :-------------------------: | ------------------------------------------------------------------------------------------------- |
-|           toolchain            |          `stable`           | Rust toolchain specification. [Details](#toolchain)                                               |
-|          test-command          | `cargo test -- --nocapture` | Shell command used to provide confidence in proposed changes. [Details](#test-command)            |
-| disable-semantic-release-cargo |           `false`           | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
-|  disable-semantic-release-git  |           `false`           | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
-|           submodules           |           `false`           | Whether to checkout submodules. [Details](#submodules)                                            |
+|        Input Parameter         | Default  | Description                                                                                       |
+| :----------------------------: | :------: | ------------------------------------------------------------------------------------------------- |
+|           toolchain            | `stable` | Rust toolchain specification. [Details](#toolchain)                                               |
+| disable-semantic-release-cargo | `false`  | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
+|  disable-semantic-release-git  | `false`  | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
+|           submodules           | `false`  | Whether to checkout submodules. [Details](#submodules)                                            |
 
 ### Secrets
 
