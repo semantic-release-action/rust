@@ -1,3 +1,13 @@
+# [5.0.0-beta.1](https://github.com/semantic-release-action/rust/compare/v4.5.0-beta.3...v5.0.0-beta.1) (2023-09-17)
+
+
+* chore!: drop support for specifying `test-command` ([11d9061](https://github.com/semantic-release-action/rust/commit/11d906168e271496ca26d22521f74c70e79bb2b5))
+
+
+### BREAKING CHANGES
+
+* drop support for specifying `test-command`
+
 # [4.5.0-beta.3](https://github.com/semantic-release-action/rust/compare/v4.5.0-beta.2...v4.5.0-beta.3) (2023-09-16)
 
 
