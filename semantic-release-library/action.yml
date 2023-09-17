@@ -48,14 +48,12 @@ runs:
     - run: |
         : build tests
         cargo test \
-          --target ${{ matrix.test.target }} \
           --no-run
       shell: bash
 
     - run: |
         : tests
         cargo test \
-          --target ${{ matrix.test.target }} \
           -- \
           --nocapture
       shell: bash
