@@ -247,16 +247,20 @@ jobs:
 
       # Separate compilation from testing to accurately report the runtime of each
 
-      - run: |
+      - env:
+          CARGO: ${{ matrix.test.cross && 'cross' || 'cargo' }}
+        run: |
           : build tests
-          cargo test \
+          $CARGO test \
             --target ${{ matrix.test.target }} \
             --no-run \
             --locked
 
-      - run: |
+      - env:
+          CARGO: ${{ matrix.test.cross && 'cross' || 'cargo' }}
+        run: |
           : tests
-          cargo test \
+          $CARGO test \
             --target ${{ matrix.test.target }} \
             --locked \
             -- \
