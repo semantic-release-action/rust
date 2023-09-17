@@ -1,3 +1,10 @@
+# [5.0.0-beta.3](https://github.com/semantic-release-action/rust/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2023-09-17)
+
+
+### Bug Fixes
+
+* do not run aarch64-apple-darwin tests with cross ([b5a6706](https://github.com/semantic-release-action/rust/commit/b5a67061766d754e65216ef6623bd593e61023b0))
+
 # [5.0.0-beta.2](https://github.com/semantic-release-action/rust/compare/v5.0.0-beta.1...v5.0.0-beta.2) (2023-09-17)
 
 
