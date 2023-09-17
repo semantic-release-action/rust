@@ -244,6 +244,7 @@ runs:
       with:
         path: ${{ env.artifact_dir }}
 
+    # TODO: gate this behind the debug flag
     - run: |
         : display downloaded release artifacts
         ls -R

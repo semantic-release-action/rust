@@ -54,14 +54,15 @@ jobs:
   get-next-version:
     uses: semantic-release-action/next-release-version/.github/workflows/next-release-version.yml@v4
 
-  configure-compilation-matrix:
+  configure-job-matrix:
     name: Configure compilation targets
     if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: ubuntu-latest
     needs:
       - get-next-version
     outputs:
-      matrix: ${{ steps.configure-compilation-matrix.outputs.matrix }}
+      compilation-matrix: ${{ steps.configure-job-matrix.outputs.compilation-matrix }}
+      test-matrix: ${{ steps.configure-job-matrix.outputs.test-matrix }}
 
     steps:
       - name: Checkout
@@ -80,6 +81,8 @@ jobs:
               '[inputs] | map(splits("\\s+") | select(length > 0))' \
               <<< "$raw_targets"
           )"
+
+          # TODO: enforce that every target is in the whitelist of targets
 
           # Array<string>
           {
@@ -125,12 +128,12 @@ jobs:
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
 
-      - id: configure-compilation-matrix
+      - id: configure-job-matrix
         run: |
           : configure compilation matrix
 
           # Perform a cartesian product of target_triples and binary_names
-          matrix="$(
+          compilation_matrix="$(
             jq \
               --null-input \
               --argjson targets_whitelist "$targets_whitelist" \
@@ -138,9 +141,22 @@ jobs:
               --argjson binary_names "$binary_names" \
               '[$target_triples[] | select(.target | IN($targets_whitelist[])) + $binary_names[]]'
           )"
+
+          test_matrix="$(
+            jq \
+              --null-input \
+              --argjson targets_whitelist "$targets_whitelist" \
+              --argjson target_triples "$target_triples" \
+              '[$target_triples[] | select(.target | IN($targets_whitelist[]))]'
+          )"
+
           {
-            echo "matrix<<EOF"
-            echo "$matrix"
+            echo "compilation-matrix<<EOF"
+            echo "$compilation_matrix"
+            echo "EOF"
+
+            echo "test-matrix<<EOF"
+            echo "$test_matrix"
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
         env:
@@ -190,6 +206,65 @@ jobs:
               }
             ]
 
+  test:
+    name: Test ${{ matrix.test.target }}
+    runs-on: ${{ matrix.test.host }}
+    needs:
+      - get-next-version
+      - configure-job-matrix
+
+    strategy:
+      fail-fast: false
+      matrix:
+        test: ${{ fromJson(needs.configure-job-matrix.outputs.test-matrix) }}
+
+    steps:
+      ###
+      # Phase 1: set up
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: ${{ inputs.submodules }}
+
+      - name: Install build inputs
+        if: runner.os == 'Linux' && !matrix.test.cross && endsWith(matrix.test.target, '-musl')
+        run: sudo apt install musl-tools
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ inputs.toolchain }}
+          target: ${{ matrix.test.target }}
+
+      - name: Install cross
+        uses: taiki-e/install-action@v2
+        if: matrix.test.cross
+        with:
+          tool: cross
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+
+      ###
+      # Phase 2: test
+
+      # Separate compilation from testing to accurately report the runtime of each
+
+      # DISCUSS: is it possible to simplify the complexity here? Maybe we can assume the
+      # dependencies need to be installed to run tests, even if `cargo test` isn't how the tests are invoked.
+      # Consider that change for a future release.
+      - if: startsWith(inputs.test-command, 'cargo test')
+        run: |
+          cargo test \
+            --target ${{ matrix.test.target }} \
+            --no-run \
+            ${{ contains(inputs.test-command, '--locked') && '--locked' || '' }}
+
+      - run: |
+          ${{ inputs.test-command }} \
+            --target ${{ matrix.test.target }}
+
   # Compile release artifacts
   build-release:
     name: (${{ matrix.build.binary_name }}, ${{ matrix.build.target }})
@@ -197,12 +272,12 @@ jobs:
     runs-on: ${{ matrix.build.host }}
     needs:
       - get-next-version
-      - configure-compilation-matrix
+      - configure-job-matrix
 
     strategy:
       fail-fast: false
       matrix:
-        build: ${{ fromJson(needs.configure-compilation-matrix.outputs.matrix) }}
+        build: ${{ fromJson(needs.configure-job-matrix.outputs.compilation-matrix) }}
 
     steps:
       ###
@@ -233,20 +308,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       ###
-      # Phase 2: test
-
-      # Separate compilation from testing to accurately report the runtime of each
-
-      # DISCUSS: is it possible to simplify the complexity here? Maybe we can assume the
-      # dependencies need to be installed to run tests, even if `cargo test` isn't how the tests are invoked.
-      # Consider that change for a future release.
-      - if: startsWith(inputs.test-command, 'cargo test')
-        run: cargo test --no-run ${{ contains(inputs.test-command, '--locked') && '--locked' || '' }}
-
-      - run: ${{ inputs.test-command }}
-
-      ###
-      # Phase 3: compile release binary
+      # Phase 2: compile release binary
 
       - name: Compile release binary
         env:
@@ -259,7 +321,7 @@ jobs:
             --target ${{ matrix.build.target }}
 
       ###
-      # Phase 4: configure release artifacts
+      # Phase 3: configure release artifacts
 
       - name: Install semantic-release-cargo
         uses: EricCrosson/install-github-release-binary@v2
@@ -306,7 +368,8 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - get-next-version
-      - configure-compilation-matrix
+      - configure-job-matrix
+      - test
       - build-release
 
     steps:
@@ -314,7 +377,7 @@ jobs:
         uses: semantic-release-action/rust/semantic-release-binary@beta
         with:
           toolchain: ${{ inputs.toolchain }}
-          compiled-targets: ${{ needs.configure-compilation-matrix.outputs.matrix }}
+          compiled-targets: ${{ needs.configure-job-matrix.outputs.compilation-matrix }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
           disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
