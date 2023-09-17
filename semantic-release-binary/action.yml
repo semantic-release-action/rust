@@ -142,6 +142,7 @@ runs:
     #    This permits specifying which binary to install with
     #    EricCrosson/install-github-release-binary.
     #
+    # TODO: simplify this when install-github-release-binary is updated; always use the second approach.
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
       id: enumerate-binary-release-assets
       env:
