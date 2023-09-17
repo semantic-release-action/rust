@@ -1,3 +1,10 @@
+## [5.0.3](https://github.com/semantic-release-action/rust/compare/v5.0.2...v5.0.3) (2023-09-17)
+
+
+### Bug Fixes
+
+* only run library tests on default system target ([715e45c](https://github.com/semantic-release-action/rust/commit/715e45c532468d54b69565c4438b5d58ebf98b21))
+
 ## [5.0.2](https://github.com/semantic-release-action/rust/compare/v5.0.1...v5.0.2) (2023-09-17)
 
 
