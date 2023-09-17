@@ -1,6 +1,7 @@
 ---
 name: Release Binary
 
+# DISCUSS: adding a whitelist for binaries to publish
 on:
   workflow_call:
     inputs:
@@ -21,10 +22,6 @@ on:
           x86_64-apple-darwin
           x86_64-unknown-linux-gnu
           x86_64-unknown-linux-musl
-      test-command:
-        description: Command used to test your Rust program
-        type: string
-        default: cargo test --locked -- --nocapture
       toolchain:
         description: Rust toolchain specification
         type: string
@@ -53,33 +50,116 @@ jobs:
   get-next-version:
     uses: semantic-release-action/next-release-version/.github/workflows/next-release-version.yml@v4
 
-  configure-compilation-target-matrix:
+  configure-job-matrix:
     name: Configure compilation targets
     if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: ubuntu-latest
     needs:
       - get-next-version
     outputs:
-      matrix: ${{ steps.configure-compilation-target-matrix.outputs.matrix }}
+      compilation-matrix: ${{ steps.configure-job-matrix.outputs.compilation-matrix }}
+      test-matrix: ${{ steps.configure-job-matrix.outputs.test-matrix }}
 
     steps:
-      - id: configure-compilation-target-matrix
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - id: sanitize-input-targets
+        env:
+          raw_targets: ${{ inputs.targets }}
         run: |
-          : configure compilation target matrix
-          matrix="$(
+          : sanitize targets input
+
+          targets="$(
             jq \
-              --argjson whitelist "$(echo "$whitelist" | jq --raw-input --slurp '[splits("[ \n]+")] | map(select(length > 0))')" \
-              'map(select(.target | IN($whitelist[])))' \
-              <<< "$all_compilation_targets"
+              --null-input \
+              --raw-input \
+              '[inputs] | map(splits("\\s+") | select(length > 0))' \
+              <<< "$raw_targets"
           )"
+
+          # TODO: enforce that every target is in the whitelist of targets
+
+          # Array<string>
           {
-            echo "matrix<<EOF"
-            echo "$matrix"
+            echo "targets<<EOF"
+            echo "$targets"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - id: get-binary-names
+        run: |
+          : detect binary names
+
+          # Array<{ binary_name: string, src_path: string }>
+          binary_manifest="$(
+            cargo metadata --no-deps --format-version 1 \
+              | jq '.packages | map(.targets[] | select(.kind[] | IN("bin")) | { binary_name: .name, src_path })'
+          )"
+
+          # Validate there are no binary-name collisions
+          # https://github.com/rust-lang/cargo/issues/6313
+
+          # Array<string>
+          name_collisions="$(
+            jq \
+              'group_by(.binary_name) | map(select(length > 1)[] | .binary_name) | unique' \
+              <<< "$binary_manifest"
+          )"
+
+          has_name_collisions="$(jq 'length > 0' <<< "$name_collisions")"
+
+          if [[ $has_name_collisions == true ]]; then
+            targets="$(jq --raw-output 'join(", ")' <<< "$name_collisions")"
+            echo "::error title={Binary name collision detected}::Refusing to process binary targets \"$targets\" due to name collisions"
+            exit 1
+          fi
+
+          binary_names="$(jq 'map({ binary_name })' <<< "$binary_manifest")"
+
+          # Array<{ binary_name: string }>
+          {
+            echo "binary-names<<EOF"
+            echo "$binary_names"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - id: configure-job-matrix
+        run: |
+          : configure compilation matrix
+
+          # Perform a cartesian product of target_triples and binary_names
+          compilation_matrix="$(
+            jq \
+              --null-input \
+              --argjson targets_whitelist "$targets_whitelist" \
+              --argjson target_triples "$target_triples" \
+              --argjson binary_names "$binary_names" \
+              '[$target_triples[] | select(.target | IN($targets_whitelist[])) + $binary_names[]]'
+          )"
+
+          # TODO: support running tests on aarch64-apple-darwin. Cross was complaining
+          test_matrix="$(
+            jq \
+              --null-input \
+              --argjson targets_whitelist "$targets_whitelist" \
+              --argjson target_triples "$target_triples" \
+              '[$target_triples[] | select((.target | IN($targets_whitelist[])) and (.target != "aarch64-apple-darwin"))]'
+          )"
+
+          {
+            echo "compilation-matrix<<EOF"
+            echo "$compilation_matrix"
+            echo "EOF"
+
+            echo "test-matrix<<EOF"
+            echo "$test_matrix"
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
         env:
-          whitelist: ${{ inputs.targets }}
-          all_compilation_targets: |
+          targets_whitelist: ${{ steps.sanitize-input-targets.outputs.targets }}
+          binary_names: ${{ steps.get-binary-names.outputs.binary-names }}
+          target_triples: |
             [
               {
                 "target": "aarch64-apple-darwin",
@@ -124,45 +204,87 @@ jobs:
             ]
 
   test:
-    name: Test
-    runs-on: ubuntu-latest
+    name: Test ${{ matrix.test.target }}
+    runs-on: ${{ matrix.test.host }}
+    needs:
+      - get-next-version
+      - configure-job-matrix
+
+    strategy:
+      fail-fast: false
+      matrix:
+        test: ${{ fromJson(needs.configure-job-matrix.outputs.test-matrix) }}
+
     steps:
+      ###
+      # Phase 1: set up
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: ${{ inputs.submodules }}
 
+      - name: Install build inputs
+        if: runner.os == 'Linux' && !matrix.test.cross && endsWith(matrix.test.target, '-musl')
+        run: sudo apt install musl-tools
+
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ inputs.toolchain }}
+          target: ${{ matrix.test.target }}
+
+      - name: Install cross
+        uses: taiki-e/install-action@v2
+        if: matrix.test.cross
+        with:
+          tool: cross
 
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
 
-      # Separate compilation from testing to accurately report the runtime of each
-      - if: startsWith(inputs.test-command, 'cargo test')
-        run: cargo test ${{ contains(inputs.test-command, '--locked') && '--locked' || '' }} --no-run
+      ###
+      # Phase 2: test
 
-      - run: ${{ inputs.test-command }}
+      # Separate compilation from testing to accurately report the runtime of each
+
+      - env:
+          CARGO: ${{ matrix.test.cross && 'cross' || 'cargo' }}
+        run: |
+          : build tests
+          $CARGO test \
+            --target ${{ matrix.test.target }} \
+            --no-run \
+            --locked
+
+      - env:
+          CARGO: ${{ matrix.test.cross && 'cross' || 'cargo' }}
+        run: |
+          : tests
+          $CARGO test \
+            --target ${{ matrix.test.target }} \
+            --locked \
+            -- \
+            --nocapture
 
   # Compile release artifacts
   build-release:
-    name: Build CLI ${{ matrix.build.target }}
+    name: (${{ matrix.build.binary_name }}, ${{ matrix.build.target }})
     if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: ${{ matrix.build.host }}
     needs:
       - get-next-version
-      - configure-compilation-target-matrix
-    outputs:
-      binary-name: ${{ steps.get-binary-name.outputs.binary-name }}
+      - configure-job-matrix
 
     strategy:
       fail-fast: false
       matrix:
-        build: ${{ fromJson(needs.configure-compilation-target-matrix.outputs.matrix) }}
+        build: ${{ fromJson(needs.configure-job-matrix.outputs.compilation-matrix) }}
 
     steps:
+      ###
+      # Phase 1: set up
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -178,44 +300,58 @@ jobs:
           toolchain: ${{ inputs.toolchain }}
           target: ${{ matrix.build.target }}
 
-      - name: Cache Rust dependencies
-        uses: Swatinem/rust-cache@v2
-
-      - name: Install semantic-release-cargo
-        uses: EricCrosson/install-github-release-binary@v2
-        with:
-          targets: semantic-release-cargo/semantic-release-cargo@v2
-
-      - name: Prepare semantic-release for Rust
-        run: semantic-release-cargo --verbose --verbose --verbose prepare ${{ needs.get-next-version.outputs.new-release-version }}
-
-      - name: Detect binary name
-        id: get-binary-name
-        run: |
-          binary_names="$(
-            cargo metadata --no-deps --format-version 1 \
-              | jq --raw-output '.packages[0].targets | map(select(.kind[] | contains("bin")).name)[0]'
-          )"
-          echo "binary-name=$binary_names" >> "$GITHUB_OUTPUT"
-
       - name: Install cross
         uses: taiki-e/install-action@v2
         if: matrix.build.cross
         with:
           tool: cross
 
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+
+      ###
+      # Phase 2: compile release binary
+
       - name: Compile release binary
         env:
           CARGO: ${{ matrix.build.cross && 'cross' || 'cargo' }}
-        run: ${{ env.CARGO }} build --release --target ${{ matrix.build.target }} --verbose
+        run: |
+          ${{ env.CARGO }} build \
+            --verbose \
+            --release \
+            --bin ${{ matrix.build.binary_name }} \
+            --target ${{ matrix.build.target }}
+
+      ###
+      # Phase 3: configure release artifacts
+
+      - name: Install semantic-release-cargo
+        uses: EricCrosson/install-github-release-binary@v2
+        with:
+          targets: semantic-release-cargo/semantic-release-cargo@v2
+
+      # NOTE: semantic-release-cargo currently implements the "lock-step"
+      # versioning strategy, where all crates in a workspace are bumped to the
+      # next version simultaneously.
+      - name: Prepare semantic-release for Rust
+        run: |
+          semantic-release-cargo \
+            --verbose --verbose --verbose \
+            prepare ${{ needs.get-next-version.outputs.new-release-version }}
 
       - name: Create release artifacts
         run: |
           mkdir dist
-          cp target/${{ matrix.build.target }}/release/${{ steps.get-binary-name.outputs.binary-name }} dist/${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }}
+          cp \
+            target/${{ matrix.build.target }}/release/${{ matrix.build.binary_name }} \
+            dist/${{ matrix.build.binary_name }}-${{ matrix.build.target }}
 
       - name: Create binary checksum
-        run: shasum --algorithm 256 --binary ${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }} | tee ${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }}-SHA256SUM.txt
+        run: |
+          shasum \
+            --algorithm 256 \
+            --binary ${{ matrix.build.binary_name }}-${{ matrix.build.target }} \
+            | tee ${{ matrix.build.binary_name }}-${{ matrix.build.target }}-SHA256SUM.txt
         working-directory: ./dist
 
       - name: Upload release artifacts
@@ -223,8 +359,8 @@ jobs:
         with:
           name: ${{ matrix.build.target }}
           path: |
-            dist/${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }}
-            dist/${{ steps.get-binary-name.outputs.binary-name }}-${{ matrix.build.target }}-SHA256SUM.txt
+            dist/${{ matrix.build.binary_name }}-${{ matrix.build.target }}
+            dist/${{ matrix.build.binary_name }}-${{ matrix.build.target }}-SHA256SUM.txt
           if-no-files-found: error
           retention-days: 1
 
@@ -233,18 +369,19 @@ jobs:
     if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: ubuntu-latest
     needs:
-      - build-release
       - get-next-version
+      - configure-job-matrix
       - test
+      - build-release
 
     steps:
       - name: Release
-        uses: semantic-release-action/rust/semantic-release-binary@v4
+        uses: semantic-release-action/rust/semantic-release-binary@beta
         with:
-          binary-name: ${{ needs.build-release.outputs.binary-name }}
+          toolchain: ${{ inputs.toolchain }}
+          compiled-targets: ${{ needs.configure-job-matrix.outputs.compilation-matrix }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
           disable-semantic-release-cargo: ${{ inputs.disable-semantic-release-cargo }}
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
           next-version: ${{ needs.get-next-version.outputs.new-release-version }}
           submodules: ${{ inputs.submodules }}
-          targets: ${{ inputs.targets }}

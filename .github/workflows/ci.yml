@@ -14,11 +14,6 @@ on:
         required: false
         type: string
         default: stable
-      test-command:
-        description: Cargo command used to provide confidence in proposed changes
-        required: false
-        type: string
-        default: cargo test --locked -- --nocapture
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -54,10 +49,12 @@ jobs:
           )"
           echo "is-crate-library=$is_crate_library" >> "$GITHUB_OUTPUT"
 
+      # REFACTOR: can use the cargo manifest command to check if this is a library crate,
+      # or just check if there is a Cargo.lock file
       - name: Construct test command
         id: format-test-command
         env:
-          input_test_command: ${{ inputs.test-command }}
+          input_test_command: cargo test --locked -- --nocapture
           is_crate_library: ${{ steps.check-if-crate-is-library.outputs.is-crate-library }}
         run: |
           test_command="$input_test_command"
@@ -71,7 +68,6 @@ jobs:
           echo "test-command=$test_command" >> "$GITHUB_OUTPUT"
 
       # Separate compilation from testing to accurately report the runtime of each
-      - if: startsWith(steps.format-test-command.outputs.test-command, 'cargo test')
-        run: cargo test ${{ contains(steps.format-test-command.outputs.test-command, '--locked') && '--locked' || '' }} --no-run
+      - run: cargo test ${{ contains(steps.format-test-command.outputs.test-command, '--locked') && '--locked' || '' }} --no-run
 
-      - run: ${{ inputs.test-command }}
+      - run: ${{ steps.format-test-command.outputs.test-command }}

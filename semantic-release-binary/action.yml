@@ -10,15 +10,22 @@ branding:
 # (which is only supported in composite actions)
 
 inputs:
-  targets:
-    description: Whitelist of compilation targets to upload GitHub release binaries for. Must be a subset of supported targets.
-    required: true
   toolchain:
     description: Rust toolchain specification
-    required: false
-    default: stable
-  binary-name:
-    description: The name of your Rust binary
+    required: true
+  compiled-targets:
+    description: |
+      Stringified JSON array describing each precompiled release artifact.
+
+      Example:
+      ```json
+      [
+        { "binary_name": "foo", "target": "x86_64-unknown-linux-musl" },
+        { "binary_name": "bar", "target": "x86_64-unknown-linux-musl" },
+        { "binary_name": "foo", "target": "aarch64-apple-darwin" },
+        { "binary_name": "bar", "target": "aarch64-apple-darwin" }
+      ]
+      ```
     required: true
   cargo-registry-token:
     description: API token for writing to your cargo registry
@@ -41,7 +48,8 @@ runs:
     - name: Checkout
       uses: actions/checkout@v4
       with:
-        # Fetch all history and tags for calculating next semantic version
+        # Fetch all history and tags so semantic-release can calculate the next release version.
+        # (Even though _we_ have alerady calculated the next version, semantic-release will do it again.)
         fetch-depth: 0
         submodules: ${{ inputs.submodules }}
 
@@ -104,13 +112,91 @@ runs:
         echo "/.semantic-release-action_rust/" >> "$HOME/.config/git/ignore"
       shell: bash
 
+    # This action supports two modes for uploading assets to a GitHub release:
+    #
+    # 1. single binary assets (this was the original implementation)
+    #
+    #    When there is only one binary to upload, use the format:
+    #
+    #    ```json
+    #    {
+    #      "path": <path>,
+    #      "label": <target-triple>
+    #    }
+    #    ```
+    #
+    #    This makes installing the binary with EricCrosson/install-github-
+    #    release-binary as straightfoward as possible.
+    #
+    # 2. multiple binary assets
+    #
+    #    When there is only one binary to upload, use the format:
+    #
+    #    ```json
+    #    {
+    #      "path": <path>,
+    #      "label": <binary-name>-<target-triple>
+    #    }
+    #    ```
+    #
+    #    This permits specifying which binary to install with
+    #    EricCrosson/install-github-release-binary.
+    #
+    # TODO: simplify this when install-github-release-binary is updated; always use the second approach.
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
+      id: enumerate-binary-release-assets
+      env:
+        compiled_targets: ${{ inputs.compiled-targets }}
+      run: |
+        : enumerate binary release assets
+
+        are_releasing_multiple_binaries="$(
+          jq 'unique_by(.binary_name) | length > 1' <<< "$compiled_targets"
+        )"
+
+        release_assets="$(
+          jq \
+            --null-input \
+            --argjson are_releasing_multiple_binaries "$are_releasing_multiple_binaries" \
+            --argjson compiled_targets "$compiled_targets" \
+            '
+              $compiled_targets
+              | map({
+                path: ".semantic-release-action_rust/dist/\(.target)/\(.binary_name)-\(.target)",
+                label: "\(if $are_releasing_multiple_binaries then "\(.binary_name)-" else "" end)\(.target)" 
+              })
+            '
+        )"
+
+        # Array<{ path: string, label: string }>
+        {
+          echo "release-assets<<EOF"
+          echo "$release_assets"
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"
+      shell: bash
+
+    - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
+      env:
+        release_assets: ${{ steps.enumerate-binary-release-assets.outputs.release-assets }}
       run: |
         : install semantic-release manifest
         cp "${{ github.action_path }}/package.json" "${{ env.node_workdir }}/package.json"
         cp "${{ github.action_path }}/package-lock.json" "${{ env.node_workdir }}/package-lock.json"
-        cp ${{ github.action_path }}/.releaserc.json .releaserc.json
-        sed -i 's/BINARY_NAME/${{ inputs.binary-name }}/g' .releaserc.json
+
+        jq \
+          --argjson release_assets "$release_assets" \
+          '
+            .plugins |= map(
+              if type == "array" and .[0] == "@semantic-release/github" then
+                .[1].assets += $release_assets
+              else
+                .
+              end
+            )
+          ' \
+          ${{ github.action_path }}/.releaserc.json \
+          > .releaserc.json
       shell: bash
 
     - if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-cargo == 'true'
@@ -139,32 +225,8 @@ runs:
         mv "${tmpdir}/.releaserc.json" .releaserc.json
       shell: bash
 
-    - env:
-        selected_targets: ${{ inputs.targets }}
-        tmpdir: ${{ runner.temp }}
-      run: |
-        : configure semantic-release assets
-        whitelist="$(
-          echo "$selected_targets SHAS256SUMS.txt" \
-          | jq --null-input --raw-input '[inputs] | map(split("\\s"; null)[] | select(length > 0))'
-        )"
-
-        jq \
-          --argjson whitelist "$whitelist" \
-          '
-            .plugins |= (
-              map(select(type == "array" and .[0] == "@semantic-release/github")[1].assets |=
-                map(select(.label | IN($whitelist[]))))
-            )
-          ' \
-          .releaserc.json \
-        > "${tmpdir}/.releaserc.json"
-
-        mv "${tmpdir}/.releaserc.json" .releaserc.json
-      shell: bash
-
-    # If the semantic-release-cargo plugin never runs, the cargo manifest never has its version bumped.
-    # Run the prepare step of semantic-release-cargo by invoking its binary directly.
+    # When the semantic-release-cargo plugin is disabled, the cargo manifest never has its version bumped.
+    # Run the semantic-release-cargo's prepare step the binary directly.
     - name: Install semantic-release-cargo
       if: steps.is-semantic-release-configured.outputs.host-configuration == 'false' && inputs.disable-semantic-release-cargo == 'true'
       uses: EricCrosson/install-github-release-binary@v2
@@ -182,9 +244,16 @@ runs:
       with:
         path: ${{ env.artifact_dir }}
 
+    # TODO: gate this behind the debug flag
+    - run: |
+        : display downloaded release artifacts
+        ls -R
+      working-directory: ${{ env.artifact_dir }}
+      shell: bash
+
     - run: |
         : combine checksums
-        cat **/${{ inputs.binary-name }}-*-SHA256SUM.txt | tee SHA256SUMS.txt
+        cat **/*-SHA256SUM.txt | tee SHA256SUMS.txt
       working-directory: ${{ env.artifact_dir }}
       shell: bash
 
