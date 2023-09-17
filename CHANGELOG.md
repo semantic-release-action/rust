@@ -1,3 +1,26 @@
+# [5.0.0](https://github.com/semantic-release-action/rust/compare/v4.4.46...v5.0.0) (2023-09-17)
+
+
+### Bug Fixes
+
+* add checkout ([e1fbdce](https://github.com/semantic-release-action/rust/commit/e1fbdce1ab115773f3ccff614ad46bc9860b8f85))
+* do not run aarch64-apple-darwin tests with cross ([b5a6706](https://github.com/semantic-release-action/rust/commit/b5a67061766d754e65216ef6623bd593e61023b0))
+* fix shell syntax ([ab93f39](https://github.com/semantic-release-action/rust/commit/ab93f39b95543e44b2d89df1fd138c87d5ed287c))
+* use cross to run tests when necessary ([49cdcbe](https://github.com/semantic-release-action/rust/commit/49cdcbe0a3564f89d27ccc4c8c020820f27a31a7))
+
+
+* chore!: drop support for specifying `test-command` ([11d9061](https://github.com/semantic-release-action/rust/commit/11d906168e271496ca26d22521f74c70e79bb2b5))
+
+
+### Features
+
+* support multiple binaries ([841cc68](https://github.com/semantic-release-action/rust/commit/841cc686a56005005e8f5b7505ac6b42048f231c)), closes [#13](https://github.com/semantic-release-action/rust/issues/13) [#31](https://github.com/semantic-release-action/rust/issues/31)
+
+
+### BREAKING CHANGES
+
+* drop support for specifying `test-command`
+
 # [5.0.0-beta.3](https://github.com/semantic-release-action/rust/compare/v5.0.0-beta.2...v5.0.0-beta.3) (2023-09-17)
 
 
