@@ -1,3 +1,10 @@
+# [5.0.0-beta.2](https://github.com/semantic-release-action/rust/compare/v5.0.0-beta.1...v5.0.0-beta.2) (2023-09-17)
+
+
+### Bug Fixes
+
+* use cross to run tests when necessary ([49cdcbe](https://github.com/semantic-release-action/rust/commit/49cdcbe0a3564f89d27ccc4c8c020820f27a31a7))
+
 # [5.0.0-beta.1](https://github.com/semantic-release-action/rust/compare/v4.5.0-beta.3...v5.0.0-beta.1) (2023-09-17)
 
 
