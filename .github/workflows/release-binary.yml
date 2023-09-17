@@ -138,12 +138,13 @@ jobs:
               '[$target_triples[] | select(.target | IN($targets_whitelist[])) + $binary_names[]]'
           )"
 
+          # TODO: support running tests on aarch64-apple-darwin. Cross was complaining
           test_matrix="$(
             jq \
               --null-input \
               --argjson targets_whitelist "$targets_whitelist" \
               --argjson target_triples "$target_triples" \
-              '[$target_triples[] | select(.target | IN($targets_whitelist[]))]'
+              '[$target_triples[] | select((.target | IN($targets_whitelist[])) and (.target != "aarch64-apple-darwin"))]'
           )"
 
           {
