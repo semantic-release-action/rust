@@ -123,7 +123,7 @@ runs:
       run: |
         : disable semantic-release-cargo
         jq \
-          '.plugins | map(select(type == "array" and .[0] == "@semantic-release-cargo/semantic-release-cargo" | not))' \
+          '.plugins |= map(select(type == "array" and .[0] == "@semantic-release-cargo/semantic-release-cargo" | not))' \
           .releaserc.json \
         > "${tmpdir}/.releaserc.json"
 
@@ -136,7 +136,7 @@ runs:
       run: |
         : disable @semantic-release/git
         jq \
-          '.plugins | map(select(type == "array" and .[0] == "@semantic-release/git" | not))' \
+          '.plugins |= map(select(type == "array" and .[0] == "@semantic-release/git" | not))' \
           .releaserc.json \
         > "${tmpdir}/.releaserc.json"
 
