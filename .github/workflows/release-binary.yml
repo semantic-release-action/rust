@@ -376,7 +376,7 @@ jobs:
 
     steps:
       - name: Release
-        uses: semantic-release-action/rust/semantic-release-binary@beta
+        uses: semantic-release-action/rust/semantic-release-binary@v5
         with:
           toolchain: ${{ inputs.toolchain }}
           compiled-targets: ${{ needs.configure-job-matrix.outputs.compilation-matrix }}
