@@ -33,7 +33,7 @@ on:
 
 jobs:
   test:
-    uses: semantic-release-action/rust/.github/workflows/ci.yml@v4
+    uses: semantic-release-action/rust/.github/workflows/ci.yml@v5
 ```
 
 ### Inputs
@@ -97,7 +97,7 @@ on:
 
 jobs:
   release:
-    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v4
+    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 ```
@@ -130,7 +130,7 @@ Separate each target with whitespace:
 ```yaml
 jobs:
   release:
-    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v4
+    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
     with:
       targets: |
         aarch64-apple-darwin
@@ -198,7 +198,7 @@ on:
 
 jobs:
   release:
-    uses: semantic-release-action/rust/.github/workflows/release-library.yml@v4
+    uses: semantic-release-action/rust/.github/workflows/release-library.yml@v5
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
 ```
