@@ -1,3 +1,10 @@
+## [5.0.2](https://github.com/semantic-release-action/rust/compare/v5.0.1...v5.0.2) (2023-09-17)
+
+
+### Bug Fixes
+
+* **release-library:** fix shell command ([ea543a8](https://github.com/semantic-release-action/rust/commit/ea543a8069b74e6e4e3932a4d624108bac7ffd4c))
+
 ## [5.0.1](https://github.com/semantic-release-action/rust/compare/v5.0.0...v5.0.1) (2023-09-17)
 
 
