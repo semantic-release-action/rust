@@ -52,10 +52,7 @@ jobs:
 
   configure-job-matrix:
     name: Configure compilation targets
-    if: needs.get-next-version.outputs.new-release-published == 'true'
     runs-on: ubuntu-latest
-    needs:
-      - get-next-version
     outputs:
       compilation-matrix: ${{ steps.configure-job-matrix.outputs.compilation-matrix }}
       test-matrix: ${{ steps.configure-job-matrix.outputs.test-matrix }}
@@ -207,7 +204,6 @@ jobs:
     name: Test ${{ matrix.test.target }}
     runs-on: ${{ matrix.test.host }}
     needs:
-      - get-next-version
       - configure-job-matrix
 
     strategy:
