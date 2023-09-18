@@ -1,3 +1,10 @@
+## [5.0.4](https://github.com/semantic-release-action/rust/compare/v5.0.3...v5.0.4) (2023-09-18)
+
+
+### Bug Fixes
+
+* always include binary name in release asset label ([77cbb1d](https://github.com/semantic-release-action/rust/commit/77cbb1d481ff2dfe57d7ce3f5c35770a0bab8e19))
+
 ## [5.0.3](https://github.com/semantic-release-action/rust/compare/v5.0.2...v5.0.3) (2023-09-17)
 
 
