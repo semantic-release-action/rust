@@ -1,3 +1,10 @@
+## [5.0.5](https://github.com/semantic-release-action/rust/compare/v5.0.4...v5.0.5) (2023-09-18)
+
+
+### Bug Fixes
+
+* **binary:** always run tests, even when not releasing a new version ([fa13d64](https://github.com/semantic-release-action/rust/commit/fa13d64817fe53a576b0f36d9525a5cbec7d569d))
+
 ## [5.0.4](https://github.com/semantic-release-action/rust/compare/v5.0.3...v5.0.4) (2023-09-18)
 
 
