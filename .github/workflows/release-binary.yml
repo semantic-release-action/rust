@@ -353,7 +353,7 @@ jobs:
       - name: Upload release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.build.target }}
+          name: ${{ matrix.build.binary-name }}-${{ matrix.build.target }}
           path: |
             dist/${{ matrix.build.binary_name }}-${{ matrix.build.target }}
             dist/${{ matrix.build.binary_name }}-${{ matrix.build.target }}-SHA256SUM.txt
