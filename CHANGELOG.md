@@ -1,3 +1,10 @@
+## [5.0.45](https://github.com/semantic-release-action/rust/compare/v5.0.44...v5.0.45) (2024-01-08)
+
+
+### Bug Fixes
+
+* do not use the same name for multiple artifact uploads ([1383995](https://github.com/semantic-release-action/rust/commit/1383995596e0add0573ef80a8c94dfa52eee1d91)), closes [#117](https://github.com/semantic-release-action/rust/issues/117)
+
 ## [5.0.44](https://github.com/semantic-release-action/rust/compare/v5.0.43...v5.0.44) (2024-01-07)
 
 
