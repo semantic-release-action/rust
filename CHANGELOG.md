@@ -1,3 +1,10 @@
+## [5.0.46](https://github.com/semantic-release-action/rust/compare/v5.0.45...v5.0.46) (2024-01-08)
+
+
+### Bug Fixes
+
+* correct typo in variable name ([a33e459](https://github.com/semantic-release-action/rust/commit/a33e4593cf3fed319efc1a4bb06a1d29257bf76e))
+
 ## [5.0.45](https://github.com/semantic-release-action/rust/compare/v5.0.44...v5.0.45) (2024-01-08)
 
 
