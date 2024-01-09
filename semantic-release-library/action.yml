@@ -61,7 +61,7 @@ runs:
     - name: Install is-semantic-release-configured
       uses: EricCrosson/install-github-release-binary@v2
       with:
-        targets: EricCrosson/is-semantic-release-configured@v1.2.45
+        targets: EricCrosson/is-semantic-release-configured@v1
 
     # Terminology:
     #
