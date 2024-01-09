@@ -1,3 +1,10 @@
+## [5.0.48](https://github.com/semantic-release-action/rust/compare/v5.0.47...v5.0.48) (2024-01-09)
+
+
+### Reverts
+
+* Revert "fix(temp): use a stable version of is-semantic-release-configured" ([873d0c2](https://github.com/semantic-release-action/rust/commit/873d0c2a62d9b60b2a7ac77a8791cdfb95ec0a4a))
+
 ## [5.0.47](https://github.com/semantic-release-action/rust/compare/v5.0.46...v5.0.47) (2024-01-09)
 
 
