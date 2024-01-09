@@ -1,3 +1,12 @@
+## [5.0.47](https://github.com/semantic-release-action/rust/compare/v5.0.46...v5.0.47) (2024-01-09)
+
+
+### Bug Fixes
+
+* adjust to actions/download-artifact's new download directory ([0676ff8](https://github.com/semantic-release-action/rust/commit/0676ff85de1b38fb32b69e2dff8950497746b3c1))
+* **deps:** update dependency @semantic-release-cargo/semantic-release-cargo to v2.2.58 ([9a3b91c](https://github.com/semantic-release-action/rust/commit/9a3b91cf316a7a1369a69d3e3c5d94a1a530a3f0))
+* **temp:** use a stable version of is-semantic-release-configured ([299d09e](https://github.com/semantic-release-action/rust/commit/299d09e417aa7bef64877d661d25e75383f66b64))
+
 ## [5.0.46](https://github.com/semantic-release-action/rust/compare/v5.0.45...v5.0.46) (2024-01-08)
 
 
