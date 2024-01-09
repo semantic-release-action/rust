@@ -138,7 +138,7 @@ runs:
             '
               $compiled_targets
               | map({
-                path: ".semantic-release-action_rust/dist/\(.target)/\(.binary_name)-\(.target)",
+                path: ".semantic-release-action_rust/dist/\(.binary_name)-\(.target)/\(.binary_name)-\(.target)",
                 label: "\(.binary_name)-\(.target)" 
               })
             '
