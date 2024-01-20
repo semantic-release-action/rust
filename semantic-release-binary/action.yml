@@ -240,7 +240,7 @@ runs:
 
     - name: Cache host npm dependencies
       if: steps.is-semantic-release-configured.outputs.host-configuration == 'true'
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: cache-host-node-modules
       with:
         path: node_modules
@@ -254,7 +254,7 @@ runs:
 
     - name: Cache action npm dependencies
       if: steps.is-semantic-release-configured.outputs.host-configuration == 'false'
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: cache-action-node-modules
       with:
         path: .semantic-release-action_rust/semantic-release-binary/node_modules
