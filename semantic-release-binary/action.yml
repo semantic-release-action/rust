@@ -274,3 +274,27 @@ runs:
         GITHUB_TOKEN: ${{ github.token }}
         CARGO_REGISTRY_TOKEN: ${{ inputs.cargo-registry-token }}
       shell: bash
+
+    - run: |
+        : write checksums to GitHub Actions summary
+        {
+          echo "## Binary Checksums"
+          echo ""
+          echo "| Binary | SHA-256 Checksum |"
+          echo "| ------------- | ------------- |"
+
+          while IFS= read -r line; do
+            # Extract checksum and filename
+            checksum=$(echo "$line" | awk '{print $1}')
+            filename=$(echo "$line" | awk '{print $2}')
+            # Remove leading asterisk if present
+            filename=$(echo "$filename" | sed 's/^\*//g')
+            binary_name=$(basename "$filename")
+
+            echo "| $binary_name | $checksum |"
+          done < SHA256SUMS.txt
+
+          echo ""
+        } >> $GITHUB_STEP_SUMMARY
+      working-directory: ${{ env.artifact_dir }}
+      shell: bash
