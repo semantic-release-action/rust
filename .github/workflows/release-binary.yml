@@ -75,7 +75,33 @@ jobs:
               <<< "$raw_targets"
           )"
 
-          # TODO: enforce that every target is in the whitelist of targets
+          # Define supported targets
+          supported_targets='[
+            "aarch64-apple-darwin",
+            "aarch64-unknown-linux-gnu",
+            "aarch64-unknown-linux-musl",
+            "i686-unknown-linux-gnu",
+            "i686-unknown-linux-musl",
+            "x86_64-apple-darwin",
+            "x86_64-unknown-linux-gnu",
+            "x86_64-unknown-linux-musl"
+          ]'
+
+          # Check if all specified targets are in the supported targets list
+          invalid_targets="$(
+            jq \
+              --argjson supported "$supported_targets" \
+              'map(select(. | IN($supported[]) | not))' \
+              <<< "$targets"
+          )"
+
+          has_invalid_targets="$(jq 'length > 0' <<< "$invalid_targets")"
+
+          if [[ $has_invalid_targets == true ]]; then
+            invalid_targets_list="$(jq --raw-output 'join(", ")' <<< "$invalid_targets")"
+            echo "::error title={Invalid targets specified}::The following targets are not supported: $invalid_targets_list"
+            exit 1
+          fi
 
           # Array<string>
           {
