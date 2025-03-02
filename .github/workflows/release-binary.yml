@@ -264,6 +264,8 @@ jobs:
 
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
+        with:
+          key: test-${{ matrix.test.target }}
 
       ###
       # Phase 2: test
@@ -330,6 +332,8 @@ jobs:
 
       - name: Cache Rust dependencies
         uses: Swatinem/rust-cache@v2
+        with:
+          key: build-${{ matrix.build.target }}
 
       ###
       # Phase 2: compile release binary
