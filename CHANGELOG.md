@@ -1,3 +1,10 @@
+## [5.0.180](https://github.com/semantic-release-action/rust/compare/v5.0.179...v5.0.180) (2025-03-02)
+
+
+### Bug Fixes
+
+* validate all specified targets are supported in release workflow ([487c7f9](https://github.com/semantic-release-action/rust/commit/487c7f900983280e3c82048e1c96a9bc91b11c6c)), closes [#76](https://github.com/semantic-release-action/rust/issues/76)
+
 ## [5.0.179](https://github.com/semantic-release-action/rust/compare/v5.0.178...v5.0.179) (2025-03-02)
 
 
