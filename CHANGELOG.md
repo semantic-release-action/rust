@@ -1,3 +1,10 @@
+## [5.0.179](https://github.com/semantic-release-action/rust/compare/v5.0.178...v5.0.179) (2025-03-02)
+
+
+### Bug Fixes
+
+* avoid invoking `cargo read-manifest` in workspaces ([9b09279](https://github.com/semantic-release-action/rust/commit/9b0927980b1b7bb8e771dc672d22a456e92686d5)), closes [#281](https://github.com/semantic-release-action/rust/issues/281)
+
 ## [5.0.178](https://github.com/semantic-release-action/rust/compare/v5.0.177...v5.0.178) (2025-02-28)
 
 
