@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/semantic-release-action/rust/compare/v5.0.181...v5.1.0) (2025-03-02)
+
+
+### Features
+
+* write binary checksums to GitHub Actions job summary ([6db782d](https://github.com/semantic-release-action/rust/commit/6db782dfffa0a737a2a69355ba9cf5a95c2790c2)), closes [#37](https://github.com/semantic-release-action/rust/issues/37)
+
 ## [5.0.181](https://github.com/semantic-release-action/rust/compare/v5.0.180...v5.0.181) (2025-03-02)
 
 
