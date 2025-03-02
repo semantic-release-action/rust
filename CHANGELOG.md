@@ -1,3 +1,10 @@
+## [5.0.181](https://github.com/semantic-release-action/rust/compare/v5.0.180...v5.0.181) (2025-03-02)
+
+
+### Bug Fixes
+
+* use distinct cache keys for test and build jobs ([8aa7ef8](https://github.com/semantic-release-action/rust/commit/8aa7ef8b6540c55074de32f3d0665273c56453c5)), closes [#282](https://github.com/semantic-release-action/rust/issues/282)
+
 ## [5.0.180](https://github.com/semantic-release-action/rust/compare/v5.0.179...v5.0.180) (2025-03-02)
 
 
