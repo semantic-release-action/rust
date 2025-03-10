@@ -1,3 +1,10 @@
+## [5.1.2](https://github.com/semantic-release-action/rust/compare/v5.1.1...v5.1.2) (2025-03-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @semantic-release-cargo/semantic-release-cargo to v2.4.27 ([c8bba87](https://github.com/semantic-release-action/rust/commit/c8bba8736b0e5a08ea0dadfaf8575bf138e685b3))
+
 ## [5.1.1](https://github.com/semantic-release-action/rust/compare/v5.1.0...v5.1.1) (2025-03-04)
 
 
