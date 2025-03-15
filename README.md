@@ -98,8 +98,13 @@ on:
 jobs:
   release:
     uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
+    with:
+      # Optional: GitHub App authentication for pushing to protected branches
+      github_app_id: ${{ secrets.SEMANTIC_RELEASE_APP_ID }}
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      # Optional, but must be specified with github_app_id input is set
+      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_PRIVATE_KEY }}
 ```
 
 ### Inputs
@@ -111,6 +116,7 @@ jobs:
 | disable-semantic-release-cargo |    `false`    | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
 |  disable-semantic-release-git  |    `false`    | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
 |           submodules           |    `false`    | Whether to checkout submodules. [Details](#submodules)                                            |
+|         github_app_id          |               | GitHub App ID for authentication to protected branches. [Details](#github-app-authentication)     |
 
 #### targets
 
@@ -157,13 +163,48 @@ This may be required with certain repository settings, for example when requirin
 
 ### Secrets
 
-|        Secret        | Required | Description                                                |
-| :------------------: | :------: | ---------------------------------------------------------- |
-| cargo-registry-token |  false   | Cargo registry API token. [Details](#cargo-registry-token) |
+|         Secret         | Required | Description                                                   |
+| :--------------------: | :------: | ------------------------------------------------------------- |
+|  cargo-registry-token  |  false   | Cargo registry API token. [Details](#cargo-registry-token)    |
+| github_app_private_key |  false   | GitHub App private key. [Details](#github-app-authentication) |
 
 #### cargo-registry-token
 
 API token with write permission for publishing your crate to your target registry.
+
+#### GitHub App Authentication
+
+GitHub App authentication can be used to allow semantic-release to push to protected branches. This is particularly useful when you have branch protection rules enabled with required status checks.
+
+When both `github_app_id` input and `github_app_private_key` secret are provided, the workflow will use GitHub App authentication instead of the default GITHUB_TOKEN.
+
+To use GitHub App authentication:
+
+1. Create a GitHub App with the following permissions:
+
+   - Repository contents: Read & write
+   - Metadata: Read-only
+   - Commit statuses: Read & write
+
+2. Install the app on your repository
+
+3. Generate a private key for your app and store it as a secret in your repository
+
+4. Update your workflow to include the app credentials:
+
+```yaml
+jobs:
+  release:
+    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
+    with:
+      toolchain: stable
+      github_app_id: ${{ secrets.SEMANTIC_RELEASE_APP_ID }}
+    secrets:
+      cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_APP_PRIVATE_KEY }}
+```
+
+If you provide only one of the two required parameters (`github_app_id` input or `github_app_private_key` secret), the workflow will fail with an error message.
 
 ## Release library
 
@@ -199,8 +240,13 @@ on:
 jobs:
   release:
     uses: semantic-release-action/rust/.github/workflows/release-library.yml@v5
+    with:
+      # Optional: GitHub App authentication for pushing to protected branches
+      github_app_id: ${{ secrets.SEMANTIC_RELEASE_APP_ID }}
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      # Optional, but must be specified with github_app_id input is set
+      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_PRIVATE_KEY }}
 ```
 
 ### Inputs
@@ -211,9 +257,11 @@ jobs:
 | disable-semantic-release-cargo | `false`  | Disable [semantic-release-cargo] in your release flow. [Details](#disable-semantic-release-cargo) |
 |  disable-semantic-release-git  | `false`  | Disable [@semantic-release/git] in your release flow. [Details](#disable-semantic-release-git)    |
 |           submodules           | `false`  | Whether to checkout submodules. [Details](#submodules)                                            |
+|         github_app_id          |          | GitHub App ID for authentication to protected branches. [Details](#github-app-authentication)     |
 
 ### Secrets
 
-|        Secret        | Required | Description                                                |
-| :------------------: | :------: | ---------------------------------------------------------- |
-| cargo-registry-token |  false   | Cargo registry API token. [Details](#cargo-registry-token) |
+|         Secret         | Required | Description                                                   |
+| :--------------------: | :------: | ------------------------------------------------------------- |
+|  cargo-registry-token  |  false   | Cargo registry API token. [Details](#cargo-registry-token)    |
+| github_app_private_key |  false   | GitHub App private key. [Details](#github-app-authentication) |

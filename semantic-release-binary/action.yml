@@ -41,6 +41,9 @@ inputs:
   submodules:
     description: Whether to checkout submodules
     required: true
+  github_token:
+    description: GitHub token used for authentication. Will use a token from GitHub App if provided, otherwise falls back to the default token.
+    default: ${{ github.token }}
 
 runs:
   using: composite
@@ -52,6 +55,7 @@ runs:
         # (Even though _we_ have alerady calculated the next version, semantic-release will do it again.)
         fetch-depth: 0
         submodules: ${{ inputs.submodules }}
+        persist-credentials: false
 
     - name: Install Rust toolchain
       uses: dtolnay/rust-toolchain@master
@@ -271,7 +275,7 @@ runs:
         : semantic-release
         ${semantic_release}
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ inputs.github_token }}
         CARGO_REGISTRY_TOKEN: ${{ inputs.cargo-registry-token }}
       shell: bash
 

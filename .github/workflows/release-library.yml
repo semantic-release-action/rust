@@ -21,9 +21,16 @@ on:
         description: Disable @semantic-release/git in your release flow. Only takes effect if the action semantic-release config is used.
         type: boolean
         default: true
+      github_app_id:
+        description: GitHub App ID for authentication to protected branches
+        required: false
+        type: string
     secrets:
       cargo-registry-token:
         description: API token for writing to your cargo registry
+      github_app_private_key:
+        description: GitHub App private key for authentication to protected branches
+        required: false
 
 # Only allow one release workflow to execute at a time, since each release
 # workflow uses shared resources (git tags, package registries)
@@ -39,6 +46,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Validate GitHub App authentication inputs
+      - name: Validate GitHub App authentication inputs
+        id: validate-app-auth
+        run: |
+          if [[ -n "${{ inputs.github_app_id }}" && -z "${{ secrets.github_app_private_key }}" ]]; then
+            echo "::error title={Invalid GitHub App authentication configuration}::GitHub App ID was provided but private key is missing. Please provide both github_app_id input and github_app_private_key secret for GitHub App authentication."
+            exit 1
+          elif [[ -z "${{ inputs.github_app_id }}" && -n "${{ secrets.github_app_private_key }}" ]]; then
+            echo "::error title={Invalid GitHub App authentication configuration}::GitHub App private key was provided but App ID is missing. Please provide both github_app_id input and github_app_private_key secret for GitHub App authentication."
+            exit 1
+          elif [[ -n "${{ inputs.github_app_id }}" && -n "${{ secrets.github_app_private_key }}" ]]; then
+            echo "use-github-app=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "use-github-app=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Generate GitHub App token if both github_app_id and github_app_private_key are provided
+      - name: Generate GitHub App token
+        if: steps.validate-app-auth.outputs.use-github-app == 'true'
+        id: get-github-token
+        uses: tibdex/github-app-token@3eb77c7243b85c65e84acfa93fdbac02fb6bd532
+        with:
+          app_id: ${{ inputs.github_app_id }}
+          private_key: ${{ secrets.github_app_private_key }}
+
       - name: Release
         uses: semantic-release-action/rust/semantic-release-library@v5
         with:
@@ -47,3 +79,4 @@ jobs:
           disable-semantic-release-git: ${{ inputs.disable-semantic-release-git }}
           cargo-registry-token: ${{ secrets.cargo-registry-token }}
           submodules: ${{ inputs.submodules }}
+          github_token: ${{ steps.get-github-token.outputs.token || github.token }}
