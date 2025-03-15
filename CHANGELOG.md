@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/semantic-release-action/rust/compare/v5.1.3...v5.2.0) (2025-03-15)
+
+
+### Features
+
+* add GitHub App authentication for protected branches ([30a8171](https://github.com/semantic-release-action/rust/commit/30a8171dd9b7a39db5358ed4ddd83d27bc5fc943)), closes [/github.com/semantic-release/semantic-release/discussions/2557#discussioncomment-3639525](https://github.com//github.com/semantic-release/semantic-release/discussions/2557/issues/discussioncomment-3639525)
+
 ## [5.1.3](https://github.com/semantic-release-action/rust/compare/v5.1.2...v5.1.3) (2025-03-12)
 
 
