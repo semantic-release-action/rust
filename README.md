@@ -100,7 +100,7 @@ jobs:
     uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
     with:
       # Optional: GitHub App authentication for pushing to protected branches
-      github_app_id: ${{ secrets.SEMANTIC_RELEASE_APP_ID }}
+      github_app_id: ${{ vars.SEMANTIC_RELEASE_APP_ID }}
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
       # Optional, but must be specified with github_app_id input is set
@@ -242,7 +242,7 @@ jobs:
     uses: semantic-release-action/rust/.github/workflows/release-library.yml@v5
     with:
       # Optional: GitHub App authentication for pushing to protected branches
-      github_app_id: ${{ secrets.SEMANTIC_RELEASE_APP_ID }}
+      github_app_id: ${{ vars.SEMANTIC_RELEASE_APP_ID }}
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
       # Optional, but must be specified with github_app_id input is set
