@@ -1,3 +1,10 @@
+## [5.2.1](https://github.com/semantic-release-action/rust/compare/v5.2.0...v5.2.1) (2025-03-15)
+
+
+### Bug Fixes
+
+* use tibdex/get-github-token v2.1.0 ([50b19db](https://github.com/semantic-release-action/rust/commit/50b19dbc419ce4c194d70e4b8b32ada0c1c3477f))
+
 # [5.2.0](https://github.com/semantic-release-action/rust/compare/v5.1.3...v5.2.0) (2025-03-15)
 
 
