@@ -428,7 +428,7 @@ jobs:
       - name: Generate GitHub App token
         if: steps.validate-app-auth.outputs.use-github-app == 'true'
         id: get-github-token
-        uses: tibdex/github-app-token@3eb77c7243b85c65e84acfa93fdbac02fb6bd532
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
         with:
           app_id: ${{ inputs.github_app_id }}
           private_key: ${{ secrets.github_app_private_key }}
