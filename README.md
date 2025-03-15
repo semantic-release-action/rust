@@ -100,11 +100,11 @@ jobs:
     uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
     with:
       # Optional: GitHub App authentication for pushing to protected branches
-      github_app_id: ${{ vars.SEMANTIC_RELEASE_APP_ID }}
+      github_app_id: ${{ vars.SEMANTIC_RELEASE_GITHUB_APP_ID }}
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
       # Optional, but must be specified with github_app_id input is set
-      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_PRIVATE_KEY }}
+      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_GITHUB_PRIVATE_KEY }}
 ```
 
 ### Inputs
@@ -198,10 +198,10 @@ jobs:
     uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
     with:
       toolchain: stable
-      github_app_id: ${{ secrets.SEMANTIC_RELEASE_APP_ID }}
+      github_app_id: ${{ secrets.SEMANTIC_RELEASE_GITHUB_APP_ID }}
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_APP_PRIVATE_KEY }}
+      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_GITHUB_APP_PRIVATE_KEY }}
 ```
 
 If you provide only one of the two required parameters (`github_app_id` input or `github_app_private_key` secret), the workflow will fail with an error message.
@@ -242,11 +242,11 @@ jobs:
     uses: semantic-release-action/rust/.github/workflows/release-library.yml@v5
     with:
       # Optional: GitHub App authentication for pushing to protected branches
-      github_app_id: ${{ vars.SEMANTIC_RELEASE_APP_ID }}
+      github_app_id: ${{ vars.SEMANTIC_RELEASE_GITHUB_APP_ID }}
     secrets:
       cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
       # Optional, but must be specified with github_app_id input is set
-      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_PRIVATE_KEY }}
+      github_app_private_key: ${{ secrets.SEMANTIC_RELEASE_GITHUB_PRIVATE_KEY }}
 ```
 
 ### Inputs
