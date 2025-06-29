@@ -1,3 +1,10 @@
+## [5.2.18](https://github.com/semantic-release-action/rust/compare/v5.2.17...v5.2.18) (2025-06-29)
+
+
+### Bug Fixes
+
+* **deps:** update dependency semantic-release to v24.2.6 ([a13ee4d](https://github.com/semantic-release-action/rust/commit/a13ee4d28828ca474901138154f03bf1d701022f))
+
 ## [5.2.17](https://github.com/semantic-release-action/rust/compare/v5.2.16...v5.2.17) (2025-06-22)
 
 
