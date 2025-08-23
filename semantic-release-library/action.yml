@@ -33,7 +33,7 @@ runs:
   using: composite
   steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         # Fetch all history and tags for calculating next semantic version
         fetch-depth: 0
