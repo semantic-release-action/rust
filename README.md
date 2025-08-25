@@ -95,6 +95,9 @@ on:
       - "[0-9]+.[0-9]+.x"
       - "[0-9]+.x"
 
+permissions:
+  contents: write
+
 jobs:
   release:
     uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
@@ -236,6 +239,9 @@ on:
       - alpha
       - "[0-9]+.[0-9]+.x"
       - "[0-9]+.x"
+
+permissions:
+  contents: write
 
 jobs:
   release:
