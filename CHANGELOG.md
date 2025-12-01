@@ -1,3 +1,10 @@
+## [5.2.51](https://github.com/semantic-release-action/rust/compare/v5.2.50...v5.2.51) (2025-12-01)
+
+
+### Bug Fixes
+
+* include sliding tags on prereleases ([e81e208](https://github.com/semantic-release-action/rust/commit/e81e208073ca884911519237d093254498be9ca9))
+
 ## [5.2.50](https://github.com/semantic-release-action/rust/compare/v5.2.49...v5.2.50) (2025-11-20)
 
 
