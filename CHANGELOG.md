@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/semantic-release-action/rust/compare/v5.2.55...v5.3.0) (2026-02-23)
+
+
+### Features
+
+* add trusted publishing support via OIDC ([de4147c](https://github.com/semantic-release-action/rust/commit/de4147caa94a604a47c2fbb1245eddc5fb7433c2))
+
 ## [5.2.55](https://github.com/semantic-release-action/rust/compare/v5.2.54...v5.2.55) (2026-01-31)
 
 
