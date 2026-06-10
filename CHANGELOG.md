@@ -1,3 +1,11 @@
+## [5.3.1](https://github.com/semantic-release-action/rust/compare/v5.3.0...v5.3.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **deps:** update semantic-release monorepo to v25.0.5 ([0b0ce2e](https://github.com/semantic-release-action/rust/commit/0b0ce2e7a773ed0de574a3e98e25fa92b3507bf9))
+* **deps:** update semantic-release monorepo to v25.0.5 ([#370](https://github.com/semantic-release-action/rust/issues/370)) ([24073d4](https://github.com/semantic-release-action/rust/commit/24073d4caa5da2664eb51c91ed1973143bd48f0d))
+
 # [5.3.0](https://github.com/semantic-release-action/rust/compare/v5.2.55...v5.3.0) (2026-02-23)
 
 
